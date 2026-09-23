@@ -1,0 +1,5 @@
+---
+import PrintLayout from '../../layouts/PrintLayout.astro';
+import { facts, faqs, sources } from '../../data/campaign';
+---
+<PrintLayout title="Measure PFD fact sheet"><div class="kicker">Pasadena · November 3, 2026</div><h1>Measure PFD: the facts.</h1><p class="intro">We support Pasadena’s firefighters and paramedics. Before you vote, read what the proposed parcel tax would require.</p><table><caption style="text-align:left;font-size:8pt;color:#59665c">Provisions of the proposed ordinance</caption><tbody>{facts.map(fact => <tr><th scope="row">{fact.label}</th><td>{fact.value}</td></tr>)}</tbody></table><div class="position"><h2>Our campaign’s position: vote NO.</h2><p>{faqs[5].answer}</p></div><div class="source"><p>Examples assume taxable improved square footage and no exemption. The ordinance names reconstruction of Fire Stations 33 and 37 within ten years.</p><p>Source: <a href={sources.ordinance.url}>City of Pasadena, proposed Measure PFD ordinance</a>.</p></div></PrintLayout>

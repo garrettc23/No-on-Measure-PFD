@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import Closing from '../components/Closing.astro';
+import cityHall from '../assets/pasadena-city-hall.png';
+import homes from '../assets/pasadena-del-rosa-homes.jpg';
+---
+<Layout>
+  <section class="hero container">
+    <div class="hero-copy">
+      <h1>Support Pasadena’s firefighters.<br /><span class="accent"><strong class="vote-no">Vote NO</strong> on<br />Measure PFD.</span></h1>
+      <p class="hero-description">We stand with our firefighters and paramedics. We’re asking for a fairer way to fund the services all of Pasadena relies on.</p>
+      <div class="hero-actions"><a href="/facts/" class="button">Get the facts <Icon /></a><a href="/join/" class="text-link">Join the campaign <Icon /></a></div>
+      <div class="hero-election"><Icon name="calendar" size={20} /><span>Your vote matters.<br /><strong>Tuesday, November 3, 2026</strong></span></div>
+    </div>
+    <figure class="hero-figure">
+      <div class="hero-photo"><Image src={cityHall} alt="Aerial view of Pasadena City Hall, with its domed tower centered against the city and San Gabriel Mountains" widths={[480]} sizes="(max-width: 800px) 100vw, 48vw" width={480} height={270} format="webp" quality={85} loading="eager" fetchpriority="high" /></div>
+      <figcaption><span>A city we can all afford<br />to call home.</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="numbers-section" aria-labelledby="numbers-title">
+    <div class="container">
+      <div class="section-kicker"><h2 id="numbers-title" class="eyebrow">What’s on the ballot</h2><a href="/facts/" class="small-link">See the full breakdown <Icon size={16} /></a></div>
+      <div class="numbers-grid">
+        <div class="number-item"><span class="stat-number">19<span>¢</span></span><div><h3>Per square foot. Every year.</h3><p>A tax on improved property,<br class="desktop-break" /> subject to exemptions.</p></div></div>
+        <div class="number-item"><span class="stat-number">$304</span><div><h3>For a 1,600 sq. ft. home.</h3><p>An annual example before exemptions,<br class="desktop-break" /> based on taxable square footage.</p></div></div>
+        <div class="number-item"><span class="stat-number">14<span> years</span></span><div><h3>A long-term commitment.</h3><p>The tax expires 14 years<br class="desktop-break" /> after it takes effect.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="position-section container">
+    <div class="section-heading"><h2>Strong public safety.<br />A fair share of the cost.</h2></div>
+    <div class="position-body"><p class="lead">Pasadena’s firefighters and paramedics do essential work. They deserve the resources to keep our city safe.</p><p>Measure PFD would add a tax based on the size of improved property. Our campaign believes a service used throughout the city deserves a funding plan that shares the cost more broadly.</p><p>We’re asking City Hall to come back with that plan.</p><a href="/facts/#questions" class="text-link">Read our answers to your questions <Icon /></a></div>
+  </section>
+
+  <section class="neighborhood-section container">
+    <figure class="neighborhood-photo"><Image src={homes} alt="Pasadena homes at Del Rosa Road and Grand Avenue, framed by palm trees" widths={[480, 800, 1200]} sizes="(max-width: 800px) 100vw, 50vw" width={1200} height={900} format="webp" quality={85} loading="lazy" /></figure>
+    <div class="neighborhood-copy"><h2>Another bill<br />lands at home.</h2><p>For 1,600 taxable square feet, Measure PFD adds $304 a year. Over 14 years, that comes to $4,256 before any exemption.</p><p>Rental housing is included, too. At the proposed rate, 20,000 taxable square feet would mean $3,800 a year for a building’s owner.</p><p>We’re concerned about adding to the cost of housing. These figures describe the property tax, and do not predict a rent increase.</p><a href="/facts/#measure" class="text-link">Understand the cost and exemptions <Icon /></a></div>
+  </section>
+
+  <section class="accountability-section container">
+    <div><h2>A decision that<br />deserves a close look.</h2></div>
+    <div class="accountability-content"><p>The ordinance includes annual independent audits, public spending reports, and a timeframe for rebuilding two fire stations. It also allows funds to pay debt service on capital improvements.</p><p>We believe residents should weigh those provisions alongside a new 14-year tax.</p><a href="/facts/#questions" class="text-link">Read the FAQ <Icon /></a></div>
+  </section>
+  <Closing />
+</Layout>
