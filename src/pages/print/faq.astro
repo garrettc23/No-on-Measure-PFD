@@ -1,0 +1,6 @@
+---
+import PrintLayout from '../../layouts/PrintLayout.astro';
+import { faqs, sources } from '../../data/campaign';
+const groups = [faqs.slice(0, 4), faqs.slice(4)];
+---
+<PrintLayout title="Measure PFD questions and answers">{groups.map((group, i) => <section class="faq-page"><div class="kicker">Pasadena · November 3, 2026 · Page {i + 1} of 2</div><h1>{i === 0 ? 'Your questions, answered.' : 'A closer look at Measure PFD.'}</h1>{group.map(faq => <article class="faq-print"><h2>{faq.question}</h2><p>{faq.answer}</p></article>)}{i === groups.length - 1 && <p class="source">Source: <a href={sources.ordinance.url}>City of Pasadena, proposed Measure PFD ordinance</a>.</p>}</section>)}</PrintLayout>

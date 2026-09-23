@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { photoCredits } from '../data/campaign';
+---
+<Layout title="Photography credits">
+  <article class="container prose-page">
+    <h1>Photography credits.</h1>
+    <p class="lead">Image sources and usage information for this website.</p>
+    {photoCredits.map(photo => <section>
+      <h2>{photo.title}</h2>
+      <p>{photo.description}{photo.author && <> Photograph by {photo.author}, taken {photo.date}.</>}</p>
+      {photo.url && <p><a href={photo.url}>View the source photograph</a>. Licensed under <a href={photo.licenseUrl}>{photo.license}</a>.</p>}
+      {photo.sourceNote && <p>{photo.sourceNote}</p>}
+    </section>)}
+    <h2>How the photographs are used</h2>
+    <p>Website versions are resized, converted to WebP, and cropped to fit their layouts. Licensed photographs retain the license listed above.</p>
+    <p>The photographers and people whose properties appear in these images have not endorsed this campaign through their use.</p>
+    <h2>Typefaces</h2>
+    <p>DM Sans is distributed under the SIL Open Font License. <a href="/licenses/dm-sans.txt">DM Sans license</a>.</p>
+  </article>
+</Layout>

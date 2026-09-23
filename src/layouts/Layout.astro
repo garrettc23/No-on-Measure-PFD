@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/dm-sans';
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
+import { campaign } from '../data/campaign';
+interface Props { title?: string; description?: string; }
+const { title = campaign.name, description = campaign.description } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/join/', label: 'Join us' }];
+const siteUrl = campaign.siteUrl || Astro.url.origin;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === campaign.name ? `${title} | Pasadena, November 2026` : `${title} | ${campaign.name}`}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#233e34" />
+    <meta name="robots" content="noindex, nofollow" />
+    {campaign.siteUrl && <link rel="canonical" href={new URL(path, campaign.siteUrl)} />}
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL('/social-card.png', siteUrl)} />
+    <meta property="og:image:alt" content="No on Measure PFD. Support firefighters. Stop the unfair tax." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="election-top"><span>Pasadena, California</span><span>Vote <strong>November 3, 2026</strong></span></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <Logo />
+        <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation" type="button"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+        <nav id="main-navigation" aria-label="Main navigation">
+          {nav.map(item => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>)}
+          {campaign.donationUrl && <a href={campaign.donationUrl} class="button button-small">Donate <Icon /></a>}
+          <a href="/join/#pledge" class="button button-small">Pledge NO <Icon size={17} /></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main"><Logo footer /><div class="footer-nav"><a href="/facts/">Facts & FAQ</a><a href="/join/">Join the campaign</a><a href="/join/#contact">Contact</a><a href="/privacy/">Privacy</a></div><div class="footer-election"><strong>November 3, 2026</strong><span>Pasadena, California</span></div></div>
+        <div class="footer-bottom"><p>{campaign.disclosure}</p><span>Local preview</span></div>
+        <div class="footer-credits"><a href="/credits/">Photography credits</a><span>Neighborhood images do not imply residents’ endorsement.</span></div>
+      </div>
+    </footer>
+    <div class="mobile-pledge"><span>November 3 · Pasadena</span><a href="/join/#pledge" class="button button-small">Pledge NO <Icon size={17} /></a></div>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#main-navigation');
+      function closeMenu() { toggle?.setAttribute('aria-expanded', 'false'); nav?.classList.remove('is-open'); }
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open)); nav?.classList.toggle('is-open', open);
+      });
+      nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); } });
+      document.addEventListener('click', event => { if (event.target instanceof Node && !nav?.contains(event.target) && !toggle?.contains(event.target)) closeMenu(); });
+      matchMedia('(min-width: 801px)').addEventListener('change', closeMenu);
+    </script>
+  </body>
+</html>
