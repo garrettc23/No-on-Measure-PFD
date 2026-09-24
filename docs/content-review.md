@@ -49,3 +49,11 @@ Before collection begins, identify the campaign data controller, collection purp
 ## Source presentation
 
 At the user’s request, public factual citations are consolidated in the Facts page resources section. Each standalone PDF has one source link. Per-provision references remain in the central data file for editorial verification. Photo attribution remains on the footer-linked credits page. Repeated inline citations were an editorial choice, not a legal requirement established during this build.
+
+## September 24 client revisions
+
+Applied the supplied campaign language to Home, the shared closing section, and Join Us. Support language includes police without stating that Measure PFD funds police. The housing-affordability and broader-funding statements are campaign arguments supplied by the client. Facts and FAQ provisions remain unchanged pending the Friday briefing.
+
+Signup now has five inputs: first name, last name, phone (optional), email, and ZIP code. Role, interest, endorsement, and SMS checkboxes have been removed; the separate contact form remains available. Forms remain local previews with no transmission or persistence.
+
+The client will supply the approved fact-sheet PDF. The previous generated PDF and print route have been removed; `campaign.factSheetUrl` controls all fact-sheet links and remains empty until the new document arrives. The FAQ PDF and social image use the new campaign-sign logo.

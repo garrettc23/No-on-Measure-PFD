@@ -62,3 +62,18 @@
 
 /* Emphasize the ballot choice in the opening headline. */
 .hero .vote-no { font-weight: 700; white-space: nowrap; text-decoration-line: underline; text-decoration-thickness: .055em; text-underline-offset: .1em; text-decoration-skip-ink: none; }
+
+/* Campaign sign logo, shared by the masthead and footer. */
+.campaign-brand { display: block; width: 218px; flex-shrink: 0; text-decoration: none; }
+.header-inner { padding-top: 14px; padding-bottom: 14px; }
+.campaign-brand-footer { width: 240px; }
+.campaign-form > .form-grid + .button { margin-top: 25px; }
+.closing h2 { font-size: clamp(36px, 3.7vw, 54px); max-width: 680px; }
+@media (max-width: 800px) {
+  .campaign-brand { width: 185px; }
+  .campaign-brand-footer { width: 218px; }
+}
+@media (max-width: 480px) {
+  .campaign-brand { width: 170px; }
+  .closing h2 { font-size: 38px; }
+}

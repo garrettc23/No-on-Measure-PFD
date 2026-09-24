@@ -1,6 +1,6 @@
 # No on Measure PFD
 
-A local Astro website for review. Home, Facts & FAQ, Join Us, Privacy, photography credits, and printable campaign resources.
+A local Astro website for review. Home, Facts & FAQ, Join Us, Privacy, photography credits, and printable FAQs.
 
 ## Run locally
 
@@ -30,15 +30,17 @@ npm run preview
 
 The local build is deliberately marked `noindex`. No production domain is invented. Donate appears only after `donationUrl` is configured. Live form handling, SMS consent, public hosting, and final campaign disclosures remain launch tasks.
 
-## PDFs and social image
+## Fact sheet, FAQ PDF, and social image
 
-Print routes read the same shared content as the Facts page. Run the dev server, then:
+The client’s approved fact-sheet PDF is pending. Place it in `public/downloads/` and set `campaign.factSheetUrl` to its public path when ready; links remain hidden while that setting is empty. The previous generated fact sheet has been withdrawn.
+
+The FAQ print route reads the same shared content as the Facts page. Its substantive content is awaiting the client’s briefing. Run the dev server, then:
 
 ```sh
 BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/generate-downloads.mjs
 ```
 
-This uses gstack browse to generate the one-page fact sheet, two-page FAQ, and 1200 × 630 social image in `public/`. Rebuild after generation so `dist/` contains the updated files. Do not edit the PDFs directly.
+This uses gstack browse to generate the two-page FAQ and 1200 × 630 social image in `public/`. Rebuild after generation so `dist/` contains the updated files. Do not edit the PDFs directly.
 
 ## Browser verification
 
@@ -47,4 +49,4 @@ BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/browser
 BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/interaction-audit.mjs
 ```
 
-Checks each main page at 390, 768, and 1440 pixels, and saves screenshots plus results under `.context/`. `PREVIEW_URL` can override the local URL. Browser interaction checks cover menu keyboard behavior, FAQ expansion, invalid and valid form previews, consent/phone dependency, and sharing. Results and screenshots in `.context/` are generated locally and are not committed.
+Checks each main page at 390, 768, and 1440 pixels, and saves screenshots plus results under `.context/`. `PREVIEW_URL` can override the local URL. Browser interaction checks cover menu keyboard behavior, FAQ expansion, invalid and valid form previews, the five-field signup and optional phone validation, and sharing. Results and screenshots in `.context/` are generated locally and are not committed.
