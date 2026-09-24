@@ -3,27 +3,24 @@
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const status = form.querySelector<HTMLElement>('[role="status"]');
     const phone = form.querySelector<HTMLInputElement>('input[type="tel"]');
-    const sms = form.querySelector<HTMLInputElement>('input[name="sms"]');
-    const consent = () => {
+    const validatePhone = () => {
       if (phone) {
-        phone.required = sms?.checked ?? false;
         const digits = phone.value.replace(/\D/g, '');
         phone.setCustomValidity(phone.value && (digits.length < 10 || digits.length > 15) ? 'Enter a phone number with 10 to 15 digits.' : '');
       }
     };
-    sms?.addEventListener('change', consent);
-    phone?.addEventListener('input', consent);
+    phone?.addEventListener('input', validatePhone);
     form.addEventListener('input', () => { if (status) status.textContent = ''; });
     form.addEventListener('submit', event => {
       event.preventDefault();
-      consent();
+      validatePhone();
       if (!form.reportValidity()) return;
       if (status) {
         status.textContent = 'Preview complete. Nothing was sent or saved. To reach the campaign, use the email or phone number below.';
         status.focus();
       }
       form.reset();
-      consent();
+      validatePhone();
     });
     // Forms remain inert if JavaScript fails; no personal data enters a URL.
     if (button) button.disabled = false;

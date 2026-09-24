@@ -1,8 +1,8 @@
 ---
+import CampaignMark from './CampaignMark.astro';
 interface Props { footer?: boolean; }
 const { footer = false } = Astro.props;
 ---
-<a href="/" class:list={['brand', { 'brand-footer': footer }]} aria-label="No on Measure PFD, home">
-  <span class="brand-mark" aria-hidden="true"><span class="brand-no">NO<span class="brand-dot">.</span></span><span class="brand-measure">ON MEASURE<br /><strong>PFD</strong></span></span>
-  <span class="brand-tagline">Support firefighters.<br />Stop the unfair tax.</span>
+<a href="/" class:list={['campaign-brand', { 'campaign-brand-footer': footer }]} aria-label="Vote NO on Measure PFD, home">
+  <CampaignMark />
 </a>

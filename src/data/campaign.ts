@@ -1,13 +1,15 @@
 export const campaign = {
   name: 'No on Measure PFD',
   title: 'Support Pasadena’s firefighters. Vote NO on Measure PFD.',
-  tagline: 'Support firefighters. Stop the unfair tax.',
-  description: 'We support Pasadena’s firefighters and paramedics. We are asking for a fairer way to fund public safety. Read the measure, understand the cost, and get involved.',
+  tagline: 'Support public safety. Keep Pasadena affordable.',
+  description: 'We stand with our firefighters, police, and paramedics. We are asking for a fairer way to fund public safety. Read the measure, understand the cost, and get involved.',
   electionDate: 'Tuesday, November 3, 2026',
   contact: { name: 'Matt Klink', phone: '310-283-6267', telephone: '+13102836267', email: 'matt@klinkcampaigns.com' },
   disclosure: 'Paid for by Committee for Responsible Property Taxation, Opposing Measure PFD, Sponsored by REALTORS®.',
   // Set only after campaign confirmation. No donation control is rendered without a URL.
   donationUrl: '',
+  // Add the client-approved PDF here when it is ready.
+  factSheetUrl: '',
   // Keep this unset until the public domain is approved. Local previews must not invent a canonical domain.
   siteUrl: '',
 };

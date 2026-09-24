@@ -4,7 +4,7 @@ const binary = process.env.BROWSE_BIN || `${process.env.HOME}/.agents/skills/gst
 const origin = process.env.PREVIEW_URL || 'http://127.0.0.1:4321';
 const run = (...args) => execFileSync(binary, args, { encoding: 'utf8', stdio: 'pipe' }).trim();
 mkdirSync('public/downloads', { recursive: true });
-for (const [route, file] of [['fact-sheet', 'measure-pfd-fact-sheet'], ['faq', 'measure-pfd-faq']]) {
+for (const [route, file] of [['faq', 'measure-pfd-faq']]) {
   run('goto', `${origin}/print/${route}/`);
   run('js', 'document.fonts.ready.then(()=>true)');
   console.log(run('pdf', `public/downloads/${file}.pdf`, '--prefer-css-page-size', '--print-background', '--tagged'));
