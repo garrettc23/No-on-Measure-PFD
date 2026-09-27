@@ -1,13 +1,15 @@
 ---
-import '@fontsource-variable/dm-sans';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/public-sans';
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
 import Icon from '../components/Icon.astro';
+import ShareButton from '../components/ShareButton.astro';
 import { campaign } from '../data/campaign';
 interface Props { title?: string; description?: string; }
 const { title = campaign.name, description = campaign.description } = Astro.props;
 const path = Astro.url.pathname;
-const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/join/', label: 'Join us' }];
+const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
 const siteUrl = campaign.siteUrl || Astro.url.origin;
 ---
 <!doctype html>
@@ -16,7 +18,7 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === campaign.name ? `${title} | Pasadena, November 2026` : `${title} | ${campaign.name}`}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#233e34" />
+    <meta name="theme-color" content="#012755" />
     <meta name="robots" content="noindex, nofollow" />
     {campaign.siteUrl && <link rel="canonical" href={new URL(path, campaign.siteUrl)} />}
     <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />
@@ -25,9 +27,9 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
-  <body>
+  <body class:list={{ 'home-page': path === '/' }}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="election-top"><span>Pasadena, California</span><span>Vote <strong>November 3, 2026</strong></span></div>
+    <div class="election-top"><span>Pasadena, California</span><span>Vote No on November 3, 2026</span></div>
     <header class="site-header">
       <div class="container header-inner">
         <Logo />
@@ -42,9 +44,8 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div class="container">
-        <div class="footer-main"><Logo footer /><div class="footer-nav"><a href="/facts/">Facts & FAQ</a><a href="/join/">Join the campaign</a><a href="/join/#contact">Contact</a><a href="/privacy/">Privacy</a></div><div class="footer-election"><strong>November 3, 2026</strong><span>Pasadena, California</span></div></div>
-        <div class="footer-bottom"><p>{campaign.disclosure}</p><span>Local preview</span></div>
-        <div class="footer-credits"><a href="/credits/">Photography credits</a><span>Neighborhood images do not imply residents’ endorsement.</span></div>
+        <div class="footer-main"><Logo footer /><div class="footer-nav"><a href="/facts/">Facts & FAQ</a><a href="/join/">Join the campaign</a><a href="/join/#contact">Contact</a><a href="/privacy/">Privacy</a><ShareButton /></div></div>
+        <div class="footer-bottom"><p>{campaign.disclosure}</p></div>
       </div>
     </footer>
     <div class="mobile-pledge"><span>November 3 · Pasadena</span><a href="/join/#pledge" class="button button-small">Pledge NO <Icon size={17} /></a></div>

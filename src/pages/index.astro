@@ -3,26 +3,31 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import Closing from '../components/Closing.astro';
+import TaxCallout from '../components/TaxCallout.astro';
 import cityHall from '../assets/pasadena-city-hall.png';
 import homes from '../assets/pasadena-del-rosa-homes.jpg';
+import { paparian } from '../data/paparian';
 ---
 <Layout>
   <section class="hero container">
     <div class="hero-copy">
-      <h1>Support Pasadena’s firefighters.<br /><span class="accent"><strong class="vote-no">Vote NO</strong> on<br />Measure PFD.</span></h1>
+      <h1><span class="hero-support">Support Pasadena’s firefighters.</span><br /><span class="accent"><strong class="vote-no">Vote NO</strong> on<br />Measure PFD.</span></h1>
       <p class="hero-description">We stand with our firefighters, police, and paramedics. We’re asking for a fairer way to fund the services all of Pasadena relies on.</p>
-      <div class="hero-actions"><a href="/facts/" class="button">Get the facts <Icon /></a><a href="/join/" class="text-link">Join the campaign <Icon /></a></div>
-      <div class="hero-election"><Icon name="calendar" size={20} /><span>Your vote matters.<br /><strong>Tuesday, November 3, 2026</strong></span></div>
+      <div class="hero-actions"><a href="/join/#pledge" class="button">Pledge NO <Icon /></a><a href="/facts/" class="text-link">Get the facts <Icon /></a></div>
     </div>
     <figure class="hero-figure">
       <div class="hero-photo"><Image src={cityHall} alt="Aerial view of Pasadena City Hall, with its domed tower centered against the city and San Gabriel Mountains" widths={[480]} sizes="(max-width: 800px) 100vw, 48vw" width={480} height={270} format="webp" quality={85} loading="eager" fetchpriority="high" /></div>
-      <figcaption><span>A city we can all afford<br />to call home.</span></figcaption>
+      <figcaption class="hero-vote-panel">
+        <p class="vote-deadline"><span class="vote-by-label">Vote by</span> <time datetime="2026-11-03">Tuesday, November 3, 2026</time></p>
+      </figcaption>
     </figure>
   </section>
 
+  <TaxCallout />
+
   <section class="numbers-section" aria-labelledby="numbers-title">
     <div class="container">
-      <div class="section-kicker"><h2 id="numbers-title" class="eyebrow">What’s on the ballot</h2><a href="/facts/" class="small-link">See the full breakdown <Icon size={16} /></a></div>
+      <div class="numbers-heading"><h2 id="numbers-title">What’s on the ballot</h2><a href="/facts/" class="small-link">See the full breakdown <Icon size={16} /></a></div>
       <div class="numbers-grid">
         <div class="number-item"><span class="stat-number">19<span>¢</span></span><div><h3>Per square foot. Every year.</h3><p>A tax on improved property,<br class="desktop-break" /> subject to exemptions.</p></div></div>
         <div class="number-item"><span class="stat-number">$304</span><div><h3>For a 1,600 sq. ft. home.</h3><p>An annual example before exemptions,<br class="desktop-break" /> based on taxable square footage.</p></div></div>
@@ -34,6 +39,16 @@ import homes from '../assets/pasadena-del-rosa-homes.jpg';
   <section class="position-section container">
     <div class="section-heading"><h2>Strong public safety.<br />A fair share of the cost.</h2></div>
     <div class="position-body"><p class="lead">Pasadena’s firefighters, police, and paramedics do essential work. They deserve the resources to keep our city safe.</p><p>But Measure PFD would add a tax based on the size of improved property. All Pasadena residents, businesses, and tourists rely on public safety. The city’s leaders need to develop a funding plan that shares the cost more broadly.</p><a href="/facts/#questions" class="text-link">Read our answers to your questions <Icon /></a></div>
+  </section>
+
+  <section class="paparian-feature container" aria-labelledby="paparian-feature-title">
+    <div class="paparian-feature-inner">
+      <div><h2 id="paparian-feature-title">Former Mayor Bill Paparian urges a <span class="accent">NO vote.</span></h2></div>
+      <div class="paparian-feature-copy">
+        <p>In his {paparian.publication} commentary, Paparian calls for Pasadena to put fire station upgrades and wildfire work first in its existing budget.</p>
+        <a href="/bill-paparian/" class="text-link">Read Paparian’s position <Icon /></a>
+      </div>
+    </div>
   </section>
 
   <section class="neighborhood-section container">

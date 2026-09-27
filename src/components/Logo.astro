@@ -4,5 +4,5 @@ interface Props { footer?: boolean; }
 const { footer = false } = Astro.props;
 ---
 <a href="/" class:list={['campaign-brand', { 'campaign-brand-footer': footer }]} aria-label="Vote NO on Measure PFD, home">
-  <CampaignMark />
+  <CampaignMark loading={footer ? 'lazy' : 'eager'} />
 </a>

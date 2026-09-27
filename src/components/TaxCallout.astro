@@ -1,0 +1,28 @@
+<section class="tax-increase container" aria-labelledby="tax-increase-title">
+  <div class="tax-increase-panel">
+    <h2 id="tax-increase-title"><span>More than $1,700</span> in new taxes per Pasadena household.</h2>
+    <div class="tax-increase-copy">
+      <p>Pasadena voters have already approved multiple tax and bond measures for the city and school district since 2020.</p>
+      <p>Now City Hall wants another parcel tax, pushing the total cost to <strong>more than $1,700 per household in new taxes in the last five years.</strong></p>
+      <p class="tax-rally">Pasadena families have done their part. Enough is enough.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tax-increase { padding-bottom: 56px; }
+  .tax-increase-panel { display: grid; grid-template-columns: .9fr 1.3fr; align-items: center; gap: 52px; padding: 36px 40px; background: #fff7f7; border-left: 4px solid var(--red); }
+  .tax-increase h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.15; text-wrap: balance; }
+  .tax-increase h2 span { color: var(--red); }
+  .tax-increase-copy > p { font-size: 18px; line-height: 1.65; color: var(--green-soft); }
+  .tax-increase-copy strong { color: var(--green); font-weight: 650; }
+  .tax-increase-copy .tax-rally { color: var(--green); font-weight: 650; }
+  @media (max-width: 800px) {
+    .tax-increase { padding-bottom: 40px; }
+    .tax-increase-panel { grid-template-columns: 1fr; gap: 22px; padding: 28px; }
+    .tax-increase h2 { max-width: 500px; text-wrap: pretty; }
+  }
+  @media (max-width: 480px) {
+    .tax-increase-panel { padding: 25px 22px; }
+  }
+</style>
