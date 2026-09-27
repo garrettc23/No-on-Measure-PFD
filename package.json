@@ -11,7 +11,8 @@
     "audit:copy": "node scripts/audit-copy.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/dm-sans": "5.3.0",
+    "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource-variable/public-sans": "5.3.0",
     "astro": "7.3.4"
   },
   "devDependencies": {

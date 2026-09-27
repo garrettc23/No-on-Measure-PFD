@@ -38,6 +38,7 @@ export const facts = [
   { label: 'Duration', value: '14 years after the ordinance takes effect', ref: '§4.110.240' },
   { label: 'Estimated revenue', value: 'Approximately $22.1 million annually', ref: 'Ballot question' },
   { label: '1,600-square-foot example', value: '$304 a year; $4,256 over 14 years', ref: '1,600 × $0.19; before exemptions' },
+  { label: 'Combined household tax cost (campaign estimate)', value: 'More than $1,700 per household in new taxes in the last five years, combining city and school-district tax and bond measures approved since 2020 with proposed Measure PFD. This is the campaign’s estimate, not the cost of PFD alone.', ref: 'Campaign-supplied messaging; supporting calculation pending' },
   { label: 'Vote required', value: 'Two-thirds of votes cast on the measure', ref: 'Resolution 10203, §6' },
   { label: 'Exemptions', value: 'Qualifying very-low-income owners; owners with senior or disability utility-tax exemptions; certain government, religious, and community-service properties', ref: '§4.110.130' },
   { label: 'Oversight', value: 'Annual independent financial audit, public annual report, and City Council oversight', ref: '§4.110.190' },
@@ -53,6 +54,11 @@ export const faqs = [
     question: 'How much would it cost?',
     answer: 'The annual rate is 19 cents per square foot of improved property. For 1,600 taxable square feet, that is $304 a year, or $4,256 over 14 years. For 20,000 taxable square feet, the annual amount is $3,800. These are arithmetic examples before exemptions. The City’s taxable square footage determines the actual bill.',
     reference: 'Ordinance §4.110.170',
+  },
+  {
+    question: 'What does the $1,700 figure refer to?',
+    answer: 'The campaign’s figure refers to the combined household cost of new city and school-district tax and bond measures approved since 2020, together with proposed Measure PFD. The campaign describes this total as more than $1,700 per household in new taxes in the last five years. It is not the amount charged by Measure PFD alone.',
+    reference: 'Campaign-supplied messaging; supporting calculation pending',
   },
   {
     question: 'Who qualifies for an exemption?',

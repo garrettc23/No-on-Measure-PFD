@@ -5,7 +5,7 @@ const origin = process.env.PREVIEW_URL || 'http://127.0.0.1:4321';
 const run = (...args) => execFileSync(binary, args, { encoding: 'utf8', maxBuffer: 5_000_000 }).trim();
 mkdirSync('.context/screenshots', { recursive: true });
 const results = [];
-for (const [page, path] of [['home','/'],['facts','/facts/'],['join','/join/'],['privacy','/privacy/'],['credits','/credits/'],['not-found','/404/']]) {
+for (const [page, path] of [['home','/'],['paparian','/bill-paparian/'],['facts','/facts/'],['join','/join/'],['privacy','/privacy/'],['credits','/credits/'],['not-found','/404/']]) {
   for (const [size, viewport] of [['mobile','390x844'],['tablet','768x1024'],['desktop','1440x1000']]) {
     run('viewport', viewport);
     run('goto', origin + path);
