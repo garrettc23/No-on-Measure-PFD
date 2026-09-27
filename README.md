@@ -1,6 +1,6 @@
 # No on Measure PFD
 
-A local Astro website for review. Home, Facts & FAQ, Join Us, Privacy, photography credits, and printable FAQs.
+A local Astro website for review. Home, Facts & FAQ, former Mayor Bill Paparian’s commentary, Join Us, Privacy, photography credits, and printable FAQs.
 
 ## Run locally
 
@@ -25,7 +25,8 @@ npm run preview
 ## Content and integrations
 
 - `src/data/campaign.ts`: shared facts, FAQs, sources, contact details, and optional donation/domain settings.
-- `src/styles/global.css`: responsive design and reusable styles.
+- `src/data/paparian.ts`: client-supplied commentary excerpts, publication date, and original source link.
+- `src/styles/global.css`: responsive design and reusable styles, with self-hosted Archivo headings and Public Sans body text.
 - `docs/content-review.md`: source verification, corrections to the brief, photo licensing, and launch dependencies.
 
 The local build is deliberately marked `noindex`. No production domain is invented. Donate appears only after `donationUrl` is configured. Live form handling, SMS consent, public hosting, and final campaign disclosures remain launch tasks.
