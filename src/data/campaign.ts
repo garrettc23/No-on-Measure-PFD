@@ -5,7 +5,9 @@ export const campaign = {
   description: 'We stand with our firefighters, police, and paramedics. We are asking for a fairer way to fund public safety. Read the measure, understand the cost, and get involved.',
   electionDate: 'Tuesday, November 3, 2026',
   contact: { name: 'Matt Klink', phone: '310-283-6267', telephone: '+13102836267', email: 'matt@klinkcampaigns.com' },
-  disclosure: 'Paid for by Committee for Responsible Property Taxation, Opposing Measure PFD, Sponsored by REALTORS®.',
+  // Website disclaimer per counsel's Sept. 25, 2026 requirements: top or bottom of every page, 11pt+ (15px+), contrasting color, never all caps. Update when the National Association of REALTORS® becomes a top funder.
+  disclosure: 'Paid for by Committee for Responsible Property Taxation – Opposing Measure PFD, Sponsored by REALTORS®.',
+  topFunder: 'Committee’s Top Funder: California Association of REALTORS®.',
   // Set only after campaign confirmation. No donation control is rendered without a URL.
   donationUrl: '',
   // Add the client-approved PDF here when it is ready.

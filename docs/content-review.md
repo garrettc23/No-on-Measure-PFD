@@ -26,7 +26,7 @@ Excluded pending verification: grocery equivalence; county sales-tax increase; E
 
 ## Required before launch
 
-1. Clear the user-supplied City Hall hero image for public use and obtain a high-resolution original. Confirm the committee's exact legal disclosure, FPPC ID, and any top-contributor disclosures. Footer language currently follows the supplied brief; this is not a determination of legal sufficiency.
+1. Clear the user-supplied City Hall hero image for public use and obtain a high-resolution original. Footer disclosure now follows counsel's September 25, 2026 website requirements (FPPC ID 1497201; top funder California Association of REALTORS®). Update it when the National Association of REALTORS® becomes a top funder, and keep the site online until 30 days after the election.
 2. Supply an approved domain, set `campaign.siteUrl`, and configure canonical/Open Graph URLs. Remove local `noindex` metadata and add production indexing assets only at launch.
 3. Select hosting and a real submission service. Replace preview handlers with server-side validation, abuse protection, delivery handling, retention rules, and tested submission receipts.
 4. Finalize privacy language for the chosen services. Have campaign counsel/provider approve any SMS consent before enabling text enrollment. Preview checkboxes collect no consent.
@@ -103,3 +103,15 @@ Validation: Astro check (zero errors/warnings), production build, copy audit, an
 The hero’s supporting sentence uses regular weight while the vote message stays bold. The $1,700 headline and homepage Paparian headline are vertically centered beside their supporting copy on desktop. Paparian’s name, publication date, and explicitly labeled source are consolidated at the top of his page; repeated quote captions and the duplicate article link are removed. The Facts heading reads “The details behind the measure.”
 
 Fresh PR checks passed: Astro check, production build, copy audit, all 21 page/viewport checks, and all 18 interaction checks. No deployment is included. The combined $1,700 figure remains campaign-supplied messaging with the supporting calculation pending.
+
+## Browser tab title and icon — September 27, 2026
+
+The homepage tab now reads “No On Measure PFD | Increasing Pasadena’s Property Taxes”; every tab title capitalizes each word (for example “Facts & FAQ | No On Measure PFD”). The NO / on PFD favicon fits both lines inside the tile, with the red rule spanning the full width of “on PFD”, and PNG fallbacks (32px favicon, 180px Apple touch icon) cover browsers that ignore SVG icons.
+
+## Website disclaimer — September 27, 2026
+
+Per counsel’s September 25, 2026 disclaimer requirements, every page footer and the FAQ PDF now read: “Paid for by Committee for Responsible Property Taxation – Opposing Measure PFD, Sponsored by REALTORS®. Committee’s Top Funder: California Association of REALTORS®.” The footer disclosure sits on one line at 15px on screens 1400px and wider; narrower screens show it at 16px with the top funder on its own line. It never drops below the 11-point minimum or appears in all capitals. The PDF disclosure is 11pt on two lines, and the PDF footer no longer carries the “Local preview · Campaign material · September 2026” label.
+
+## Vercel Web Analytics — September 28, 2026
+
+Added Vercel Web Analytics to the main site layout. It counts visits and page views without cookies; the privacy notice and README now say so. Print pages used to generate the FAQ PDF and social image are not tracked.
