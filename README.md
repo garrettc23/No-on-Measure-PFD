@@ -20,7 +20,7 @@ npm run audit:copy
 npm run preview
 ```
 
-`dist/` is the static output. Form previews validate in the browser, display an explicit non-submission message, and clear fields. They send no requests, collect no consent, and use no browser storage. Buttons are disabled until the preview handler is attached. Fonts and photographs are local. No analytics are installed.
+`dist/` is the static output. Form previews validate in the browser, display an explicit non-submission message, and clear fields. They send no requests, collect no consent, and use no browser storage. Buttons are disabled until the preview handler is attached. Fonts and photographs are local. Vercel Web Analytics (`@vercel/analytics`) counts page views without cookies; enable it under the project’s Analytics tab in Vercel.
 
 ## Content and integrations
 

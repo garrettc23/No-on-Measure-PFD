@@ -3,9 +3,11 @@ import '@fontsource-variable/archivo';
 import '@fontsource-variable/public-sans';
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
+import Analytics from '@vercel/analytics/astro';
 import Icon from '../components/Icon.astro';
 import ShareButton from '../components/ShareButton.astro';
 import { campaign } from '../data/campaign';
+import { titleCase } from '../utils/titleCase';
 interface Props { title?: string; description?: string; }
 const { title = campaign.name, description = campaign.description } = Astro.props;
 const path = Astro.url.pathname;
@@ -16,7 +18,7 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
 <html lang="en">
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === campaign.name ? `${title} | Pasadena, November 2026` : `${title} | ${campaign.name}`}</title>
+    <title>{titleCase(title === campaign.name ? `${title} | Increasing Pasadena’s property taxes` : `${title} | ${campaign.name}`)}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#012755" />
     <meta name="robots" content="noindex, nofollow" />
@@ -25,7 +27,8 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
     <meta property="og:image" content={new URL('/social-card.png', siteUrl)} />
     <meta property="og:image:alt" content="Vote NO on Measure PFD. Support public safety. Keep Pasadena affordable." />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Analytics />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class:list={{ 'home-page': path === '/' }}>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -45,7 +48,7 @@ const siteUrl = campaign.siteUrl || Astro.url.origin;
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main"><Logo footer /><div class="footer-nav"><a href="/facts/">Facts & FAQ</a><a href="/join/">Join the campaign</a><a href="/join/#contact">Contact</a><a href="/privacy/">Privacy</a><ShareButton /></div></div>
-        <div class="footer-bottom"><p>{campaign.disclosure}</p></div>
+        <div class="footer-bottom"><p data-legal-copy>{campaign.disclosure} <span class="top-funder">{campaign.topFunder}</span></p></div>
       </div>
     </footer>
     <div class="mobile-pledge"><span>November 3 · Pasadena</span><a href="/join/#pledge" class="button button-small">Pledge NO <Icon size={17} /></a></div>

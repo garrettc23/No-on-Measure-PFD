@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="No on PFD">
   <rect width="64" height="64" rx="8" fill="#012755"/>
   <g fill="#fff" font-family="Arial, Helvetica, sans-serif" font-weight="900" text-anchor="middle">
-    <text x="32" y="35" font-size="36" letter-spacing="-2">NO</text>
-    <text x="32" y="53" font-size="15">on PFD</text>
+    <text x="32" y="31" font-size="30" textLength="40" lengthAdjust="spacingAndGlyphs">NO</text>
+    <text x="32" y="48" font-size="15" textLength="42" lengthAdjust="spacingAndGlyphs">on PFD</text>
   </g>
-  <path d="M8 60h48" stroke="#d20a14" stroke-width="5"/>
+  <path d="M11 55h42" stroke="#d20a14" stroke-width="4"/>
 </svg>

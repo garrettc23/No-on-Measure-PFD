@@ -28,10 +28,15 @@
 .optional, .form-grid .optional { font-size: 16px; }
 .form-grid input, .form-grid select, .form-grid textarea { font-size: 18px; }
 .checkbox-label input { width: 20px; height: 20px; }
-.footer-bottom p { max-width: none; font-size: 14px; }
+.footer-bottom p { max-width: none; font-size: 16px; text-transform: none; }
+.footer-bottom .top-funder { display: block; }
+/* One line where it fits at 15px (11pt minimum is ~14.7px); narrower screens wrap rather than shrink. */
+@media (min-width: 1400px) {
+  .footer-bottom p { font-size: 15px; white-space: nowrap; }
+  .footer-bottom .top-funder { display: inline; }
+}
 @media (min-width: 801px) {
   .site-footer .footer-main { grid-template-columns: 1fr auto; }
-  .footer-bottom p { font-size: clamp(12px, 1.15vw, 16px); white-space: nowrap; }
 }
 @media (max-width: 1100px) {
   .site-header nav { gap: 20px; }
