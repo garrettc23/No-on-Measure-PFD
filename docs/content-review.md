@@ -115,3 +115,21 @@ Per counsel’s September 25, 2026 disclaimer requirements, every page footer an
 ## Vercel Web Analytics — September 28, 2026
 
 Added Vercel Web Analytics to the main site layout. It counts visits and page views without cookies; the privacy notice and README now say so. Print pages used to generate the FAQ PDF and social image are not tracked.
+
+## Counsel edits — September 30, 2026
+
+The supplied screenshot and client-approved plan supersede the earlier tax wording and single-line disclosure presentation above. The homepage uses counsel’s sentence: “Now Measure PFD adds one more -- $304 a year on a typical home, resulting in more than $1,700 in new taxes since 2020 for many households.” The headline, Facts table, and FAQ use “since 2020” and “for many households”; the $1,700 campaign estimate expressly includes the proposed $304 annual PFD charge. Each explanation includes “Estimate based on the median sales price for a Pasadena home.” The basis is supplied by counsel; no calculation or measure-by-measure breakdown has been independently verified.
+
+The client subsequently clarified that the ad-specific disclaimer treatment should not apply to the website and requested the previous footer be restored. The website and FAQ PDF again use the original “Paid for by” and “Committee’s Top Funder” wording and their original light-background presentation. The black ad disclosure area, added underlining, and ad-specific spacing have been removed. The payer and top-funder statements remain separate blocks, centered between the logo and navigation on desktop and stacked below them on smaller screens. The navigation is vertically aligned with the logo and disclosure; the footer share button has been removed.
+
+The refined homepage tax section remains: the prominent $1,700 amount has a smaller qualifier, and linked superscript asterisks lead to one 13px footnote below a divider. All approved tax qualifications and median-home-price notes remain in the homepage, Facts table, FAQ, and regenerated two-page download.
+
+## Expanded FAQ, PDF, and search discovery — September 30, 2026
+
+The client confirmed `https://www.pfdno.com/` as the public domain and clarified that the PDF request concerns removing Matt's contact details, not sending a message. The downloadable FAQ retains the full “Paid for by Committee for Responsible Property Taxation – Opposing Measure PFD, Sponsored by REALTORS®.” and “Committee’s Top Funder: California Association of REALTORS®.” statements. Campaign contact details are omitted from the PDF only.
+
+Expanded the shared FAQ to 18 questions in three groups: measure basics, costs and exemptions, and funding and accountability. The website provides direct answers and per-question source references; the PDF now uses three pages to accommodate the expanded content at readable sizes. This supersedes the earlier two-page layout. Rechecked the City's ballot-measure packet and general-election page for the November 3 date, city voter eligibility, two-thirds threshold, $0.19 rate, 14-year term, rate-increase restrictions, collection, exemptions, authorized spending, audits, and baseline-funding language. The answers distinguish ordinance facts, arithmetic examples, and campaign positions. The $1,700 calculation remains campaign-supplied and unverified, includes proposed PFD, and retains the median-sales-price note.
+
+Added canonical URLs, unique search/social metadata, a production sitemap, robots rules, shared structured data, and an optional plain-text AI reading guide. Local development and Vercel previews remain excluded from indexing. The FAQ structured data matches the visible answers; it does not claim Google FAQ rich-result eligibility. No search-volume, ranking, indexing, or AI-citation result is asserted. See `docs/seo-readiness.md` for sources, verification, and post-deployment webmaster steps. The privacy notice no longer references the removed share button.
+
+Validation passed: Astro check (zero errors, warnings, or hints), production build, copy audit, both production and preview SEO audits, 21 responsive page checks, and 19 interaction checks. Visually reviewed all three PDF pages and confirmed the full disclosure, absence of campaign contact details, no text overflow, and byte-for-byte parity between the source and built download. Screenshots are saved under `.context/`.
