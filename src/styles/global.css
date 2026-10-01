@@ -154,9 +154,9 @@
 .numbers-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; }
 .numbers-heading h2 { font-size: clamp(30px, 3vw, 42px); }
 
-/* Keep the disclosure centered while its payer statement fits comfortably on two lines. */
-.site-footer .footer-main { grid-template-columns: 150px minmax(0, 1fr) auto; column-gap: clamp(24px, 3vw, 48px); padding-bottom: 12px; }
-.site-footer .footer-bottom { display: block; min-width: 0; align-self: center; border: 0; padding: 0; text-align: center; }
+/* Keep the disclosure centered below the footer logo and navigation. */
+.site-footer .footer-main { grid-template-columns: 1fr auto; column-gap: clamp(24px, 3vw, 48px); padding-bottom: 28px; }
+.site-footer .footer-bottom { display: block; min-width: 0; border: 0; padding: 0; text-align: center; }
 .site-footer .footer-bottom p { max-width: 620px; margin-inline: auto; line-height: 1.6; }
 .site-footer .top-funder { margin-top: 8px; }
 @media (min-width: 1001px) {
@@ -164,9 +164,8 @@
   .site-footer .footer-nav { grid-template-columns: repeat(2, max-content); gap: 12px 24px; align-self: center; line-height: 1.5; }
 }
 @media (max-width: 1000px) {
-  .site-footer .footer-main { grid-template-columns: 1fr auto; row-gap: 28px; }
+  .site-footer .footer-main { row-gap: 28px; }
   .site-footer .footer-nav { grid-column: 2; grid-row: 1; }
-  .site-footer .footer-bottom { grid-column: 1 / -1; grid-row: 2; }
 }
 
 .mobile-pledge > .button { width: 100%; }
