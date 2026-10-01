@@ -9,7 +9,7 @@ import { photoCredits } from '../data/campaign';
     {photoCredits.map(photo => <section>
       <h2>{photo.title}</h2>
       <p>{photo.description}{photo.author && <> Photograph by {photo.author}, taken {photo.date}.</>}</p>
-      {photo.url && <p><a href={photo.url}>View the source photograph</a>. Licensed under <a href={photo.licenseUrl}>{photo.license}</a>.</p>}
+      {photo.url && <p><a href={photo.url} target="_blank" rel="noopener noreferrer">View the source photograph<span class="sr-only"> (opens in a new tab)</span></a>. Licensed under <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">{photo.license}<span class="sr-only"> (opens in a new tab)</span></a>.</p>}
       {photo.sourceNote && <p>{photo.sourceNote}</p>}
     </section>)}
     <h2>How the photographs are used</h2>

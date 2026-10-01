@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const origin = new URL(process.env.PUBLIC_SITE_URL || 'https://www.pfdno.com').origin;
 const indexable = !['preview', 'development'].includes(process.env.VERCEL_ENV);
-const paths = ['/', '/facts/', '/bill-paparian/', '/join/', '/privacy/', '/credits/'];
+const paths = ['/', '/facts/', '/vote/', '/bill-paparian/', '/join/', '/privacy/', '/credits/'];
 const titles = new Set();
 const descriptions = new Set();
 const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -29,7 +29,7 @@ for (const path of paths) {
   assert.equal(page.url, `${origin}${path}`);
   if (path === '/facts/') {
     assert.equal(page['@type'], 'FAQPage');
-    assert.equal(page.mainEntity.length, 18);
+    assert.equal(page.mainEntity.length, 19);
     assert.equal((html.match(/<details\b/g) || []).length, page.mainEntity.length);
     // Compare plain content after the same HTML-entity decoding used for visible text.
     const decode = text => text.replace(/&amp;/g, '&').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -57,4 +57,4 @@ assert.ok(!sitemap.includes('localhost') && !guide.includes('localhost'));
 const print = await read('print/faq/index.html');
 assert.ok(print.includes('Committee for Responsible Property Taxation'));
 assert.ok(!print.includes('Campaign contact:') && !print.includes('matt@klinkcampaigns.com') && !print.includes('310-283-6267'));
-console.log(`SEO audit passed: ${paths.length} canonical pages, 18 visible FAQ answers, structured data, crawler files, PDF source, and ${indexable ? 'production' : 'preview'} indexing policy.`);
+console.log(`SEO audit passed: ${paths.length} canonical pages, 19 visible FAQ answers, structured data, crawler files, PDF source, and ${indexable ? 'production' : 'preview'} indexing policy.`);

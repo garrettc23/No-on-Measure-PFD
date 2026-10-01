@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "check": "astro check",
+    "test:forms": "node --test server/campaign-forms.test.mjs",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
     "audit:copy": "node scripts/audit-copy.mjs",

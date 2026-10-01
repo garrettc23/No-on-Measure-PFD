@@ -18,6 +18,7 @@ export const GET: APIRoute = () => new Response([
   '## Questions and answers',
   ...faqs.flatMap(faq => [
     '', `### ${faq.question}`, faq.answer, ...(faq.note ? [faq.note] : []),
+    ...(faq.action ? [`[${faq.action.label}](${absoluteUrl(faq.action.href)})`] : []),
     `Source: ${faq.reference}${faq.sourceUrl ? ` (${faq.sourceUrl})` : ''}.`,
   ]),
   '', '## Publisher disclosure', campaign.disclosure, campaign.topFunder,

@@ -1,6 +1,28 @@
 ---
-import '@fontsource-variable/archivo';
-import '@fontsource-variable/public-sans';
-import CampaignMark from '../../components/CampaignMark.astro';
+import cityHall from '../../assets/pasadena-city-hall.png';
 ---
-<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex, nofollow" /><title>No On Measure PFD Social Image</title><style>body{margin:0;background:#012755;color:#ffffff;width:1200px;height:630px;box-sizing:border-box;padding:45px 75px;font-family:'Public Sans Variable',Arial,sans-serif}.top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #5b6f92;padding-bottom:25px}.bottom{border-top:6px solid #e00a14;padding-top:18px}.brand{width:130px}.date{font-size:16px;letter-spacing:1px}h1{font-family:'Archivo Variable',Arial,sans-serif;font-size:62px;line-height:1.08;font-weight:750;letter-spacing:-2px;margin:30px 0 25px}p{font-size:22px;margin:0;color:#dde4ef}.bottom{font-size:14px;letter-spacing:2px;margin-top:45px;text-transform:uppercase}</style></head><body><div class="top"><div class="brand"><CampaignMark /></div><div class="date">PASADENA · NOVEMBER 3, 2026</div></div><h1>Support Pasadena’s firefighters.<br />Vote NO on Measure PFD.</h1><p>Support public safety. Keep Pasadena affordable.</p><div class="bottom">Measure PFD is the wrong solution to a serious problem.</div></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Vote No on Measure PFD</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { position: relative; isolation: isolate; overflow: hidden; margin: 0; width: 1200px; height: 630px; background: #f7f5f0; }
+      /* Center the building's tower within the right tile, rather than the source frame. */
+      .city-hall { position: absolute; z-index: -3; left: 600px; top: 0; width: 600px; height: 630px; object-fit: cover; object-position: 58% center; }
+      .photo-tone { position: absolute; z-index: -2; inset: 0 0 0 600px; background: linear-gradient(180deg, rgb(1 39 85 / 5%), transparent 55%, rgb(1 39 85 / 22%)); }
+      .veil { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #f7f5f0 0%, #f7f5f0 50%, rgb(247 245 240 / 25%) 59%, transparent 67%); }
+      .logo { position: absolute; left: 300px; top: 50%; transform: translate(-50%, -50%); display: block; width: 580px; height: 580px; object-fit: contain; }
+      .rule { position: absolute; inset: auto 0 0; height: 8px; background: #012755; }
+      .rule::before { content: ''; display: block; width: 600px; height: 100%; background: #e00014; }
+    </style>
+  </head>
+  <body>
+    <img class="city-hall" src={cityHall.src} alt="Pasadena City Hall" />
+    <div class="photo-tone"></div><div class="veil"></div>
+    <img class="logo" src="/social-logo.png" alt="Vote No on Measure PFD" width="1260" height="1260" />
+    <div class="rule"></div>
+  </body>
+</html>

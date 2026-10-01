@@ -1,3 +1,5 @@
+import { votingLinks } from './voting';
+
 export const campaign = {
   name: 'No on Measure PFD',
   title: 'Support Pasadena’s firefighters. Vote NO on Measure PFD.',
@@ -60,6 +62,7 @@ export interface CampaignFaq {
   reference: string;
   sourceUrl?: string;
   note?: string;
+  action?: { href: string; label: string };
 }
 
 export const faqs: CampaignFaq[] = [
@@ -74,6 +77,13 @@ export const faqs: CampaignFaq[] = [
     question: 'When is the vote on Measure PFD?',
     answer: 'Measure PFD is on Pasadena’s November 3, 2026 general-election ballot. The City Clerk’s election page links to official voter-registration information, vote-by-mail instructions, and Los Angeles County voting resources.',
     reference: 'City of Pasadena, November 2026 election information', sourceUrl: sources.election.url,
+  },
+  {
+    id: 'how-to-vote', group: 'basics',
+    question: 'How do I vote on Measure PFD?',
+    answer: 'Eligible registered Pasadena voters can return a mail ballot by mail or at an official Los Angeles County drop box, or vote in person at a county vote center. Election Day is November 3, 2026. Our voting guide links to registration, ballot-return instructions, locations, and ballot tracking. No campaign signup is required.',
+    reference: 'Los Angeles County voting instructions', sourceUrl: votingLinks.mail,
+    action: { href: '/vote/', label: 'How to vote: official tools and deadlines' },
   },
   {
     id: 'who-can-vote', group: 'basics',

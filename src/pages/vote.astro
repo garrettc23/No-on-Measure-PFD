@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { sources } from '../data/campaign';
+import { votingLinks } from '../data/voting';
+---
+<Layout title="How to vote" seoTitle="How to Vote on Measure PFD | Pasadena, November 2026" description="Check registration, find a Pasadena-area vote center or ballot drop box, read ballot-return instructions, and track your ballot using official election tools.">
+  <div class="voting-page container">
+    <header class="voting-header">
+      <h1>How to vote<br />on Measure PFD.</h1>
+      <div class="election-date"><span>Election Day</span><strong>November 3, 2026</strong><span>Tuesday · Polls open 7 a.m. to 8 p.m.</span></div>
+    </header>
+
+    <div class="voting-guide" id="voting-tools">
+      <article class="voting-step voting-utility section-anchor" id="registration">
+        <div><h2>Check your registration.</h2><p>Confirm your address. The regular registration deadline is <strong>October 19.</strong></p>
+          <details><summary>Missed the deadline? <Icon name="chevronDown" size={18} /></summary><p>Eligible voters can register and vote provisionally through Election Day. <a href={votingLinks.conditional} target="_blank" rel="noopener noreferrer">See same-day registration instructions<span class="sr-only"> (opens in a new tab)</span>.</a></p></details>
+        </div>
+        <div class="utility-actions"><a class="button" href={votingLinks.registration} target="_blank" rel="noopener noreferrer">Check registration<span class="sr-only"> (opens in a new tab)</span><Icon name="external" /></a><a class="text-link" href={votingLinks.register} target="_blank" rel="noopener noreferrer">Register or update<span class="sr-only"> (opens in a new tab)</span><Icon name="external" size={18} /></a></div>
+      </article>
+
+      <section class="voting-options" aria-labelledby="choose-voting-method">
+        <h2 id="choose-voting-method">Choose how to vote.</h2>
+        <div class="voting-options-grid">
+          <article class="voting-step voting-option section-anchor" id="return-ballot">
+            <h3>By mail or drop box</h3>
+            <p>Fill out your ballot. Sign, date, and seal the return envelope.</p>
+            <div class="voting-deadline"><span>Drop-off deadline</span><strong>November 3 · 8 p.m.</strong></div>
+            <a class="button" href={votingLinks.dropBoxes} target="_blank" rel="noopener noreferrer">Find a drop box<span class="sr-only"> (opens in a new tab)</span><Icon name="external" /></a>
+            <details><summary>Mailing your ballot? <Icon name="chevronDown" size={18} /></summary><p>No postage needed. It must be postmarked by November 3 and received within seven days. The County recommends mailing at least seven days before Election Day.</p><a href={votingLinks.mail} target="_blank" rel="noopener noreferrer">Full ballot-return instructions<span class="sr-only"> (opens in a new tab)</span><Icon name="external" size={18} /></a></details>
+          </article>
+          <article class="voting-step voting-option section-anchor" id="vote-in-person">
+            <h3>In person</h3>
+            <p>Find a vote center near you. Check its dates and hours before you go.</p>
+            <div class="voting-deadline"><span>Election Day hours</span><strong>7 a.m. to 8 p.m.</strong></div>
+            <a class="button" href={votingLinks.voteCenters} target="_blank" rel="noopener noreferrer">Find a vote center<span class="sr-only"> (opens in a new tab)</span><Icon name="external" /></a>
+            <details><summary>Want to vote early? <Icon name="chevronDown" size={18} /></summary><p>Early-voting dates and hours vary by location. Check the vote-center locator for the latest schedule.</p><a href={votingLinks.inPerson} target="_blank" rel="noopener noreferrer">In-person voting details<span class="sr-only"> (opens in a new tab)</span><Icon name="external" size={18} /></a></details>
+          </article>
+        </div>
+      </section>
+
+      <article class="voting-step voting-utility tracking section-anchor" id="track-ballot">
+        <div><h2>Already returned your ballot?</h2><p>Check whether it was received and counted.</p></div>
+        <a class="button button-outline" href={votingLinks.tracking} target="_blank" rel="noopener noreferrer">Track your ballot<span class="sr-only"> (opens in a new tab)</span><Icon name="external" /></a>
+      </article>
+    </div>
+
+    <footer class="voting-sources"><p>A campaign guide using official election resources. All voting tools open in a new tab.</p><div><a href={sources.election.url} target="_blank" rel="noopener noreferrer">Pasadena election information<span class="sr-only"> (opens in a new tab)</span><Icon name="external" size={16} /></a><a href={votingLinks.calendar} target="_blank" rel="noopener noreferrer">County election calendar<span class="sr-only"> (opens in a new tab)</span><Icon name="external" size={16} /></a></div></footer>
+  </div>
+</Layout>
+
+<style>
+  .voting-page { padding-top: 56px; padding-bottom: 64px; }
+  .voting-header { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-bottom: 40px; }
+  .voting-header h1 { font-size: clamp(40px, 4.2vw, 60px); }
+  .election-date { border-left: 3px solid var(--red); padding-left: 24px; display: grid; gap: 5px; font-size: 18px; }
+  .election-date strong { font-family: var(--display); font-size: 28px; line-height: 1.3; }
+  .election-date span { color: var(--green-soft); }
+  .voting-utility { display: flex; align-items: center; justify-content: space-between; gap: 28px 48px; padding: 30px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .voting-utility > div:first-child { max-width: 640px; }
+  .voting-utility h2 { font-size: 28px; margin-bottom: 10px; }
+  .voting-guide p { color: var(--green-soft); font-size: 18px; line-height: 1.6; }
+  .voting-guide p strong { color: var(--green); }
+  .utility-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; flex-shrink: 0; }
+  .voting-guide .button { min-height: 56px; font-size: 18px; gap: 18px; }
+  .voting-guide .text-link { font-size: 18px; }
+  .voting-options { padding: 40px 0; }
+  .voting-options > h2 { font-size: 34px; margin-bottom: 24px; }
+  .voting-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .voting-option { background: var(--paper-deep); padding: 32px; }
+  .voting-option h3 { font-family: var(--display); font-size: 30px; letter-spacing: -.025em; margin-bottom: 12px; }
+  .voting-option > p { max-width: 470px; min-height: 58px; }
+  .voting-deadline { display: grid; gap: 4px; padding: 24px 0; }
+  .voting-deadline span { font-size: 16px; color: var(--green-soft); }
+  .voting-deadline strong { font-size: 24px; line-height: 1.3; }
+  .voting-option > .button { width: 100%; }
+  details { margin-top: 18px; }
+  summary { display: flex; align-items: center; gap: 10px; width: fit-content; min-height: 44px; font-size: 18px; font-weight: 600; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] summary svg { transform: rotate(180deg); }
+  details p { margin-top: 8px; }
+  details > a { display: inline-flex; gap: 8px; align-items: center; margin-top: 14px; font-size: 18px; }
+  .tracking { border-top: 0; padding-top: 0; }
+  .tracking > .button { flex-shrink: 0; }
+  .voting-sources { padding-top: 24px; color: var(--green-soft); }
+  .voting-sources p { font-size: 16px; }
+  .voting-sources > div { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 10px; }
+  .voting-sources a { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; }
+  @media (max-width: 800px) {
+    .voting-page { padding-top: 36px; padding-bottom: 40px; }
+    .voting-header { flex-direction: column; align-items: flex-start; gap: 24px; padding-bottom: 30px; }
+    .election-date { padding-left: 18px; }
+    .voting-utility { align-items: flex-start; flex-direction: column; gap: 24px; }
+    .utility-actions { align-items: flex-start; }
+    .voting-options-grid { grid-template-columns: 1fr; gap: 20px; }
+    .voting-option > p { min-height: 0; }
+    .voting-option { padding: 26px; }
+  }
+  @media (max-width: 480px) {
+    .voting-utility h2 { font-size: 26px; }
+    .voting-options > h2 { font-size: 30px; }
+    .voting-option { padding: 22px; }
+    .voting-option h3 { font-size: 28px; }
+    .voting-deadline strong { font-size: 22px; }
+    .utility-actions, .voting-guide .button { width: 100%; }
+    .utility-actions { align-items: center; }
+    .voting-guide .button { padding-inline: 16px; }
+  }
+</style>
