@@ -34,13 +34,15 @@ export const sources = {
   },
 };
 
+export const taxEstimateNote = 'Estimate based on the median sales price for a Pasadena home.';
+
 export const facts = [
   { label: 'Election', value: 'Tuesday, November 3, 2026', ref: 'Resolution 10203, §2' },
   { label: 'Annual rate', value: '$0.19 per square foot of improved property', ref: '§4.110.170' },
   { label: 'Duration', value: '14 years after the ordinance takes effect', ref: '§4.110.240' },
   { label: 'Estimated revenue', value: 'Approximately $22.1 million annually', ref: 'Ballot question' },
   { label: '1,600-square-foot example', value: '$304 a year; $4,256 over 14 years', ref: '1,600 × $0.19; before exemptions' },
-  { label: 'Combined household tax cost (campaign estimate)', value: 'More than $1,700 per household in new taxes in the last five years, combining city and school-district tax and bond measures approved since 2020 with proposed Measure PFD. This is the campaign’s estimate, not the cost of PFD alone.', ref: 'Campaign-supplied messaging; supporting calculation pending' },
+  { label: 'Combined household tax cost (campaign estimate)', value: 'More than $1,700 in new taxes since 2020 for many households, combining city and school-district tax and bond measures with proposed Measure PFD. This campaign estimate includes the proposed $304 annual PFD charge on a typical home.', note: taxEstimateNote, ref: 'Campaign-supplied messaging; supporting calculation pending' },
   { label: 'Vote required', value: 'Two-thirds of votes cast on the measure', ref: 'Resolution 10203, §6' },
   { label: 'Exemptions', value: 'Qualifying very-low-income owners; owners with senior or disability utility-tax exemptions; certain government, religious, and community-service properties', ref: '§4.110.130' },
   { label: 'Oversight', value: 'Annual independent financial audit, public annual report, and City Council oversight', ref: '§4.110.190' },
@@ -59,7 +61,8 @@ export const faqs = [
   },
   {
     question: 'What does the $1,700 figure refer to?',
-    answer: 'The campaign’s figure refers to the combined household cost of new city and school-district tax and bond measures approved since 2020, together with proposed Measure PFD. The campaign describes this total as more than $1,700 per household in new taxes in the last five years. It is not the amount charged by Measure PFD alone.',
+    answer: 'The campaign estimates more than $1,700 in new taxes since 2020 for many households, combining city and school-district tax and bond measures with proposed Measure PFD. That total includes the proposed $304 annual PFD charge on a typical home. The $304 is not added on top of the $1,700 estimate.',
+    note: taxEstimateNote,
     reference: 'Campaign-supplied messaging; supporting calculation pending',
   },
   {
