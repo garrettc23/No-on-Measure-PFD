@@ -50,4 +50,4 @@ BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/browser
 BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/interaction-audit.mjs
 ```
 
-Checks each main page at 390, 768, and 1440 pixels, and saves screenshots plus results under `.context/`. `PREVIEW_URL` can override the local URL. Browser interaction checks cover menu keyboard behavior, FAQ expansion, invalid and valid form previews, the five-field signup and optional phone validation, and sharing. Results and screenshots in `.context/` are generated locally and are not committed.
+Checks each main page at 390, 768, and 1440 pixels, and saves screenshots plus results under `.context/`. `PREVIEW_URL` can override the local URL. Browser interaction checks cover menu keyboard behavior, FAQ expansion, invalid and valid form previews, the five-field signup and optional phone validation, and the tax-estimate footnote link. Results and screenshots in `.context/` are generated locally and are not committed.

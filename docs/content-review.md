@@ -115,3 +115,11 @@ Per counsel’s September 25, 2026 disclaimer requirements, every page footer an
 ## Vercel Web Analytics — September 28, 2026
 
 Added Vercel Web Analytics to the main site layout. It counts visits and page views without cookies; the privacy notice and README now say so. Print pages used to generate the FAQ PDF and social image are not tracked.
+
+## Counsel edits — September 30, 2026
+
+The supplied screenshot and client-approved plan supersede the earlier tax wording and single-line disclosure presentation above. The homepage uses counsel’s sentence: “Now Measure PFD adds one more -- $304 a year on a typical home, resulting in more than $1,700 in new taxes since 2020 for many households.” The headline, Facts table, and FAQ use “since 2020” and “for many households”; the $1,700 campaign estimate expressly includes the proposed $304 annual PFD charge. Each explanation includes “Estimate based on the median sales price for a Pasadena home.” The basis is supplied by counsel; no calculation or measure-by-measure breakdown has been independently verified.
+
+The client subsequently clarified that the ad-specific disclaimer treatment should not apply to the website and requested the previous footer be restored. The website and FAQ PDF again use the original “Paid for by” and “Committee’s Top Funder” wording and their original light-background presentation. The black ad disclosure area, added underlining, and ad-specific spacing have been removed. The payer and top-funder statements remain separate blocks, centered between the logo and navigation on desktop and stacked below them on smaller screens. The navigation is vertically aligned with the logo and disclosure; the footer share button has been removed.
+
+The refined homepage tax section remains: the prominent $1,700 amount has a smaller qualifier, and linked superscript asterisks lead to one 13px footnote below a divider. All approved tax qualifications and median-home-price notes remain in the homepage, Facts table, FAQ, and regenerated two-page download.
