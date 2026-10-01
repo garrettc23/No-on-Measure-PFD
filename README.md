@@ -17,6 +17,7 @@ Open http://localhost:4321. The server binds to the local machine only.
 npm run check
 npm run build
 npm run audit:copy
+npm run audit:seo
 npm run preview
 ```
 
@@ -24,24 +25,24 @@ npm run preview
 
 ## Content and integrations
 
-- `src/data/campaign.ts`: shared facts, FAQs, sources, contact details, and optional donation/domain settings.
+- `src/data/campaign.ts`: shared facts, FAQs, sources, contact details, and optional donation settings.
 - `src/data/paparian.ts`: client-supplied commentary excerpts, publication date, and original source link.
 - `src/styles/global.css`: responsive design and reusable styles, with self-hosted Archivo headings and Public Sans body text.
 - `docs/content-review.md`: source verification, corrections to the brief, photo licensing, and launch dependencies.
 
-The local build is deliberately marked `noindex`. No production domain is invented. Donate appears only after `donationUrl` is configured. Live form handling, SMS consent, public hosting, and final campaign disclosures remain launch tasks.
+Production builds use `https://www.pfdno.com/` for canonical URLs, social metadata, structured data, and the sitemap. Set `PUBLIC_SITE_URL` in the build environment to change that origin. Local development and Vercel preview/development builds remain `noindex` with crawling disabled; production builds allow search and AI crawlers. See `docs/seo-readiness.md` for validation and post-deployment steps. Donate appears only after `donationUrl` is configured. Live form handling and SMS consent remain launch tasks.
 
 ## Fact sheet, FAQ PDF, and social image
 
 The client’s approved fact-sheet PDF is pending. Place it in `public/downloads/` and set `campaign.factSheetUrl` to its public path when ready; links remain hidden while that setting is empty. The previous generated fact sheet has been withdrawn.
 
-The FAQ print route reads the same shared content as the Facts page. Its substantive content is awaiting the client’s briefing. Run the dev server, then:
+The FAQ print route reads the same 18 questions and answers as the Facts page, with official sources and clearly attributed campaign estimates. The download retains the committee and top-funder disclosure but omits campaign contact details. Run the dev server, then:
 
 ```sh
 BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/generate-downloads.mjs
 ```
 
-This uses gstack browse to generate the two-page FAQ and 1200 × 630 social image in `public/`. Rebuild after generation so `dist/` contains the updated files. Do not edit the PDFs directly.
+This uses gstack browse to generate the three-page FAQ and 1200 × 630 social image in `public/`. The expanded FAQ has one page each for basics, costs/exemptions, and funding/accountability. Rebuild after generation so `dist/` contains the updated files. Do not edit the PDFs directly.
 
 ## Browser verification
 
