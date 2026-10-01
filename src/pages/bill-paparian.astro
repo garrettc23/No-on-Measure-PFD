@@ -8,7 +8,7 @@ import { paparian } from '../data/paparian';
     <header class="paparian-intro">
       <h1>Former Pasadena Mayor Bill Paparian urges a <span class="accent">NO vote on Measure PFD.</span></h1>
       <p class="paparian-byline">Commentary by William “Bill” Paparian, former Pasadena mayor<br />Source: {paparian.publication} · <time datetime={paparian.publishedDate}>{paparian.published}</time></p>
-      <a class="text-link" href={paparian.url}>Read the full commentary <Icon name="external" /></a>
+      <a class="text-link" href={paparian.url} target="_blank" rel="noopener noreferrer">Read the full commentary<span class="sr-only"> (opens in a new tab)</span> <Icon name="external" /></a>
     </header>
 
     <section class="paparian-excerpts" aria-labelledby="excerpts-title">
@@ -38,7 +38,7 @@ import { paparian } from '../data/paparian';
   <section class="closing">
     <div class="container closing-inner">
       <h2>Vote NO on Measure PFD by November 3, 2026</h2>
-      <div class="closing-action"><p>Support our firefighters. Ask City Hall for a better funding plan.</p><a class="button button-cream" href="/join/#pledge">Pledge your NO vote <Icon /></a></div>
+      <div class="closing-action"><p>Support our firefighters. Ask City Hall for a better funding plan.</p><a class="button button-cream" href="/join/#signup">Vote NO <Icon /></a></div>
     </div>
   </section>
 </Layout>

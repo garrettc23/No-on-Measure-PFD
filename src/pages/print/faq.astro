@@ -1,13 +1,14 @@
 ---
 import PrintLayout from '../../layouts/PrintLayout.astro';
 import { faqs, faqGroups, sources } from '../../data/campaign';
+import { absoluteUrl } from '../../utils/seo';
 ---
 <PrintLayout title="Measure PFD questions and answers">
   {faqGroups.map((group, i) => <section class="faq-page">
     <div class="kicker">Pasadena · November 3, 2026 · Page {i + 1} of {faqGroups.length}</div>
     <h1>{group.title}.</h1>
     {i === 0 && <p class="source">Published by the No on Measure PFD campaign. Reviewed September 30, 2026.</p>}
-    {faqs.filter(faq => faq.group === group.id).map(faq => <article class="faq-print"><h2>{faq.question}</h2><p>{faq.answer}</p>{faq.note && <small>{faq.note}</small>}</article>)}
-    <p class="source">Sources: <a href={sources.ordinance.url}>City of Pasadena, proposed Measure PFD ordinance</a> and <a href={sources.election.url}>2026 election information</a>. Campaign positions and estimates are identified in the answers.</p>
+    {faqs.filter(faq => faq.group === group.id).map(faq => <article class="faq-print"><h2>{faq.question}</h2><p>{faq.answer}</p>{faq.action && <small><a href={absoluteUrl(faq.action.href)}>Voting guide: {absoluteUrl(faq.action.href)}</a></small>}{faq.note && <small>{faq.note}</small>}</article>)}
+    <p class="source">Sources: <a href={sources.ordinance.url} target="_blank" rel="noopener noreferrer">City of Pasadena, proposed Measure PFD ordinance</a> and <a href={sources.election.url} target="_blank" rel="noopener noreferrer">2026 election information</a>. Campaign positions and estimates are identified in the answers.</p>
   </section>)}
 </PrintLayout>

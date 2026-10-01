@@ -1,0 +1,64 @@
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-campaign-form]').forEach(form => {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const status = form.querySelector<HTMLElement>('[role="status"]');
+    const phone = form.querySelector<HTMLInputElement>('input[type="tel"]');
+    if (!button || !status) return;
+    const buttonContent = button.innerHTML;
+    let submissionId = crypto.randomUUID();
+    let pending = false;
+    const validatePhone = () => {
+      if (phone) {
+        const digits = phone.value.replace(/\D/g, '');
+        phone.setCustomValidity(phone.value && (digits.length < 10 || digits.length > 15) ? 'Enter a phone number with 10 to 15 digits.' : '');
+      }
+    };
+    phone?.addEventListener('input', validatePhone);
+    form.addEventListener('input', () => {
+      status.textContent = '';
+      submissionId = crypto.randomUUID();
+    });
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (pending) return;
+      validatePhone();
+      if (!form.reportValidity()) return;
+      const body = { ...Object.fromEntries(new FormData(form)), kind: form.dataset.campaignForm, submissionId };
+      const fields = form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+      pending = true;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      form.setAttribute('aria-busy', 'true');
+      fields.forEach(field => { field.disabled = true; });
+      status.textContent = '';
+      try {
+        const response = await fetch('/api/forms/', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body), signal: AbortSignal.timeout(15_000),
+        });
+        const result = await response.json();
+        if (!response.ok || result.ok !== true) {
+          if (typeof result.error === 'string') status.textContent = result.error;
+          throw new Error('Unable to send.');
+        }
+        status.textContent = form.dataset.campaignForm === 'signup'
+          ? 'Thank you. Your signup has been sent to Matt at the campaign.'
+          : 'Your message has been sent to Matt at the campaign.';
+        form.reset();
+        submissionId = crypto.randomUUID();
+        validatePhone();
+      } catch {
+        if (!status.textContent) status.textContent = 'We couldn’t send this right now. Your entries are still here. Please try again or email matt@klinkcampaigns.com.';
+      } finally {
+        pending = false;
+        button.disabled = false;
+        button.innerHTML = buttonContent;
+        fields.forEach(field => { field.disabled = false; });
+        form.removeAttribute('aria-busy');
+        status.focus();
+      }
+    });
+    // Fail closed if JavaScript does not initialize: never put personal information in a URL.
+    button.disabled = false;
+  });
+</script>

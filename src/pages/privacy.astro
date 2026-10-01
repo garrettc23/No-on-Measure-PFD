@@ -2,6 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import { campaign } from '../data/campaign';
 ---
-<Layout title="Privacy notice" description="How the No on Measure PFD local website preview handles information.">
-  <article class="container prose-page"><h1>Your privacy.</h1><p class="lead">This notice describes the local preview of the No on Measure PFD website.</p><h2>Forms and personal information</h2><p>Signup and contact forms run in your browser for demonstration. Submitting a preview form does not send information to the campaign or a third-party service. The form clears after a valid preview submission. We do not save form data in cookies, browser storage, or a database.</p><p>Please use sample information when reviewing the forms.</p><h2>Analytics and cookies</h2><p>This site uses Vercel Web Analytics to count visits and page views in aggregate. It does not use cookies or identify individual visitors. There are no advertising pixels or tracking cookies. Fonts and images are served locally. The local server may record ordinary request information in its development logs.</p><h2>Email, phone, and external links</h2><p>Email and phone links open your chosen app. If you contact the campaign, your email or phone provider processes that communication. Source links open external websites governed by their own privacy practices.</p><h2>Before a public launch</h2><p>This notice will be updated before live forms or other data collection are enabled. The published notice will identify the information collected, its uses, service providers, retention practices, and how to make privacy requests. Any text messaging program will have separate consent terms.</p><h2>Contact</h2><p>Questions about the campaign can be directed to {campaign.contact.name} at <a href={`mailto:${campaign.contact.email}`}>{campaign.contact.email}</a> or <a href={`tel:${campaign.contact.telephone}`}>{campaign.contact.phone}</a>.</p></article>
+<Layout title="Privacy notice" description="How the No on Measure PFD website handles campaign signups, messages, and analytics.">
+  <article class="container prose-page">
+    <h1>Your privacy.</h1>
+    <p class="lead">This notice explains how information submitted through this campaign website is handled.</p>
+    <h2>Campaign signups and messages</h2>
+    <p>When you sign up, we ask for your name, email address, ZIP code, and optional phone number. The contact form asks for your name, email address, topic, message, and optional phone number.</p>
+    <p>Submitting either form sends those details to Matt Klink at the campaign by email. We use them to respond to your inquiry and coordinate your involvement. Providing a phone number does not enroll you in an automated text-message program.</p>
+    <h2>How information is processed</h2>
+    <p>Vercel hosts the website and processes form requests. Resend sends submission emails to the campaign. Your email address is included as the reply-to address so Matt can respond directly. The website does not store submissions in a database, cookies, or browser storage.</p>
+    <p>Submission emails are retained in the campaign’s mailbox and may also be retained by its service providers. The server uses a temporary, hashed network identifier to limit repeated requests. Hosting and email providers may process ordinary request and delivery logs.</p>
+    <h2>Analytics and cookies</h2>
+    <p>This site uses Vercel Web Analytics to count visits and page views in aggregate. It does not use cookies or identify individual visitors. There are no advertising pixels or tracking cookies. Fonts and images are served locally.</p>
+    <h2>Email, phone, and external links</h2>
+    <p>Email and phone links open your chosen app. Your provider processes those communications. External websites have their own privacy practices.</p>
+    <h2>Contact and privacy requests</h2>
+    <p>To ask about your information, request its deletion, or stop campaign communications, contact {campaign.contact.name} at <a href={`mailto:${campaign.contact.email}`}>{campaign.contact.email}</a> or <a href={`tel:${campaign.contact.telephone}`}>{campaign.contact.phone}</a>.</p>
+  </article>
 </Layout>
