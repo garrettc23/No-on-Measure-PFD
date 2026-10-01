@@ -197,3 +197,9 @@ Final form actions are “Join the Campaign” and “Send Message,” with expl
 Re-ran Astro check (zero diagnostics), all eight server test groups, production build, copy audit, production and preview SEO audits, 34 mocked browser interaction checks, and 24 responsive page checks. The FAQ PDF has three pages, includes the voting answer and committee disclosure, omits campaign contact details, and keeps text inside page bounds. Screenshots are saved under `.context/screenshots/`.
 
 Security/API, testing/maintainability, design/performance, and adversarial reviews found no blocking issues. Additional Codex CLI review was unavailable because the installed CLI does not support its configured model. Production deployment and an actual inbox-delivery check remain separate follow-up steps; this PR verification sent no email.
+
+## Footer disclaimer placement — October 1, 2026
+
+The disclaimer now appears in its own centered row below the footer logo and navigation at every width, superseding the earlier desktop layout notes. The upper row uses two columns with 28px spacing before the disclosure. Legal wording, typography, and mobile bottom clearance remain unchanged.
+
+Astro check, all eight form tests, production build, copy audit, and SEO audit passed. Browser checks at 320, 375, 768, and 1440px confirmed the disclaimer sits below the footer information without horizontal overflow or overlap with the fixed mobile button. These checks were local; production deployment remains separate.
