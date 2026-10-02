@@ -10,9 +10,16 @@ const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const meta = (html, name) => html.match(new RegExp(`<meta\\b[^>]*name="${escape(name)}"[^>]*content="([^"]*)"`))?.[1];
 const buildDir = process.env.SEO_BUILD_DIR || 'dist';
 const read = path => readFile(`${buildDir}/${path}`, 'utf8');
+const checkFaviconHead = (html, path) => {
+  const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/)?.[1];
+  assert.ok(head && /<link\b[^>]*rel="icon"/.test(head), `${path}: favicon links belong in the head`);
+  // This custom element makes browsers end the head early, ignoring later favicon links.
+  assert.ok(!head.includes('<vercel-analytics'), `${path}: analytics must render in the body, not the head`);
+};
 
 for (const path of paths) {
   const html = await read(path === '/' ? 'index.html' : `${path.slice(1)}index.html`);
+  checkFaviconHead(html, path);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = meta(html, 'description');
   assert.ok(title && description, `${path}: title and description required`);
@@ -55,6 +62,7 @@ const guide = await read('llms.txt');
 assert.ok(guide.includes(`${origin}/facts/`) && guide.includes('not an official election authority'));
 assert.ok(!sitemap.includes('localhost') && !guide.includes('localhost'));
 const print = await read('print/faq/index.html');
+checkFaviconHead(print, '/print/faq/');
 assert.ok(print.includes('Committee for Responsible Property Taxation'));
 assert.ok(!print.includes('Campaign contact:') && !print.includes('matt@klinkcampaigns.com') && !print.includes('310-283-6267'));
 console.log(`SEO audit passed: ${paths.length} canonical pages, 19 visible FAQ answers, structured data, crawler files, PDF source, and ${indexable ? 'production' : 'preview'} indexing policy.`);
