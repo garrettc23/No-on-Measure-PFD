@@ -3,6 +3,7 @@ import '@fontsource-variable/archivo';
 import '@fontsource-variable/public-sans';
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
+import Favicon from '../components/Favicon.astro';
 import Analytics from '@vercel/analytics/astro';
 import Icon from '../components/Icon.astro';
 import { campaign } from '../data/campaign';
@@ -45,7 +46,7 @@ const schema = {
     <meta property="og:image:alt" content="Vote No on Measure PFD logo with Pasadena City Hall behind it" />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={absoluteUrl('/vote-no-pasadena-city-hall.png')} />
     <Analytics />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Favicon />
   </head>
   <body class:list={{ 'home-page': path === '/' }}>
     <a class="skip-link" href="#main">Skip to content</a>
