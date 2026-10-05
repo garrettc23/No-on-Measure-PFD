@@ -75,6 +75,10 @@
 .header-inner { padding-top: 12px; padding-bottom: 12px; }
 .campaign-brand-footer { width: 150px; }
 .election-top { border-bottom: 4px solid var(--red); }
+@media (max-width: 800px) {
+  .election-top { justify-content: center; text-align: center; }
+  .election-top .election-location { display: none; }
+}
 .campaign-form > .form-grid + .button { margin-top: 25px; }
 .closing h2 { font-size: clamp(36px, 3.7vw, 54px); max-width: 680px; }
 @media (max-width: 800px) {
