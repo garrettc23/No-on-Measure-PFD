@@ -1,0 +1,177 @@
+---
+import { getImage } from 'astro:assets';
+import FullscreenControls from './FullscreenControls.astro';
+import cityHall from '../assets/pasadena-city-hall-sunset.jpg';
+
+const poster = await getImage({ src: cityHall, width: 944, height: 531, fit: 'cover', position: 'top', format: 'webp', quality: 85 });
+---
+
+<div class="hero-video">
+  <video
+    id="campaign-video"
+    src="/videos/measure-pfd-commercial.mp4"
+    poster={poster.src}
+    width="1920"
+    height="1080"
+    preload="none"
+    playsinline
+    controls
+    aria-label="No on Measure PFD campaign video"
+    tabindex="0"
+  >
+    <track kind="captions" src="/videos/measure-pfd-commercial.en.vtt" srclang="en" label="English" />
+    <a href="/videos/measure-pfd-commercial.mp4">Watch the No on Measure PFD campaign video</a>
+  </video>
+  <button class="video-play" type="button" aria-label="Watch The No On PFD Commercial" aria-controls="campaign-video" hidden>
+    <span class="video-title">Watch The <span class="video-title-emphasis">No On PFD</span> Commercial</span>
+    <span class="play-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16l13-8z" /></svg></span>
+  </button>
+  <div class="video-loading" role="status" hidden><span class="video-spinner" aria-hidden="true"></span><span>Loading video…</span></div>
+  <p class="video-error" role="status" hidden>Unable to load the video. Select play to try again.</p>
+  <FullscreenControls />
+</div>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('#campaign-video');
+  const playButton = document.querySelector<HTMLButtonElement>('.video-play');
+  const errorMessage = document.querySelector<HTMLParagraphElement>('.video-error');
+  const loading = document.querySelector<HTMLDivElement>('.video-loading');
+  const captions = document.querySelector<HTMLTrackElement>('#campaign-video track');
+
+  if (video && captions) {
+    captions.track.mode = 'disabled';
+    const captionLines = new WeakMap<VTTCue, number>();
+    const positionCaptions = () => {
+      const { width, height } = video.getBoundingClientRect();
+      if (!width || !height || !video.videoWidth || !captions.track.cues) return;
+      // Keep native cues inside the picture when fullscreen adds letterboxing.
+      const pictureHeight = Math.min(height, width * video.videoHeight / video.videoWidth);
+      const topInset = (height - pictureHeight) / 2;
+      let changed = false;
+      for (const cue of Array.from(captions.track.cues)) {
+        if (!(cue instanceof VTTCue)) continue;
+        if (!captionLines.has(cue)) captionLines.set(cue, typeof cue.line === 'number' ? cue.line : 90);
+        const pictureLine = captionLines.get(cue)!;
+        const line = (topInset + pictureHeight * pictureLine / 100) / height * 100;
+        if (cue.line !== line || cue.snapToLines || cue.lineAlign !== 'end') {
+          cue.snapToLines = false;
+          cue.lineAlign = 'end';
+          cue.line = line;
+          changed = true;
+        }
+      }
+      // Chromium can retain the old cue layout across fullscreen resizes.
+      // Refresh only a track the viewer has already enabled.
+      if (changed && captions.track.mode === 'showing') {
+        captions.track.mode = 'hidden';
+        captions.track.mode = 'showing';
+      }
+    };
+    captions.addEventListener('load', positionCaptions);
+    video.addEventListener('loadedmetadata', positionCaptions);
+    video.textTracks.addEventListener('change', positionCaptions);
+    document.addEventListener('fullscreenchange', positionCaptions);
+    new ResizeObserver(positionCaptions).observe(video);
+  }
+
+  if (video && playButton && errorMessage && loading) {
+    let loadingTimeout: ReturnType<typeof setTimeout> | undefined;
+    let attempt = 0;
+    let needsReload = false;
+    video.controls = false;
+    video.tabIndex = -1;
+    playButton.hidden = false;
+
+    const stopLoading = () => {
+      clearTimeout(loadingTimeout);
+      loading.hidden = true;
+      playButton.removeAttribute('aria-busy');
+      playButton.disabled = false;
+    };
+
+    const showRetry = () => {
+      attempt += 1;
+      needsReload = true;
+      stopLoading();
+      video.pause();
+      video.controls = false;
+      video.tabIndex = -1;
+      playButton.hidden = false;
+      errorMessage.hidden = false;
+    };
+
+    const startLoading = () => {
+      stopLoading();
+      loading.hidden = false;
+      playButton.setAttribute('aria-busy', 'true');
+      playButton.disabled = true;
+      loadingTimeout = setTimeout(showRetry, 20000);
+    };
+
+    playButton.addEventListener('click', async () => {
+      const currentAttempt = ++attempt;
+      errorMessage.hidden = true;
+      if (needsReload || video.error) video.load();
+      needsReload = false;
+      startLoading();
+      try {
+        await video.play();
+        if (currentAttempt !== attempt) return;
+        stopLoading();
+        video.controls = true;
+        video.tabIndex = 0;
+        playButton.hidden = true;
+        video.focus({ preventScroll: true });
+      } catch {
+        if (currentAttempt === attempt) showRetry();
+      }
+    });
+
+    // Keep picture clicks consistent inline and with the fullscreen toolbar.
+    video.addEventListener('click', async (event) => {
+      if (!playButton.hidden || event.defaultPrevented) return;
+      event.preventDefault();
+      video.focus({ preventScroll: true });
+      if (!video.paused) video.pause();
+      else {
+        try { await video.play(); }
+        catch { showRetry(); }
+      }
+    });
+    video.closest('.hero-video')?.addEventListener('keydown', (event) => {
+      if (!(event instanceof KeyboardEvent) || event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (!playButton.hidden || event.key.toLowerCase() !== 'm') return;
+      event.preventDefault();
+      video.muted = !video.muted;
+    });
+
+    video.addEventListener('waiting', () => {
+      if (!video.paused) startLoading();
+    });
+    video.addEventListener('playing', stopLoading);
+    video.addEventListener('pause', stopLoading);
+    video.addEventListener('ended', stopLoading);
+    video.addEventListener('error', showRetry);
+  }
+</script>
+
+<style>
+  .hero-video { position: relative; width: 100%; margin-inline: auto; aspect-ratio: 16 / 9; background: #000; overflow: hidden; box-shadow: 0 0 0 1px #0127551a, 0 12px 32px -12px #01275533; }
+  video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+  .video-play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; color: #fff; cursor: pointer; }
+  .video-play[hidden], .video-error[hidden], .video-loading[hidden] { display: none; }
+  .video-title { position: absolute; top: 0; left: 0; right: 0; padding: clamp(14px, 3cqi, 24px); color: #fff; font: 700 clamp(18px, 4.2cqi, 28px) / 1.2 var(--display); text-align: left; text-shadow: 0 1px 2px #000, 0 2px 4px #0009; }
+  .video-title-emphasis { text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .14em; }
+  .play-icon { display: grid; place-items: center; width: clamp(58px, 7vw, 80px); aspect-ratio: 1; border: 2px solid #fff; border-radius: 50%; background: var(--red); box-shadow: 0 3px 18px #0005; }
+  .play-icon svg { width: 32px; height: 32px; fill: currentColor; }
+  .video-play:hover .play-icon { background: var(--green); }
+  .video-play:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
+  .video-play:disabled { cursor: progress; opacity: 1; }
+  .video-play[aria-busy="true"] .play-icon { visibility: hidden; }
+  .video-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #fff; pointer-events: none; font-size: 14px; text-shadow: 0 1px 3px #000; }
+  .video-loading > span:last-child { padding: 4px 8px; border-radius: 4px; background: #000c; }
+  .video-spinner { width: 38px; height: 38px; border: 3px solid #ffffff66; border-top-color: #fff; border-radius: 50%; animation: video-spin .8s linear infinite; filter: drop-shadow(0 1px 2px #0008); }
+  @keyframes video-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .video-spinner { animation: none; } }
+  .video-error { position: absolute; bottom: 0; margin: 0; padding: 8px 12px; width: 100%; background: #000d; color: #fff; text-align: center; font-size: 14px; pointer-events: none; }
+</style>
