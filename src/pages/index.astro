@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import Closing from '../components/Closing.astro';
 import TaxCallout from '../components/TaxCallout.astro';
-import cityHall from '../assets/pasadena-city-hall.png';
+import HeroVideo from '../components/HeroVideo.astro';
 import homes from '../assets/pasadena-del-rosa-homes.jpg';
 import { paparian } from '../data/paparian';
 ---
@@ -16,10 +16,7 @@ import { paparian } from '../data/paparian';
       <div class="hero-actions"><a href="/join/#signup" class="button">Vote NO <Icon /></a><a href="/facts/" class="text-link">Get the facts <Icon /></a></div>
     </div>
     <figure class="hero-figure">
-      <div class="hero-photo"><Image src={cityHall} alt="Aerial view of Pasadena City Hall, with its domed tower centered against the city and San Gabriel Mountains" widths={[480]} sizes="(max-width: 800px) 100vw, 48vw" width={480} height={270} format="webp" quality={85} loading="eager" fetchpriority="high" /></div>
-      <figcaption class="hero-vote-panel">
-        <p class="vote-deadline"><span class="vote-by-label">Vote by</span> <time datetime="2026-11-03">Tuesday, November 3, 2026</time></p>
-      </figcaption>
+      <HeroVideo />
     </figure>
   </section>
 
