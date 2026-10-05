@@ -35,6 +35,38 @@
     let restoringControls = true;
     let active = false;
     const isFullscreen = () => document.fullscreenElement === player;
+    let controlsTimeout: ReturnType<typeof setTimeout> | undefined;
+    let pointerOverControls = false;
+    const overFullscreenButton = (event: MouseEvent) => {
+      const rect = enter.getBoundingClientRect();
+      return !enter.hidden && !isFullscreen() && event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+    };
+    const hideInlineButton = () => {
+      if (!video.paused && !video.ended && !isFullscreen() && !pointerOverControls && !enter.matches(':hover, :focus-visible')) {
+        enter.classList.add('is-idle');
+      }
+    };
+    const showInlineButton = () => {
+      clearTimeout(controlsTimeout);
+      enter.classList.remove('is-idle');
+      if (!video.paused && !video.ended && !isFullscreen()) {
+        controlsTimeout = setTimeout(hideInlineButton, 2500);
+      }
+    };
+    player.addEventListener('pointermove', (event) => {
+      pointerOverControls = event.pointerType === 'mouse' && event.clientY >= video.getBoundingClientRect().bottom - 84;
+      enter.classList.toggle('is-hovered', overFullscreenButton(event));
+      showInlineButton();
+    });
+    for (const event of ['pointerdown', 'keydown', 'focusin']) player.addEventListener(event, showInlineButton);
+    player.addEventListener('pointerleave', () => {
+      pointerOverControls = false;
+      enter.classList.remove('is-hovered');
+      clearTimeout(controlsTimeout);
+      hideInlineButton();
+    });
+    enter.addEventListener('blur', showInlineButton);
+    for (const event of ['play', 'pause', 'ended', 'seeking', 'seeked']) video.addEventListener(event, showInlineButton);
     const formatTime = (seconds: number) => {
       const total = Math.max(0, Math.floor(seconds || 0));
       return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
@@ -70,12 +102,20 @@
     video.setAttribute('controlslist', 'nofullscreen');
     video.classList.add('has-fullscreen-controls');
     enter.addEventListener('click', requestFullscreen);
+    // Keep pointer hover on the native panel so all controls share its timing.
+    // The overlay retains a keyboard target; pointer clicks use the same action.
+    player.addEventListener('click', (event) => {
+      if (event.detail === 0 || !video.controls || !overFullscreenButton(event) || enter.classList.contains('is-idle')) return;
+      event.preventDefault();
+      event.stopPropagation();
+      void requestFullscreen();
+    }, { capture: true });
     video.addEventListener('dblclick', (event) => {
       event.preventDefault();
       if (isFullscreen()) void document.exitFullscreen();
       else void requestFullscreen();
     });
-    video.addEventListener('playing', () => { enter.hidden = false; });
+    video.addEventListener('playing', () => { enter.hidden = false; showInlineButton(); });
     video.addEventListener('error', () => {
       if (isFullscreen()) void document.exitFullscreen();
     });
@@ -95,6 +135,7 @@
     });
     exit.addEventListener('click', () => { void document.exitFullscreen(); });
     document.addEventListener('fullscreenchange', () => {
+      showInlineButton();
       if (isFullscreen()) {
         active = true;
         video.controls = false;
@@ -132,15 +173,21 @@
 
 <style>
   /* Reserve a slot beside the native sound and menu buttons. */
-  .fullscreen-enter { position: absolute; bottom: 26px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 0; background: transparent; color: #fff; cursor: pointer; opacity: .95; transition: opacity 160ms ease; }
-  .fullscreen-enter:hover { opacity: 1; }
+  .fullscreen-enter { position: absolute; bottom: 26px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 0; background: transparent; color: #fff; cursor: pointer; opacity: .95; transition: opacity 300ms ease; }
+  .fullscreen-enter::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: rgb(32 33 36 / 70%); opacity: 0; transition: opacity 150ms ease; }
+  .fullscreen-enter svg { position: relative; }
+  .fullscreen-enter { pointer-events: none; }
+  .fullscreen-enter.is-hovered, .fullscreen-enter:focus-visible { opacity: 1; }
+  .fullscreen-enter.is-hovered::before, .fullscreen-enter:focus-visible::before { opacity: 1; }
+  .fullscreen-enter:active::before { background: rgb(32 33 36 / 90%); }
+  .fullscreen-enter.is-idle:not(:focus-visible) { opacity: 0; pointer-events: none; }
   .fullscreen-enter svg { width: 24px; height: 24px; fill: currentColor; stroke: none; }
   .fullscreen-enter[hidden] { display: none; }
   svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .fullscreen-toolbar { display: none; }
   :global(video.has-fullscreen-controls::-webkit-media-controls-fullscreen-button) { display: none; }
   :global(video.has-fullscreen-controls::-webkit-media-controls-panel) { padding-right: 60px; }
-  :global(video.has-fullscreen-controls::-webkit-media-controls-timeline) { width: calc(100% + 60px); max-width: none; margin-right: -60px; }
+  :global(video.has-fullscreen-controls::-webkit-media-controls-timeline) { margin-right: -60px; }
   :global(.hero-video:fullscreen) { display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; aspect-ratio: auto; background: #000; overflow: hidden; box-shadow: none; }
   :global(.hero-video:fullscreen > video) { grid-row: 1; width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center; }
   :global(.hero-video:fullscreen) .fullscreen-enter { display: none; }
@@ -176,6 +223,6 @@
     .fullscreen-time { margin-right: 0; font-size: 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .fullscreen-toolbar button, .fullscreen-enter { transition: none; }
+    .fullscreen-toolbar button, .fullscreen-enter, .fullscreen-enter::before { transition: none; }
   }
 </style>

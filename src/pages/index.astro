@@ -13,11 +13,11 @@ import { paparian } from '../data/paparian';
     <div class="hero-copy">
       <h1><span class="hero-support">Support Pasadena’s firefighters.</span><br /><span class="accent"><strong class="vote-no">Vote NO</strong> on<br />Measure PFD.</span></h1>
       <p class="hero-description">We stand with our firefighters, police, and paramedics. We’re asking for a fairer way to fund the services all of Pasadena relies on.</p>
-      <div class="hero-actions"><a href="/join/#signup" class="button">Vote NO <Icon /></a><a href="/facts/" class="text-link">Get the facts <Icon /></a></div>
     </div>
     <figure class="hero-figure">
       <HeroVideo />
     </figure>
+    <div class="hero-actions"><a href="/join/#signup" class="button">Vote NO <Icon /></a><a href="/facts/" class="text-link">Get the facts <Icon /></a></div>
   </section>
 
   <TaxCallout />
@@ -59,3 +59,15 @@ import { paparian } from '../data/paparian';
   </section>
   <Closing />
 </Layout>
+
+<style>
+  .hero { grid-template-areas: "copy video" "actions video"; row-gap: 0; }
+  .hero-copy { grid-area: copy; align-self: end; }
+  .hero-figure { grid-area: video; }
+  .hero-actions { grid-area: actions; align-self: start; }
+  @media (max-width: 800px) {
+    .hero { grid-template-areas: "copy" "video" "actions"; row-gap: 28px; }
+    .hero-actions { margin-top: 0; flex-direction: column; align-items: stretch; gap: 12px; }
+    .hero-actions > .text-link { justify-content: center; }
+  }
+</style>
