@@ -28,6 +28,7 @@ npm run preview
 - `src/data/campaign.ts`: shared facts, FAQs, sources, contact details, and optional donation settings.
 - `src/data/voting.ts`: verified official voting tools and instructions for the ungated `/vote/` guide.
 - `src/data/paparian.ts`: client-supplied commentary excerpts, publication date, and original source link.
+- `src/data/starNews.ts`: client-supplied editorial excerpts and original article metadata for `/pasadena-star-news/`.
 - `src/styles/global.css`: responsive design and reusable styles, with self-hosted Archivo headings and Public Sans body text.
 - `docs/content-review.md`: source verification, corrections to the brief, photo licensing, and launch dependencies.
 
