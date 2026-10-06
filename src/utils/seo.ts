@@ -9,6 +9,7 @@ export const publicPages = [
   { path: '/facts/', name: 'Measure PFD facts and FAQ', description: 'What PFD is, costs, exemptions, voting, funding, and official sources.' },
   { path: '/vote/', name: 'How to vote on Measure PFD', description: 'Official registration, ballot-return, vote-center, and ballot-tracking tools.' },
   { path: '/bill-paparian/', name: 'Bill Paparian commentary', description: 'Excerpts from the former Pasadena mayor’s published commentary.' },
+  { path: '/pasadena-star-news/', name: 'Pasadena Star-News editorial', description: 'Excerpts from the editorial board’s recommendation to vote No on Measure PFD.' },
   { path: '/join/', name: 'Join the campaign', description: 'Campaign contacts and ways to get involved.' },
   { path: '/privacy/', name: 'Privacy notice', description: 'How the website handles visitor information.' },
   { path: '/credits/', name: 'Photography credits', description: 'Image sources and usage information.' },

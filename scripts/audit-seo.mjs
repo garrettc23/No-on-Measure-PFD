@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const origin = new URL(process.env.PUBLIC_SITE_URL || 'https://www.pfdno.com').origin;
 const indexable = !['preview', 'development'].includes(process.env.VERCEL_ENV);
-const paths = ['/', '/facts/', '/vote/', '/bill-paparian/', '/join/', '/privacy/', '/credits/'];
+const paths = ['/', '/facts/', '/vote/', '/bill-paparian/', '/pasadena-star-news/', '/join/', '/privacy/', '/credits/'];
 const titles = new Set();
 const descriptions = new Set();
 const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

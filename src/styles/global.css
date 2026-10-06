@@ -115,38 +115,37 @@
 .paparian-feature h2 { font-size: clamp(32px, 3.2vw, 44px); }
 .paparian-feature-copy > p:first-child { color: var(--green-soft); }
 .paparian-feature-copy .text-link { margin-top: 24px; }
-.paparian-article { padding-top: 64px; padding-bottom: 85px; }
-.paparian-intro { max-width: 1040px; }
-.paparian-intro > .eyebrow { margin-bottom: 24px; font-size: 14px; }
-.paparian-intro h1 { font-size: clamp(42px, 5.2vw, 72px); text-wrap: balance; }
-.paparian-byline { margin-top: 28px; color: var(--green-soft); font-size: 16px; }
-.paparian-intro > .text-link { margin-top: 25px; }
-.paparian-excerpts { margin-top: 58px; padding-top: 45px; border-top: 1px solid var(--line); }
-.paparian-section-heading .eyebrow { font-size: 13px; margin-bottom: 16px; }
-.paparian-section-heading h2 { font-size: clamp(32px, 3.4vw, 46px); }
-.paparian-quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 32px; }
-.paparian-quote { padding: 32px; background: var(--paper-deep); border-top: 3px solid var(--red); display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
-.paparian-article blockquote { margin: 0; }
-.paparian-article blockquote p { font-family: var(--display); font-weight: 600; letter-spacing: -.015em; font-size: clamp(27px, 2.8vw, 38px); line-height: 1.35; }
-.paparian-article figcaption { font-size: 14px; line-height: 1.6; color: var(--green-soft); }
-.paparian-context { max-width: 820px; margin-top: 32px; color: var(--green-soft); }
-.paparian-conclusion { margin-top: 52px; padding: 40px 0 0; border-top: 1px solid var(--line); max-width: 1020px; }
-.paparian-conclusion > .eyebrow { font-size: 13px; margin-bottom: 24px; color: var(--red); }
-.paparian-conclusion figcaption { margin-top: 23px; }
-.paparian-conclusion > .text-link { margin-top: 26px; }
+.editorial-article { padding-top: 64px; padding-bottom: 85px; }
+.editorial-intro { max-width: 1040px; }
+.editorial-intro > .eyebrow { margin-bottom: 24px; font-size: 14px; }
+.editorial-intro h1 { font-size: clamp(42px, 5.2vw, 72px); text-wrap: balance; }
+.editorial-intro > .text-link { margin-top: 25px; }
+.editorial-excerpts { margin-top: 58px; padding-top: 45px; border-top: 1px solid var(--line); }
+.editorial-section-heading .eyebrow { font-size: 13px; margin-bottom: 16px; }
+.editorial-section-heading h2 { font-size: clamp(32px, 3.4vw, 46px); }
+.editorial-quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 32px; }
+.editorial-quote { padding: 32px; background: var(--paper-deep); border-top: 3px solid var(--red); display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+.editorial-article blockquote { margin: 0; }
+.editorial-article blockquote p { font-family: var(--display); font-weight: 600; letter-spacing: -.015em; font-size: clamp(27px, 2.8vw, 38px); line-height: 1.35; }
+.editorial-article figcaption { font-size: 14px; line-height: 1.6; color: var(--green-soft); }
+.editorial-context { max-width: 820px; margin-top: 32px; color: var(--green-soft); }
+.editorial-conclusion { margin-top: 52px; padding: 40px 0 0; border-top: 1px solid var(--line); max-width: 1020px; }
+.editorial-conclusion > .eyebrow { font-size: 13px; margin-bottom: 24px; color: var(--red); }
+.editorial-conclusion figcaption { margin-top: 23px; }
+.editorial-conclusion > .text-link { margin-top: 26px; }
 @media (max-width: 800px) {
   .paparian-feature { padding-bottom: 58px; }
   .paparian-feature-inner { grid-template-columns: 1fr; gap: 24px; padding: 30px; }
-  .paparian-article { padding-top: 42px; padding-bottom: 58px; }
-  .paparian-quote-grid { gap: 20px; }
-  .paparian-quote { padding: 24px; }
+  .editorial-article { padding-top: 42px; padding-bottom: 58px; }
+  .editorial-quote-grid { gap: 20px; }
+  .editorial-quote { padding: 24px; }
 }
 @media (max-width: 480px) {
   .hero-figure .hero-vote-panel { padding: 20px 18px; }
   .paparian-feature-inner { padding: 26px 22px; }
-  .paparian-quote-grid { grid-template-columns: 1fr; }
-  .paparian-excerpts { margin-top: 40px; padding-top: 32px; }
-  .paparian-conclusion { margin-top: 36px; padding-top: 30px; }
+  .editorial-quote-grid { grid-template-columns: 1fr; }
+  .editorial-excerpts { margin-top: 40px; padding-top: 32px; }
+  .editorial-conclusion { margin-top: 36px; padding-top: 30px; }
 }
 
 /* Calls to action use typography and arrows without underlines. */

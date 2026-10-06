@@ -10,8 +10,14 @@ const patterns = [/\bjust\b/gi, /\bquietly\b/gi, /[\u2014\u2013]/g, /\bnot (?:ju
 const failures = [];
 for (const file of files) {
   const html = await readFile(file, 'utf8');
-  // Legal disclaimers must match counsel's wording verbatim (including its en dash), so they are exempt from style checks.
-  const text = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<(\w+)\b[^>]*\bdata-legal-copy\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<[^>]+>/g, ' ');
+  // Legal disclaimers and explicitly attributed, cited quotations must remain verbatim.
+  // The quotation exemption applies only to marked blockquotes with a source URL;
+  // attribution and surrounding campaign copy still receive the normal style checks.
+  const text = html
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+    .replace(/<(\w+)\b[^>]*\bdata-legal-copy\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+    .replace(/<blockquote\b(?=[^>]*\sdata-attributed-quote(?:\s|=|>))(?=[^>]*\scite="https?:\/\/[^\"]+")[^>]*>[\s\S]*?<\/blockquote>/gi, '')
+    .replace(/<[^>]+>/g, ' ');
   for (const pattern of patterns) {
     pattern.lastIndex = 0;
     const matches = [...text.matchAll(pattern)];

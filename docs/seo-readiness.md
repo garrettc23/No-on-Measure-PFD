@@ -3,9 +3,9 @@
 ## Implemented
 
 - Public origin: `https://www.pfdno.com/`, confirmed by the client. `PUBLIC_SITE_URL` can override it in the build environment; only an HTTPS origin is accepted.
-- Seven public pages have unique titles/descriptions, absolute canonical URLs, Open Graph/Twitter metadata, and Organization, WebSite, and page structured data. Interior pages include breadcrumbs in the structured data.
+- Eight public pages have unique titles/descriptions, absolute canonical URLs, Open Graph/Twitter metadata, and Organization, WebSite, and page structured data. Interior pages include breadcrumbs in the structured data.
 - `/facts/` contains 19 server-rendered FAQs, grouped by topic, with stable anchors and links to official sources. FAQPage answers come from the same data as the visible answers and the PDF. Campaign positions and estimates remain attributed.
-- `/sitemap.xml` lists the seven canonical public pages. Print routes and the 404 page are excluded and marked `noindex`.
+- `/sitemap.xml` lists the eight canonical public pages. Print routes and the 404 page are excluded and marked `noindex`.
 - Production `/robots.txt` allows public search and AI crawlers and advertises the sitemap. Local development and Vercel preview/development builds disallow crawling and use `noindex` metadata; preview sitemaps are empty.
 - `/llms.txt` is an optional plain-text reading guide containing canonical links, source links, campaign identity, and the same FAQ answers. It is not required by search engines and does not guarantee AI citations.
 - The three-page downloadable FAQ has selectable text and source links, retains the full committee/top-funder disclosure, and omits Matt's contact details. The website's contact page remains available.

@@ -3,31 +3,30 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { paparian } from '../data/paparian';
 ---
-<Layout seoTitle="Bill Paparian on Pasadena’s Measure PFD | Vote No" title="Bill Paparian urges a NO vote on Measure PFD" description="Read excerpts from former Pasadena Mayor Bill Paparian’s September 25 commentary opposing Measure PFD. His published views are not a campaign endorsement.">
-  <article class="paparian-article container">
-    <header class="paparian-intro">
+<Layout seoTitle="Bill Paparian on Pasadena’s Measure PFD | Vote No" title="Bill Paparian urges a NO vote on Measure PFD" description="Read excerpts from former Pasadena Mayor Bill Paparian’s commentary opposing Measure PFD. His published views are not a campaign endorsement.">
+  <article class="editorial-article container">
+    <header class="editorial-intro">
       <h1>Former Pasadena Mayor Bill Paparian urges a <span class="accent">NO vote on Measure PFD.</span></h1>
-      <p class="paparian-byline">Commentary by William “Bill” Paparian, former Pasadena mayor<br />Source: {paparian.publication} · <time datetime={paparian.publishedDate}>{paparian.published}</time></p>
       <a class="text-link" href={paparian.url} target="_blank" rel="noopener noreferrer">Read the full commentary<span class="sr-only"> (opens in a new tab)</span> <Icon name="external" /></a>
     </header>
 
-    <section class="paparian-excerpts" aria-labelledby="excerpts-title">
-      <div class="paparian-section-heading"><h2 id="excerpts-title">Public safety first.<br />Budget priorities matter.</h2></div>
-      <div class="paparian-quote-grid">
-        <figure class="paparian-quote">
+    <section class="editorial-excerpts" aria-labelledby="excerpts-title">
+      <div class="editorial-section-heading"><h2 id="excerpts-title">Public safety first.<br />Budget priorities matter.</h2></div>
+      <div class="editorial-quote-grid">
+        <figure class="editorial-quote">
           <blockquote cite={paparian.url}><p>“{paparian.quotes.service}”</p></blockquote>
         </figure>
-        <figure class="paparian-quote">
+        <figure class="editorial-quote">
           <blockquote cite={paparian.url}><p>“{paparian.quotes.accountability}”</p></blockquote>
         </figure>
       </div>
-      <div class="paparian-context">
+      <div class="editorial-context">
         <p>Paparian opens by calling for dependable fire service. He then criticizes the Yes campaign’s advertising and argues that City Hall should have prioritized fire stations and wildfire work in its existing budget.</p>
         <p>Our campaign shares that call for better priorities. We support Pasadena’s firefighters and paramedics, and we believe the City should develop a fairer funding plan. We’re asking voters to vote NO on Measure PFD.</p>
       </div>
     </section>
 
-    <section class="paparian-conclusion" aria-labelledby="conclusion-title">
+    <section class="editorial-conclusion" aria-labelledby="conclusion-title">
       <h2 id="conclusion-title" class="sr-only">His call to voters</h2>
       <figure>
         <blockquote cite={paparian.url}><p>“{paparian.quotes.vote}”</p></blockquote>
