@@ -12,7 +12,7 @@ import { absoluteUrl, allowIndexing, serializeSchema, publicPages } from '../uti
 interface Props { title?: string; description?: string; seoTitle?: string; noindex?: boolean; structuredData?: Record<string, unknown>; }
 const { title = campaign.name, description = campaign.description, seoTitle, noindex = false, structuredData = {} } = Astro.props;
 const path = Astro.url.pathname;
-const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/pasadena-star-news/', label: 'Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
+const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
 const canonical = absoluteUrl(path);
 const pageTitle = seoTitle || titleCase(title === campaign.name ? `${title} | Pasadena Parcel Tax, November 2026` : `${title} | ${campaign.name}`);
 const indexable = allowIndexing && !noindex;
