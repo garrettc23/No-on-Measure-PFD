@@ -36,15 +36,17 @@ Production builds use `https://www.pfdno.com/` for canonical URLs, social metada
 
 ## Fact sheet, FAQ PDF, and social image
 
-The client’s approved fact-sheet PDF is pending. Place it in `public/downloads/` and set `campaign.factSheetUrl` to its public path when ready; links remain hidden while that setting is empty. The previous generated fact sheet has been withdrawn.
+The original client-supplied PDFs are published at `/downloads/measure-pfd-fact-sheet.pdf` (two pages) and `/downloads/measure-pfd-faq.pdf` (three pages). Both are linked as downloads from Facts & FAQ; the fact sheet is also linked from the contact section. Replace these files only with supplied revisions, never with generated HTML exports.
 
-The FAQ print route reads the same 19 questions and answers as the Facts page, with official sources and clearly attributed campaign estimates. The download retains the committee and top-funder disclosure but omits campaign contact details. Run the dev server, then:
+`src/data/campaignDocuments.ts` preserves the October 8 document text and emphasis. Its paragraph data feeds the fact sheet, 13 FAQ accordions, FAQ structured data, printable HTML FAQ, and `llms.txt`. The fact sheet's Paparian clipping is represented by the matching readable quotation from the FAQ. The HTML print route retains the website disclosure; the supplied PDFs remain unchanged.
+
+To regenerate only the 1200 × 630 social images, run the dev server, then:
 
 ```sh
 BROWSE_BIN="$HOME/.agents/skills/gstack/browse/dist/browse" node scripts/generate-downloads.mjs
 ```
 
-This uses gstack browse to generate the three-page FAQ and 1200 × 630 social image in `public/`. The expanded FAQ has one page each for basics, costs/exemptions, and funding/accountability. Rebuild after generation so `dist/` contains the updated files. Do not edit the PDFs directly.
+This script leaves both campaign PDFs untouched. Rebuild after changing public assets so `dist/` includes them.
 
 ## Browser verification
 

@@ -6,10 +6,11 @@ import { taxEstimateNote } from '../data/campaign';
     <h2 id="tax-increase-title"><span class="tax-amount">More than $1,700<sup><a href="#tax-estimate-note" aria-label="Read the tax estimate footnote">*</a></sup></span><span class="tax-headline-detail">in new taxes since 2020<br class="tax-desktop-break" /> for many households.</span></h2>
     <div class="tax-increase-copy">
       <p>Pasadena voters have already approved multiple tax and bond measures for the city and school district since 2020.</p>
-      <p>Now Measure PFD adds one more -- $304 a year on a typical home, resulting in <strong>more than $1,700 in new taxes since 2020 for many households.</strong><sup class="tax-note-marker"><a href="#tax-estimate-note" aria-label="Read the tax estimate footnote">*</a></sup></p>
+      <p>City and school measures since 2020 already add <strong>more than $1,700 in new taxes for many households.</strong><sup class="tax-note-marker"><a href="#tax-estimate-note" aria-label="Read the tax estimate footnote">*</a></sup></p>
+      <p>Measure PFD would add approximately $304 a year for a 1,600-square-foot home.</p>
       <p class="tax-rally">Pasadena families have done their part. Enough is enough.</p>
     </div>
-    <p class="tax-estimate-note" id="tax-estimate-note"><span aria-hidden="true">*</span><span>Campaign estimate. {taxEstimateNote} Includes the proposed $304 annual PFD charge.</span></p>
+    <p class="tax-estimate-note" id="tax-estimate-note"><span aria-hidden="true">*</span><span>Campaign estimate. {taxEstimateNote} Excludes the proposed $304 annual PFD charge.</span></p>
   </div>
 </section>
 
@@ -21,7 +22,7 @@ import { taxEstimateNote } from '../data/campaign';
   .tax-headline-detail { display: block; font-size: clamp(22px, 2vw, 28px); line-height: 1.2; letter-spacing: -.02em; }
   .tax-increase sup { font-size: .5em; vertical-align: super; line-height: 0; }
   .tax-increase sup a { text-decoration: none; padding-inline: 2px; }
-  .tax-increase .tax-note-marker { font-size: .75em; color: var(--red); }
+  .tax-increase .tax-note-marker { font-size: .75em; color: inherit; }
   .tax-estimate-note { display: flex; gap: 6px; grid-column: 1 / -1; margin: 0; padding-top: 14px; border-top: 1px solid #e8dada; color: var(--green-soft); font-size: 13px; line-height: 1.6; scroll-margin-top: 170px; }
   .tax-estimate-note > span:first-child { color: var(--green); }
   .tax-increase-copy > p { font-size: 18px; line-height: 1.65; color: var(--green-soft); }

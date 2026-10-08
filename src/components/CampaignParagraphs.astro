@@ -1,0 +1,13 @@
+---
+import type { CampaignParagraph } from '../data/campaignDocuments';
+interface Props { paragraphs: CampaignParagraph[]; }
+const { paragraphs } = Astro.props;
+---
+{paragraphs.map(paragraph => paragraph.cite
+  ? <blockquote data-attributed-quote cite={paragraph.cite}><p set:html={paragraph.html} /></blockquote>
+  : <p set:html={paragraph.html} />)}
+<style>
+  p { margin: 0 0 1em; }
+  p:last-child { margin-bottom: 0; }
+  blockquote { margin: 1.25em 0; padding-left: 20px; border-left: 3px solid var(--red, #d20a14); }
+</style>
