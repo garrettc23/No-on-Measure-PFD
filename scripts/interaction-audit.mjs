@@ -53,11 +53,11 @@ assert('Both forms post the right kind and fields to the email endpoint','window
 if (formNetwork !== '(no network requests)') throw new Error('Mocked form test emitted an unexpected network request');
 passed.push('Browser QA sends no real submissions');
 run('goto',origin+'/facts/');
-assert('All FAQs start collapsed','document.querySelectorAll("details").length===19 && document.querySelectorAll("details[open]").length===0');
-run('click','#when-is-the-election summary');
-assert('FAQ opens by click','document.querySelector("#when-is-the-election").open');
+assert('All FAQs start collapsed','document.querySelectorAll("details").length===13 && document.querySelectorAll("details[open]").length===0');
+run('click','#what-is-measure-pfd summary');
+assert('FAQ opens by click','document.querySelector("#what-is-measure-pfd").open');
 run('press','Enter');
-assert('FAQ closes from keyboard','!document.querySelector("#when-is-the-election").open');
+assert('FAQ closes from keyboard','!document.querySelector("#what-is-measure-pfd").open');
 run('goto',origin+'/');
 run('press','Tab');
 assert('Keyboard starts at skip link','document.activeElement.matches(".skip-link")');
@@ -75,9 +75,8 @@ assert('Footer voting link opens the guide','location.pathname==="/vote/" && doc
 assert('Voting tools are available without a campaign form','!document.querySelector("form") && document.querySelectorAll(".voting-step").length===4');
 assert('Official voting links open new tabs','[...document.querySelectorAll(".voting-guide a[href^=https],.voting-sources a[href^=https]")].every(a=>a.target==="_blank" && a.rel.includes("noopener"))');
 run('goto',origin+'/facts/');
-run('click','#how-to-vote summary');
-run('click','#how-to-vote a[href="/vote/"]');
-assert('How-to-vote FAQ reaches the guide','location.pathname==="/vote/"');
+run('click','#how-to-vote');
+assert('How-to-vote resource reaches the guide','location.pathname==="/vote/"');
 run('click','.mobile-pledge a');
 assert('Mobile Vote NO action reaches signup from the guide','location.pathname==="/join/" && location.hash==="#signup" && !!document.querySelector("#pledge form")');
 writeFileSync('.context/interaction-audit.json',JSON.stringify(passed,null,2));

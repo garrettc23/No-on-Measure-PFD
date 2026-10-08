@@ -36,12 +36,17 @@ for (const path of paths) {
   assert.equal(page.url, `${origin}${path}`);
   if (path === '/facts/') {
     assert.equal(page['@type'], 'FAQPage');
-    assert.equal(page.mainEntity.length, 19);
+    assert.equal(page.mainEntity.length, 13);
     assert.equal((html.match(/<details\b/g) || []).length, page.mainEntity.length);
     // Compare plain content after the same HTML-entity decoding used for visible text.
-    const decode = text => text.replace(/&amp;/g, '&').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-    const visible = decode(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' '));
+    const decode = text => text.replace(/&amp;/g, '&').replace(/&#39;|&#x27;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    const visible = decode(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '').replace(/<\/(?:p|blockquote|div|summary|details|h[1-6]|section|article)>/g, ' ').replace(/<[^>]+>/g, ''));
+    const printHtml = await read('print/faq/index.html');
+    const printText = decode(printHtml.replace(/<\/(?:p|blockquote|h[1-6]|article)>/g, ' ').replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ');
+    const readingGuide = await read('llms.txt');
     for (const question of page.mainEntity) {
+      assert.ok(printText.includes(question.acceptedAnswer.text.replace(/\s+/g, ' ')), `Printable answer differs: ${question.name}`);
+      assert.ok(readingGuide.includes(question.acceptedAnswer.text), `Reading guide answer differs: ${question.name}`);
       assert.ok(visible.includes(question.name), `FAQ question missing from HTML: ${question.name}`);
       assert.ok(visible.replace(/\s+/g, ' ').includes(question.acceptedAnswer.text.replace(/\s+/g, ' ')), `FAQ answer differs from visible content: ${question.name}`);
     }
@@ -65,4 +70,4 @@ const print = await read('print/faq/index.html');
 checkFaviconHead(print, '/print/faq/');
 assert.ok(print.includes('Committee for Responsible Property Taxation'));
 assert.ok(!print.includes('Campaign contact:') && !print.includes('matt@klinkcampaigns.com') && !print.includes('310-283-6267'));
-console.log(`SEO audit passed: ${paths.length} canonical pages, 19 visible FAQ answers, structured data, crawler files, PDF source, and ${indexable ? 'production' : 'preview'} indexing policy.`);
+console.log(`SEO audit passed: ${paths.length} canonical pages, 13 visible FAQ answers, structured data, crawler files, printable FAQ, and ${indexable ? 'production' : 'preview'} indexing policy.`);
