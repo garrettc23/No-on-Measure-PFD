@@ -26,7 +26,7 @@ Excluded pending verification: grocery equivalence; county sales-tax increase; E
 
 ## Required before launch
 
-1. Clear the user-supplied City Hall hero image for public use and obtain a high-resolution original. Footer disclosure now follows counsel's September 25, 2026 website requirements (FPPC ID 1497201; top funder California Association of REALTORS®). Update it when the National Association of REALTORS® becomes a top funder, and keep the site online until 30 days after the election.
+1. Clear the user-supplied City Hall hero image for public use and obtain a high-resolution original. Footer disclosure lists National Association of REALTORS® and California Association of REALTORS® as top funders per the client's October 13, 2026 update (FPPC ID 1497201). Keep the site online until 30 days after the election.
 2. Supply an approved domain, set `campaign.siteUrl`, and configure canonical/Open Graph URLs. Remove local `noindex` metadata and add production indexing assets only at launch.
 3. Select hosting and a real submission service. Replace preview handlers with server-side validation, abuse protection, delivery handling, retention rules, and tested submission receipts.
 4. Finalize privacy language for the chosen services. Have campaign counsel/provider approve any SMS consent before enabling text enrollment. Preview checkboxes collect no consent.
@@ -222,3 +222,9 @@ Replaced the provisions table with the supplied fact sheet's ten sections and th
 The homepage now follows the client's supplied interpretation: the campaign's $1,700 estimate excludes PFD, and a proposed $304 annual charge applies to a 1,600-square-foot home. This supersedes the earlier inclusive interpretation recorded above. Both supplied PDFs, including their original artwork and disclosures, are copied unchanged. The asset-generation script no longer overwrites the FAQ PDF. FAQ structured data, the HTML print route, and the reading guide use the same paragraph content as the page.
 
 Validation: Astro check passed with zero diagnostics; production build, copy audit, SEO audit, and `git diff --check` passed. All 34 existing interaction checks passed with form delivery mocked, plus 20 targeted document checks covering downloads, the enabled contact link, the homepage estimate, and layouts from 320 to 1440 pixels. Compared 53 source headings/paragraphs against the rendered Facts & FAQ page. All 13 answers match structured data, the HTML print page, and `llms.txt`. HTTP responses and browser-downloaded copies of both PDFs match the supplied originals byte for byte; build output matches as well. Desktop/mobile screenshots are in `.context/`. These checks validate the local implementation; no production deployment was performed.
+
+## Website disclaimer — October 13, 2026
+
+The client-approved website disclosure now reads: “Ad paid for by Committee for Responsible Property Taxation - Opposing Measure PFD, Sponsored by REALTORS®.” The payer statement and “Ad Committee’s Top Funders:” heading are underlined. National Association of REALTORS® appears first and California Association of REALTORS® second, on separate ununderlined lines. This supersedes the earlier website wording and underline treatment recorded above.
+
+The shared website footer, printable HTML FAQ, and `llms.txt` use the updated disclosure. Supplied downloadable PDFs remain unchanged. Local desktop and mobile review confirmed readable line breaks without horizontal overflow; Astro check, production build, and copy audit passed. Production deployment remains separate.

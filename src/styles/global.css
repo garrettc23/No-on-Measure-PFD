@@ -161,7 +161,8 @@
 .site-footer .footer-main { grid-template-columns: 1fr auto; column-gap: clamp(24px, 3vw, 48px); padding-bottom: 28px; }
 .site-footer .footer-bottom { display: block; min-width: 0; border-top: 1px solid var(--line); padding: 24px 0 0; text-align: center; }
 .site-footer .footer-bottom p { max-width: 620px; margin-inline: auto; line-height: 1.6; }
-.site-footer .top-funder { margin-top: 8px; }
+.site-footer .top-funder { margin-top: 8px; white-space: pre-line; }
+.site-footer .disclosure-heading { text-decoration: underline; text-underline-offset: 2px; }
 @media (min-width: 1001px) {
   .site-footer .footer-main { align-items: center; }
   .site-footer .footer-nav { grid-template-columns: repeat(2, max-content); gap: 12px 24px; align-self: center; line-height: 1.5; }
