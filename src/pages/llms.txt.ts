@@ -24,6 +24,6 @@ export const GET: APIRoute = () => new Response([
     '', `### ${faq.question}`, paragraphText(faq.paragraphs),
     'Source: No on Measure PFD campaign FAQ supplied October 8, 2026.',
   ]),
-  '', '## Publisher disclosure', campaign.disclosure, campaign.topFunder,
+  '', '## Publisher disclosure', campaign.disclosure, campaign.topFunderLabel, campaign.topFunder,
   '',
 ].join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
