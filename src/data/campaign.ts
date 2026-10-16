@@ -1,3 +1,4 @@
+import { paparian } from './paparian';
 export { faqs, factSheetSections, paragraphText } from './campaignDocuments';
 
 export const campaign = {
@@ -39,6 +40,17 @@ export const sources = {
 export const taxEstimateNote = 'Estimate based on the median sales price for a Pasadena home.';
 
 export const photoCredits = [
+  {
+    title: 'Former Pasadena Mayor Bill Paparian',
+    file: 'bill-paparian.png',
+    url: paparian.portrait.sourceUrl,
+    author: '',
+    date: '',
+    description: 'Portrait accompanying William Paparian’s October 15, 2026 guest opinion in Pasadena Now.',
+    license: '',
+    licenseUrl: '',
+    sourceNote: 'Source: Pasadena Now. The article does not identify a photographer or state a reuse license.',
+  },
   {
     title: 'Pasadena City Hall',
     file: 'pasadena-city-hall.png',

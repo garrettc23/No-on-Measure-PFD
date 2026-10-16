@@ -1,23 +1,41 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { paparian } from '../data/paparian';
+import paparianPortrait from '../assets/bill-paparian.png';
+const { latest, earlier } = paparian;
 ---
-<Layout seoTitle="Bill Paparian on Pasadena’s Measure PFD | Vote No" title="Bill Paparian urges a NO vote on Measure PFD" description="Read excerpts from former Pasadena Mayor Bill Paparian’s commentary opposing Measure PFD. His published views are not a campaign endorsement.">
+<Layout seoTitle="Bill Paparian on Pasadena’s Measure PFD | Vote No" title="Bill Paparian urges a NO vote on Measure PFD" description="Read former Pasadena Mayor Bill Paparian’s Pasadena Now and Pasadena Star-News commentaries opposing Measure PFD, with links to both articles.">
   <article class="editorial-article container">
     <header class="editorial-intro">
       <h1>Former Pasadena Mayor Bill Paparian urges a <span class="accent">NO vote on Measure PFD.</span></h1>
-      <a class="text-link" href={paparian.url} target="_blank" rel="noopener noreferrer">Read the full commentary<span class="sr-only"> (opens in a new tab)</span> <Icon name="external" /></a>
     </header>
 
+    <section class="paparian-latest" aria-labelledby="latest-title">
+      <figure class="paparian-portrait"><Image src={paparianPortrait} alt={paparian.portrait.alt} widths={[400, 739]} sizes="(max-width: 800px) 100vw, 40vw" format="webp" quality={85} loading="eager" /></figure>
+      <div class="paparian-latest-copy">
+        <p class="editorial-byline">{latest.publication} · <time datetime={latest.publishedDate}>{latest.published}</time></p>
+        <h2 id="latest-title">{latest.title}</h2>
+        <p>{latest.summary}</p>
+        <a class="text-link" href={latest.url} target="_blank" rel="noopener noreferrer">Read the full op-ed on Pasadena Now<span class="sr-only"> (opens in a new tab)</span> <Icon name="external" /></a>
+      </div>
+    </section>
+    <p class="paparian-position-note">These are Paparian’s published views, not a campaign endorsement.</p>
+
     <section class="editorial-excerpts" aria-labelledby="excerpts-title">
-      <div class="editorial-section-heading"><h2 id="excerpts-title">Public safety first.<br />Budget priorities matter.</h2></div>
+      <div class="editorial-section-heading">
+        <h2 id="excerpts-title">Earlier commentary</h2>
+        <p class="editorial-byline">{earlier.publication} · <time datetime={earlier.publishedDate}>{earlier.published}</time></p>
+        <p class="editorial-earlier-heading">Public safety first. Budget priorities matter.</p>
+        <a class="text-link" href={earlier.url} target="_blank" rel="noopener noreferrer">Read the full commentary in the Pasadena Star-News<span class="sr-only"> (opens in a new tab)</span> <Icon name="external" /></a>
+      </div>
       <div class="editorial-quote-grid">
         <figure class="editorial-quote">
-          <blockquote cite={paparian.url}><p>“{paparian.quotes.service}”</p></blockquote>
+          <blockquote cite={earlier.url}><p>“{earlier.quotes.service}”</p></blockquote>
         </figure>
         <figure class="editorial-quote">
-          <blockquote cite={paparian.url}><p>“{paparian.quotes.accountability}”</p></blockquote>
+          <blockquote cite={earlier.url}><p>“{earlier.quotes.accountability}”</p></blockquote>
         </figure>
       </div>
       <div class="editorial-context">
@@ -29,7 +47,7 @@ import { paparian } from '../data/paparian';
     <section class="editorial-conclusion" aria-labelledby="conclusion-title">
       <h2 id="conclusion-title" class="sr-only">His call to voters</h2>
       <figure>
-        <blockquote cite={paparian.url}><p>“{paparian.quotes.vote}”</p></blockquote>
+        <blockquote cite={earlier.url}><p>“{earlier.quotes.vote}”</p></blockquote>
       </figure>
     </section>
   </article>
