@@ -40,6 +40,8 @@ Hero: User-supplied aerial of Pasadena City Hall, from `.context/attachments/UKu
 
 Supporting housing photograph: Ken Lund’s street view of homes at Del Rosa Road and Grand Avenue in Pasadena, taken June 26, 2014. Wikimedia Commons, CC BY-SA 2.0. Source: https://commons.wikimedia.org/wiki/File:Neighborhood_Surrounding_Richard_H._Chambers_United_States_Court_of_Appeals,_Pasadena,_California_(14516428984).jpg
 
+Paparian portrait: the 739 × 400 image accompanying his October 15, 2026 Pasadena Now guest opinion is stored at `src/assets/bill-paparian.png` and rendered through Astro as responsive WebP images. Source: https://pasadenanow.com/main/wp-content/uploads/2026/10/image_0-2026-07-13T060746.874-1-1-1.png. The article does not identify a photographer or state a reuse license; `/credits/` records this without claiming one.
+
 Source links, author credits, dates, and licenses are public at `/credits/`. Originals are retained in `src/assets/`. Responsive derivatives are resized/converted/cropped and retain each original's license. No photographer or resident endorsement is implied.
 
 ## Production privacy draft outline
@@ -228,3 +230,13 @@ Validation: Astro check passed with zero diagnostics; production build, copy aud
 The client-approved website disclosure now reads: “Ad paid for by Committee for Responsible Property Taxation - Opposing Measure PFD, Sponsored by REALTORS®.” The payer statement and “Ad Committee’s Top Funders:” heading are underlined. National Association of REALTORS® appears first and California Association of REALTORS® second, on separate ununderlined lines. This supersedes the earlier website wording and underline treatment recorded above.
 
 The shared website footer, printable HTML FAQ, and `llms.txt` use the updated disclosure. Supplied downloadable PDFs remain unchanged. Local desktop and mobile review confirmed readable line breaks without horizontal overflow; Astro check, production build, and copy audit passed. Production deployment remains separate.
+
+## Paparian’s latest commentary, October 15, 2026
+
+The homepage now pairs Paparian’s portrait with an attributed summary of his latest Pasadena Now op-ed and links to `/bill-paparian/`. That page leads with the October 15 article title, publication, date, summary, and original-article link. The September 25 Pasadena Star-News excerpts and source link remain under “Earlier commentary.” Shared content data and page metadata distinguish both articles.
+
+Source: https://pasadenanow.com/main/guest-opinion-william-paparian-measure-i-delivered-220-9-million-the-council-did-not-fund-the-stations-reject-the-parcel-tax
+
+Both article dates are visible, and the page explicitly identifies the commentaries as published views rather than a campaign endorsement. This supersedes the earlier date and non-endorsement-note presentation recorded above. The new article is summarized, not reproduced. Portrait and text sit side by side on desktop and stack on mobile.
+
+Validation passed: Astro check, production build, copy audit, SEO audit, and all eight form test groups. Both updated pages were reviewed locally at desktop and mobile widths using gstack browse; screenshots are saved under `.context/`. Production deployment remains separate.

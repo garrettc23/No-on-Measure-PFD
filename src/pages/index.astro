@@ -6,6 +6,7 @@ import Closing from '../components/Closing.astro';
 import TaxCallout from '../components/TaxCallout.astro';
 import HeroVideo from '../components/HeroVideo.astro';
 import homes from '../assets/pasadena-del-rosa-homes.jpg';
+import paparianPortrait from '../assets/bill-paparian.png';
 import { paparian } from '../data/paparian';
 ---
 <Layout seoTitle="Vote No on Measure PFD" description="Vote No on Pasadena Measure PFD on November 3, 2026. Read the proposed parcel tax’s costs, exemptions, official sources, and the campaign’s position.">
@@ -40,10 +41,11 @@ import { paparian } from '../data/paparian';
 
   <section class="paparian-feature container" aria-labelledby="paparian-feature-title">
     <div class="paparian-feature-inner">
-      <div><h2 id="paparian-feature-title">Former Mayor Bill Paparian urges a <span class="accent">NO vote.</span></h2></div>
+      <figure class="paparian-portrait"><Image src={paparianPortrait} alt={paparian.portrait.alt} widths={[400, 739]} sizes="(max-width: 800px) 100vw, 40vw" format="webp" quality={85} loading="lazy" /></figure>
       <div class="paparian-feature-copy">
-        <p>In his {paparian.publication} commentary, Paparian calls for Pasadena to put fire station upgrades and wildfire work first in its existing budget.</p>
-        <a href="/bill-paparian/" class="text-link">Read Paparian’s position <Icon /></a>
+        <h2 id="paparian-feature-title">Former Mayor Bill Paparian urges a <span class="accent">NO vote.</span></h2>
+        <p>{paparian.latest.summary}</p>
+        <a href="/bill-paparian/" class="text-link">Read Paparian’s latest commentary <Icon /></a>
       </div>
     </div>
   </section>
