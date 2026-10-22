@@ -19,155 +19,156 @@
 </div>
 
 <script>
-  const video = document.querySelector<HTMLVideoElement>('#campaign-video');
-  const player = video?.closest<HTMLElement>('.hero-video');
-  const enter = player?.querySelector<HTMLButtonElement>('.fullscreen-enter');
-  const toolbar = player?.querySelector<HTMLDivElement>('.fullscreen-toolbar');
+  for (const player of document.querySelectorAll<HTMLElement>('[data-video-player]')) {
+    const video = player.querySelector<HTMLVideoElement>('video');
+    const enter = player?.querySelector<HTMLButtonElement>('.fullscreen-enter');
+    const toolbar = player?.querySelector<HTMLDivElement>('.fullscreen-toolbar');
 
-  if (video && player && enter && toolbar && document.fullscreenEnabled) {
-    const play = toolbar.querySelector<HTMLButtonElement>('.fullscreen-play')!;
-    const seek = toolbar.querySelector<HTMLInputElement>('.fullscreen-seek')!;
-    const time = toolbar.querySelector<HTMLSpanElement>('.fullscreen-time')!;
-    const mute = toolbar.querySelector<HTMLButtonElement>('.fullscreen-mute')!;
-    const volume = toolbar.querySelector<HTMLInputElement>('.fullscreen-volume')!;
-    const captions = toolbar.querySelector<HTMLButtonElement>('.fullscreen-captions')!;
-    const exit = toolbar.querySelector<HTMLButtonElement>('.fullscreen-exit')!;
-    let restoringControls = true;
-    let active = false;
-    const isFullscreen = () => document.fullscreenElement === player;
-    let controlsTimeout: ReturnType<typeof setTimeout> | undefined;
-    let pointerOverControls = false;
-    const overFullscreenButton = (event: MouseEvent) => {
-      const rect = enter.getBoundingClientRect();
-      return !enter.hidden && !isFullscreen() && event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
-    };
-    const hideInlineButton = () => {
-      if (!video.paused && !video.ended && !isFullscreen() && !pointerOverControls && !enter.matches(':hover, :focus-visible')) {
-        enter.classList.add('is-idle');
-      }
-    };
-    const showInlineButton = () => {
-      clearTimeout(controlsTimeout);
-      enter.classList.remove('is-idle');
-      if (!video.paused && !video.ended && !isFullscreen()) {
-        controlsTimeout = setTimeout(hideInlineButton, 2500);
-      }
-    };
-    player.addEventListener('pointermove', (event) => {
-      pointerOverControls = event.pointerType === 'mouse' && event.clientY >= video.getBoundingClientRect().bottom - 84;
-      enter.classList.toggle('is-hovered', overFullscreenButton(event));
-      showInlineButton();
-    });
-    for (const event of ['pointerdown', 'keydown', 'focusin']) player.addEventListener(event, showInlineButton);
-    player.addEventListener('pointerleave', () => {
-      pointerOverControls = false;
-      enter.classList.remove('is-hovered');
-      clearTimeout(controlsTimeout);
-      hideInlineButton();
-    });
-    enter.addEventListener('blur', showInlineButton);
-    for (const event of ['play', 'pause', 'ended', 'seeking', 'seeked']) video.addEventListener(event, showInlineButton);
-    const formatTime = (seconds: number) => {
-      const total = Math.max(0, Math.floor(seconds || 0));
-      return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
-    };
-    const update = () => {
-      play.classList.toggle('is-paused', video.paused);
-      play.title = video.paused ? 'Play (Space)' : 'Pause (Space)';
-      play.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
-      const duration = Number.isFinite(video.duration) ? video.duration : 30;
-      seek.max = String(duration);
-      seek.value = String(video.currentTime);
-      seek.style.setProperty('--progress', `${duration > 0 ? video.currentTime / duration * 100 : 0}%`);
-      seek.setAttribute('aria-valuetext', `${formatTime(video.currentTime)} of ${formatTime(duration)}`);
-      time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
-      mute.title = video.muted ? 'Unmute (M)' : 'Mute (M)';
-      mute.setAttribute('aria-label', video.muted ? 'Unmute audio' : 'Mute audio');
-      mute.setAttribute('aria-pressed', String(video.muted));
-      volume.value = String(video.muted ? 0 : video.volume);
-      volume.style.setProperty('--progress', `${Number(volume.value) * 100}%`);
-      captions.setAttribute('aria-pressed', String(video.textTracks[0]?.mode === 'showing'));
-      if (isFullscreen() && video.controls) video.controls = false;
-    };
-    const requestFullscreen = async () => {
-      restoringControls = video.controls;
-      try {
-        await player.requestFullscreen();
-      } catch {
-        // Keep inline playback working if the browser declines fullscreen.
-        video.controls = restoringControls;
-      }
-    };
-    // Fullscreen the complete player so the control row sits outside the picture.
-    video.setAttribute('controlslist', 'nofullscreen');
-    video.classList.add('has-fullscreen-controls');
-    enter.addEventListener('click', requestFullscreen);
-    // Keep pointer hover on the native panel so all controls share its timing.
-    // The overlay retains a keyboard target; pointer clicks use the same action.
-    player.addEventListener('click', (event) => {
-      if (event.detail === 0 || !video.controls || !overFullscreenButton(event) || enter.classList.contains('is-idle')) return;
-      event.preventDefault();
-      event.stopPropagation();
-      void requestFullscreen();
-    }, { capture: true });
-    video.addEventListener('dblclick', (event) => {
-      event.preventDefault();
-      if (isFullscreen()) void document.exitFullscreen();
-      else void requestFullscreen();
-    });
-    video.addEventListener('playing', () => { enter.hidden = false; showInlineButton(); });
-    video.addEventListener('error', () => {
-      if (isFullscreen()) void document.exitFullscreen();
-    });
-    play.addEventListener('click', async () => {
-      if (!video.paused) video.pause();
-      else {
-        try { await video.play(); }
-        catch { if (isFullscreen()) await document.exitFullscreen(); }
-      }
-    });
-    seek.addEventListener('input', () => { video.currentTime = Number(seek.value); });
-    mute.addEventListener('click', () => { video.muted = !video.muted; });
-    volume.addEventListener('input', () => { video.volume = Number(volume.value); video.muted = video.volume === 0; });
-    captions.addEventListener('click', () => {
-      const track = video.textTracks[0];
-      if (track) track.mode = track.mode === 'showing' ? 'disabled' : 'showing';
-    });
-    exit.addEventListener('click', () => { void document.exitFullscreen(); });
-    document.addEventListener('fullscreenchange', () => {
-      showInlineButton();
-      if (isFullscreen()) {
-        active = true;
-        video.controls = false;
-        update();
-        play.focus({ preventScroll: true });
-      } else if (active) {
-        active = false;
-        video.controls = restoringControls;
-        enter.focus({ preventScroll: true });
-      }
-    });
-    player.addEventListener('keydown', (event) => {
-      if (!isFullscreen()) return;
-      if (event.key === 'Escape') {
+    if (video && player && enter && toolbar && document.fullscreenEnabled) {
+      const play = toolbar.querySelector<HTMLButtonElement>('.fullscreen-play')!;
+      const seek = toolbar.querySelector<HTMLInputElement>('.fullscreen-seek')!;
+      const time = toolbar.querySelector<HTMLSpanElement>('.fullscreen-time')!;
+      const mute = toolbar.querySelector<HTMLButtonElement>('.fullscreen-mute')!;
+      const volume = toolbar.querySelector<HTMLInputElement>('.fullscreen-volume')!;
+      const captions = toolbar.querySelector<HTMLButtonElement>('.fullscreen-captions')!;
+      const exit = toolbar.querySelector<HTMLButtonElement>('.fullscreen-exit')!;
+      let restoringControls = true;
+      let active = false;
+      const isFullscreen = () => document.fullscreenElement === player;
+      let controlsTimeout: ReturnType<typeof setTimeout> | undefined;
+      let pointerOverControls = false;
+      const overFullscreenButton = (event: MouseEvent) => {
+        const rect = enter.getBoundingClientRect();
+        return !enter.hidden && !isFullscreen() && event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+      };
+      const hideInlineButton = () => {
+        if (!video.paused && !video.ended && !isFullscreen() && !pointerOverControls && !enter.matches(':hover, :focus-visible')) {
+          enter.classList.add('is-idle');
+        }
+      };
+      const showInlineButton = () => {
+        clearTimeout(controlsTimeout);
+        enter.classList.remove('is-idle');
+        if (!video.paused && !video.ended && !isFullscreen()) {
+          controlsTimeout = setTimeout(hideInlineButton, 2500);
+        }
+      };
+      player.addEventListener('pointermove', (event) => {
+        pointerOverControls = event.pointerType === 'mouse' && event.clientY >= video.getBoundingClientRect().bottom - 84;
+        enter.classList.toggle('is-hovered', overFullscreenButton(event));
+        showInlineButton();
+      });
+      for (const event of ['pointerdown', 'keydown', 'focusin']) player.addEventListener(event, showInlineButton);
+      player.addEventListener('pointerleave', () => {
+        pointerOverControls = false;
+        enter.classList.remove('is-hovered');
+        clearTimeout(controlsTimeout);
+        hideInlineButton();
+      });
+      enter.addEventListener('blur', showInlineButton);
+      for (const event of ['play', 'pause', 'ended', 'seeking', 'seeked']) video.addEventListener(event, showInlineButton);
+      const formatTime = (seconds: number) => {
+        const total = Math.max(0, Math.floor(seconds || 0));
+        return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
+      };
+      const update = () => {
+        play.classList.toggle('is-paused', video.paused);
+        play.title = video.paused ? 'Play (Space)' : 'Pause (Space)';
+        play.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
+        const duration = Number.isFinite(video.duration) ? video.duration : 30;
+        seek.max = String(duration);
+        seek.value = String(video.currentTime);
+        seek.style.setProperty('--progress', `${duration > 0 ? video.currentTime / duration * 100 : 0}%`);
+        seek.setAttribute('aria-valuetext', `${formatTime(video.currentTime)} of ${formatTime(duration)}`);
+        time.textContent = `${formatTime(video.currentTime)} / ${formatTime(duration)}`;
+        mute.title = video.muted ? 'Unmute (M)' : 'Mute (M)';
+        mute.setAttribute('aria-label', video.muted ? 'Unmute audio' : 'Mute audio');
+        mute.setAttribute('aria-pressed', String(video.muted));
+        volume.value = String(video.muted ? 0 : video.volume);
+        volume.style.setProperty('--progress', `${Number(volume.value) * 100}%`);
+        captions.setAttribute('aria-pressed', String(video.textTracks[0]?.mode === 'showing'));
+        if (isFullscreen() && video.controls) video.controls = false;
+      };
+      const requestFullscreen = async () => {
+        restoringControls = video.controls;
+        try {
+          await player.requestFullscreen();
+        } catch {
+          // Keep inline playback working if the browser declines fullscreen.
+          video.controls = restoringControls;
+        }
+      };
+      // Fullscreen the complete player so the control row sits outside the picture.
+      video.setAttribute('controlslist', 'nofullscreen');
+      video.classList.add('has-fullscreen-controls');
+      enter.addEventListener('click', requestFullscreen);
+      // Keep pointer hover on the native panel so all controls share its timing.
+      // The overlay retains a keyboard target; pointer clicks use the same action.
+      player.addEventListener('click', (event) => {
+        if (event.detail === 0 || !video.controls || !overFullscreenButton(event) || enter.classList.contains('is-idle')) return;
         event.preventDefault();
-        void document.exitFullscreen();
-        return;
-      }
-      if (event.key === 'Tab') {
-        const controls = Array.from(toolbar.querySelectorAll<HTMLElement>('button, input')).filter(control => control.getClientRects().length > 0);
-        const first = controls[0];
-        const last = controls[controls.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-      }
-      if ((event.key === ' ' || event.key === 'k') && event.target === video) {
+        event.stopPropagation();
+        void requestFullscreen();
+      }, { capture: true });
+      video.addEventListener('dblclick', (event) => {
         event.preventDefault();
-        play.click();
-      }
-    });
-    for (const event of ['timeupdate', 'durationchange', 'play', 'pause', 'ended', 'volumechange', 'error']) video.addEventListener(event, update);
-    video.textTracks.addEventListener('change', update);
+        if (isFullscreen()) void document.exitFullscreen();
+        else void requestFullscreen();
+      });
+      video.addEventListener('playing', () => { enter.hidden = false; showInlineButton(); });
+      video.addEventListener('error', () => {
+        if (isFullscreen()) void document.exitFullscreen();
+      });
+      play.addEventListener('click', async () => {
+        if (!video.paused) video.pause();
+        else {
+          try { await video.play(); }
+          catch { if (isFullscreen()) await document.exitFullscreen(); }
+        }
+      });
+      seek.addEventListener('input', () => { video.currentTime = Number(seek.value); });
+      mute.addEventListener('click', () => { video.muted = !video.muted; });
+      volume.addEventListener('input', () => { video.volume = Number(volume.value); video.muted = video.volume === 0; });
+      captions.addEventListener('click', () => {
+        const track = video.textTracks[0];
+        if (track) track.mode = track.mode === 'showing' ? 'disabled' : 'showing';
+      });
+      exit.addEventListener('click', () => { void document.exitFullscreen(); });
+      document.addEventListener('fullscreenchange', () => {
+        showInlineButton();
+        if (isFullscreen()) {
+          active = true;
+          video.controls = false;
+          update();
+          play.focus({ preventScroll: true });
+        } else if (active) {
+          active = false;
+          video.controls = restoringControls;
+          enter.focus({ preventScroll: true });
+        }
+      });
+      player.addEventListener('keydown', (event) => {
+        if (!isFullscreen()) return;
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          void document.exitFullscreen();
+          return;
+        }
+        if (event.key === 'Tab') {
+          const controls = Array.from(toolbar.querySelectorAll<HTMLElement>('button, input')).filter(control => control.getClientRects().length > 0);
+          const first = controls[0];
+          const last = controls[controls.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+        if ((event.key === ' ' || event.key === 'k') && event.target === video) {
+          event.preventDefault();
+          play.click();
+        }
+      });
+      for (const event of ['timeupdate', 'durationchange', 'play', 'pause', 'ended', 'volumechange', 'error']) video.addEventListener(event, update);
+      video.textTracks.addEventListener('change', update);
+    }
   }
 </script>
 

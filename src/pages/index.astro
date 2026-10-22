@@ -5,7 +5,7 @@ import Icon from '../components/Icon.astro';
 import Closing from '../components/Closing.astro';
 import TaxCallout from '../components/TaxCallout.astro';
 import HeroVideo from '../components/HeroVideo.astro';
-import homes from '../assets/pasadena-del-rosa-homes.jpg';
+import CampaignVideo from '../components/CampaignVideo.astro';
 import paparianPortrait from '../assets/bill-paparian.png';
 import { paparian } from '../data/paparian';
 ---
@@ -51,7 +51,9 @@ import { paparian } from '../data/paparian';
   </section>
 
   <section class="neighborhood-section container">
-    <figure class="neighborhood-photo"><Image src={homes} alt="Pasadena homes at Del Rosa Road and Grand Avenue, framed by palm trees" widths={[480, 800, 1200]} sizes="(max-width: 800px) 100vw, 50vw" width={1200} height={900} format="webp" quality={85} loading="lazy" /></figure>
+    <figure class="neighborhood-photo">
+      <CampaignVideo id="kitchen-table-video" src="/videos/kitchen-table.mp4" poster="/videos/kitchen-table-poster.webp" captions="/videos/kitchen-table.en.vtt" label="Kitchen Table" width={1280} height={720} />
+    </figure>
     <div class="neighborhood-copy"><h2>Another bill<br />lands at home.</h2><p>For 1,600 taxable square feet, Measure PFD adds $304 a year. Over 14 years, that comes to $4,256 before any exemption.</p><p>Rental housing is included, too. At the proposed rate, 20,000 taxable square feet would mean $3,800 a year for a building’s owner.</p><p>Housing that’s affordable is a top concern. This tax measure makes housing less affordable for Pasadena residents struggling to make ends meet.</p><a href="/facts/#measure" class="text-link">Understand the cost and exemptions <Icon /></a></div>
   </section>
 

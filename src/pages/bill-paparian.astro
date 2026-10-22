@@ -1,9 +1,8 @@
 ---
-import { Image } from 'astro:assets';
+import CampaignVideo from '../components/CampaignVideo.astro';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { paparian } from '../data/paparian';
-import paparianPortrait from '../assets/bill-paparian.png';
 const { latest, earlier } = paparian;
 ---
 <Layout seoTitle="Bill Paparian on Pasadena’s Measure PFD | Vote No" title="Bill Paparian urges a NO vote on Measure PFD" description="Read former Pasadena Mayor Bill Paparian’s Pasadena Now and Pasadena Star-News commentaries opposing Measure PFD, with links to both articles.">
@@ -13,7 +12,9 @@ const { latest, earlier } = paparian;
     </header>
 
     <section class="paparian-latest" aria-labelledby="latest-title">
-      <figure class="paparian-portrait"><Image src={paparianPortrait} alt={paparian.portrait.alt} widths={[400, 739]} sizes="(max-width: 800px) 100vw, 40vw" format="webp" quality={85} loading="eager" /></figure>
+      <figure class="paparian-video">
+        <CampaignVideo id="paparian-video" src="/videos/bill-paparian.mp4" poster="/videos/bill-paparian-poster.webp" captions="/videos/bill-paparian.en.vtt" label="Bill Paparian on Measure PFD" />
+      </figure>
       <div class="paparian-latest-copy">
         <p class="editorial-byline">{latest.publication} · <time datetime={latest.publishedDate}>{latest.published}</time></p>
         <h2 id="latest-title">{latest.title}</h2>
