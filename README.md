@@ -29,7 +29,7 @@ npm run preview
 - `src/data/voting.ts`: verified official voting tools and instructions for the ungated `/vote/` guide.
 - `src/data/paparian.ts`: client-supplied commentary excerpts, publication date, and original source link.
 - `src/data/starNews.ts`: client-supplied editorial excerpts and original article metadata for `/pasadena-star-news/`.
-- `src/components/CampaignVideo.astro`: shared click-to-play player with English captions and independent controls. Kitchen Table appears once beside “Another bill lands at home”; Bill Paparian’s video appears once on `/bill-paparian/`. Video files, posters, and caption tracks are in `public/videos/`; the existing homepage hero video remains.
+- `src/components/CampaignVideo.astro`: shared click-to-play player with English captions and independent controls. Kitchen Table appears in the homepage hero; a still photograph of Pasadena homes appears beside “Another bill lands at home”. Bill Paparian’s video appears on the homepage and `/bill-paparian/`, sharing the gray portrait poster through `PaparianVideo.astro`. Video files and caption tracks are in `public/videos/`; the homes photograph and Paparian portrait poster are optimized from `src/assets/` through Astro.
 - `src/styles/global.css`: responsive design and reusable styles, with self-hosted Archivo headings and Public Sans body text.
 - `docs/content-review.md`: source verification, corrections to the brief, photo licensing, and launch dependencies.
 

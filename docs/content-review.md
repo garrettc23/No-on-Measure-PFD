@@ -40,7 +40,7 @@ Hero: User-supplied aerial of Pasadena City Hall, from `.context/attachments/UKu
 
 Supporting housing photograph: Ken Lund’s street view of homes at Del Rosa Road and Grand Avenue in Pasadena, taken June 26, 2014. Wikimedia Commons, CC BY-SA 2.0. Source: https://commons.wikimedia.org/wiki/File:Neighborhood_Surrounding_Richard_H._Chambers_United_States_Court_of_Appeals,_Pasadena,_California_(14516428984).jpg
 
-Paparian portrait: the 739 × 400 image accompanying his October 15, 2026 Pasadena Now guest opinion is stored at `src/assets/bill-paparian.png` and rendered through Astro as responsive WebP images. Source: https://pasadenanow.com/main/wp-content/uploads/2026/10/image_0-2026-07-13T060746.874-1-1-1.png. The article does not identify a photographer or state a reuse license; `/credits/` records this without claiming one.
+Paparian portrait: the 739 × 400 image accompanying his October 15, 2026 Pasadena Now guest opinion is stored at `src/assets/bill-paparian.png` and optimized through Astro as the shared 16:9 WebP poster for his videos on the homepage and `/bill-paparian/`. Source: https://pasadenanow.com/main/wp-content/uploads/2026/10/image_0-2026-07-13T060746.874-1-1-1.png. The article does not identify a photographer or state a reuse license; `/credits/` records this without claiming one.
 
 Source links, author credits, dates, and licenses are public at `/credits/`. Originals are retained in `src/assets/`. Responsive derivatives are resized/converted/cropped and retain each original's license. No photographer or resident endorsement is implied.
 
