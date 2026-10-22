@@ -1,0 +1,12 @@
+---
+import { getImage } from 'astro:assets';
+import CampaignVideo from './CampaignVideo.astro';
+import portrait from '../assets/bill-paparian.png';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const poster = await getImage({ src: portrait, width: 704, height: 396, fit: 'cover', position: 'center', format: 'webp', quality: 85 });
+---
+<CampaignVideo id={id} src="/videos/bill-paparian.mp4" poster={poster.src} captions="/videos/bill-paparian.en.vtt" label="Bill Paparian on Measure PFD" />

@@ -1,5 +1,5 @@
 ---
-import CampaignVideo from '../components/CampaignVideo.astro';
+import PaparianVideo from '../components/PaparianVideo.astro';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import { paparian } from '../data/paparian';
@@ -13,7 +13,7 @@ const { latest, earlier } = paparian;
 
     <section class="paparian-latest" aria-labelledby="latest-title">
       <figure class="paparian-video">
-        <CampaignVideo id="paparian-video" src="/videos/bill-paparian.mp4" poster="/videos/bill-paparian-poster.webp" captions="/videos/bill-paparian.en.vtt" label="Bill Paparian on Measure PFD" />
+        <PaparianVideo id="paparian-video" />
       </figure>
       <div class="paparian-latest-copy">
         <p class="editorial-byline">{latest.publication} · <time datetime={latest.publishedDate}>{latest.published}</time></p>
