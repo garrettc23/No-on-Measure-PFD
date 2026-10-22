@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:4321. The server binds to the local machine only.
+Open the `http://127.0.0.1:<port>` address printed by Astro (normally `http://127.0.0.1:4321`). The server binds to the local machine only; use that address because `localhost` may reach another server through IPv6.
 
 ```sh
 npm run check
@@ -29,6 +29,7 @@ npm run preview
 - `src/data/voting.ts`: verified official voting tools and instructions for the ungated `/vote/` guide.
 - `src/data/paparian.ts`: client-supplied commentary excerpts, publication date, and original source link.
 - `src/data/starNews.ts`: client-supplied editorial excerpts and original article metadata for `/pasadena-star-news/`.
+- `src/components/CampaignVideo.astro`: shared click-to-play player with English captions and independent controls. Kitchen Table appears once beside “Another bill lands at home”; Bill Paparian’s video appears once on `/bill-paparian/`. Video files, posters, and caption tracks are in `public/videos/`; the existing homepage hero video remains.
 - `src/styles/global.css`: responsive design and reusable styles, with self-hosted Archivo headings and Public Sans body text.
 - `docs/content-review.md`: source verification, corrections to the brief, photo licensing, and launch dependencies.
 
