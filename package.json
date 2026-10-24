@@ -10,7 +10,16 @@
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
     "audit:copy": "node scripts/audit-copy.mjs",
-    "audit:seo": "node scripts/audit-seo.mjs"
+    "audit:links": "node scripts/audit-links.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "test:calculator": "node --test scripts/parcel-tax.test.mjs",
+    "test:rent": "node --test scripts/rent-scenario.test.mjs",
+    "test:exemptions": "node --test scripts/exemption-checklist.test.mjs",
+    "test:measurement": "node --test scripts/search-baseline.test.mjs",
+    "test:results": "node --test scripts/election-results.test.mjs",
+    "seo:baseline": "node scripts/search-baseline.mjs",
+    "seo:vercel-baseline": "node scripts/vercel-baseline.mjs",
+    "audit:release": "node scripts/release-audit.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.3.0",

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const origin = new URL(process.env.PUBLIC_SITE_URL || 'https://www.pfdno.com').origin;
 const indexable = !['preview', 'development'].includes(process.env.VERCEL_ENV);
-const paths = ['/', '/facts/', '/vote/', '/bill-paparian/', '/pasadena-star-news/', '/join/', '/privacy/', '/credits/'];
+const paths = ['/', '/facts/', '/resources/', '/vote/', '/bill-paparian/', '/pasadena-star-news/', '/join/', '/privacy/', '/credits/', '/measure-pfd-calculator/', '/measure-pfd-exemptions/', '/measure-pfd-vs-measure-i/', '/measure-pfd-fire-station-funding/', '/pasadena-property-tax-guide/', '/measure-pfd-pass-or-fail/', '/pasadena-city-limits/', '/measure-pfd-renters/'];
 const titles = new Set();
 const descriptions = new Set();
 const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -20,6 +20,8 @@ const checkFaviconHead = (html, path) => {
 for (const path of paths) {
   const html = await read(path === '/' ? 'index.html' : `${path.slice(1)}index.html`);
   checkFaviconHead(html, path);
+  assert.ok(!/<(?:p|span|div)\b[^>]*class="[^"]*\b(?:eyebrow|reference-kicker|editorial-byline|reference-meta|paparian-position-note|editorial-earlier-heading)\b/.test(html), `${path}: no decorative labels or attribution notes`);
+  assert.ok(!html.includes('These are Paparian’s published views, not a campaign endorsement.') && !html.includes('Excerpts published here by No on Measure PFD.'), `${path}: removed attribution notes`);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = meta(html, 'description');
   assert.ok(title && description, `${path}: title and description required`);
@@ -28,15 +30,58 @@ for (const path of paths) {
   assert.equal((html.match(/<h1\b/g) || []).length, 1, `${path}: one main heading`);
   assert.equal(html.match(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/)?.[1], `${origin}${path}`);
   assert.equal(meta(html, 'robots')?.startsWith('index,'), indexable, `${path}: indexing policy`);
+  assert.equal(html.includes('data-resource-analytics="enabled"'), indexable && process.env.PUBLIC_RESOURCE_ANALYTICS_ENABLED === 'true', `${path}: analytics environment and capability guard`);
+  assert.ok(html.includes('name="twitter:image:alt"'), `${path}: accessible social preview`);
   const scripts = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
   assert.equal(scripts.length, 1, `${path}: one structured-data graph`);
   const schema = JSON.parse(scripts[0][1]);
   assert.ok(schema['@graph'].some(item => item['@type'] === 'Organization'));
-  const page = schema['@graph'].find(item => ['WebPage', 'FAQPage'].includes(item['@type']));
+  const page = schema['@graph'].find(item => ['WebPage', 'FAQPage', 'Article', 'CollectionPage'].includes(item['@type']));
   assert.equal(page.url, `${origin}${path}`);
+  const videos = schema['@graph'].filter(item => item['@type'] === 'VideoObject');
+  assert.equal(videos.length, path === '/' ? 2 : path === '/bill-paparian/' ? 1 : 0);
+  for (const video of videos) {
+    assert.ok(video.name && video.description && video.thumbnailUrl && video.contentUrl);
+    assert.equal(video.duration, 'PT30.016S');
+    assert.equal(video.uploadDate, '2026-10-22T15:30:54Z');
+    assert.ok(!('transcript' in video), 'Removed transcript blocks are not duplicated in metadata');
+    assert.ok(html.includes(new URL(video.contentUrl).pathname.replace('.mp4', '.en.vtt')), 'Video captions remain available');
+    assert.ok(html.includes(new URL(video.contentUrl).pathname), 'Structured video is present on page');
+  }
+  if (path === '/') {
+    assert.ok(html.indexOf('id="paparian-feature-title"') < html.indexOf('id="reference-title"'));
+    assert.ok(html.indexOf('id="reference-title"') < html.indexOf('class="neighborhood-section'));
+  }
+  if (path.startsWith('/measure-pfd-') || path === '/pasadena-property-tax-guide/' || path === '/pasadena-city-limits/') {
+    assert.equal(page['@type'], 'Article');
+    assert.ok(page.dateModified && Number.isFinite(Date.parse(page.dateModified)));
+    assert.deepEqual(page.citation, []);
+    assert.equal(page.image, `${origin}/vote-no-pasadena-city-hall.png`);
+    assert.ok(html.includes('property="article:modified_time"'));
+    assert.ok(!html.includes('id="sources"'), 'Resource guides omit source sections');
+    assert.ok(!html.includes('class="reference-citation"'), 'Resource guides omit inline citations');
+    assert.ok(!html.includes('href="#sources"'), 'No removed source-section links');
+    assert.ok(!html.includes('aria-label="Breadcrumb"'), 'Guide pages should not display breadcrumbs');
+    assert.ok(html.includes('/facts/'));
+  }
+  if (path === '/resources/') {
+    assert.equal(page['@type'], 'CollectionPage');
+    assert.equal(page.mainEntity['@type'], 'ItemList');
+    const tiles = html.match(/<nav\b[^>]*class="[^"]*resource-directory[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(tiles, 'Visible resource directory exists');
+    const tileUrls = [...tiles.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(match => new URL(match[1], origin).href);
+    assert.deepEqual(page.mainEntity.itemListElement.map(item => item.url), tileUrls, 'Structured resource order matches the visible tiles');
+    assert.equal(page.mainEntity.numberOfItems, tileUrls.length);
+  }
   if (path === '/facts/') {
+    assert.ok(html.indexOf('id="overview"') < html.indexOf('id="questions"'));
+    assert.ok(html.indexOf('id="questions"') < html.indexOf('id="measure"'));
+
     assert.equal(page['@type'], 'FAQPage');
     assert.equal(page.mainEntity.length, 13);
+    const exemption = page.mainEntity.find(item => item.name === 'Who is exempt from Measure PFD?');
+    assert.ok(exemption?.acceptedAnswer.text.includes('qualifying low-income owners'));
+    assert.ok(!html.includes('Only qualifying low-income seniors receive an exemption.'), 'Approved exemption correction applies throughout the facts page');
     assert.equal((html.match(/<details\b/g) || []).length, page.mainEntity.length);
     // Compare plain content after the same HTML-entity decoding used for visible text.
     const decode = text => text.replace(/&amp;/g, '&').replace(/&#39;|&#x27;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
