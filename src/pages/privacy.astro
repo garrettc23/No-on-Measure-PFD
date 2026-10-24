@@ -1,22 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { campaign } from '../data/campaign';
+import { allowIndexing } from '../utils/seo';
+const resourceEventsEnabled = allowIndexing && import.meta.env.PUBLIC_RESOURCE_ANALYTICS_ENABLED === 'true';
 ---
 <Layout title="Privacy notice" description="How the No on Measure PFD website handles campaign signups, messages, and analytics.">
   <article class="container prose-page">
     <h1>Your privacy.</h1>
-    <p class="lead">This notice explains how information submitted through this campaign website is handled.</p>
+    <p class="lead">Here’s what happens to your information when you use this website or contact us.</p>
     <h2>Campaign signups and messages</h2>
     <p>When you sign up, we ask for your name, email address, ZIP code, and optional phone number. The contact form asks for your name, email address, topic, message, and optional phone number.</p>
-    <p>Submitting either form sends those details to Matt Klink at the campaign by email. We use them to respond to your inquiry and coordinate your involvement. Providing a phone number does not enroll you in an automated text-message program.</p>
-    <h2>How information is processed</h2>
-    <p>Vercel hosts the website and processes form requests. Resend sends submission emails to the campaign. Your email address is included as the reply-to address so Matt can respond directly. The website does not store submissions in a database, cookies, or browser storage.</p>
-    <p>Submission emails are retained in the campaign’s mailbox and may also be retained by its service providers. The server uses a temporary, hashed network identifier to limit repeated requests. Hosting and email providers may process ordinary request and delivery logs.</p>
+    <p>Both forms email your details to Matt Klink. He uses them to answer your questions and help you get involved. Sharing your phone number does not sign you up for automated texts.</p>
+    <h2>Who handles your information</h2>
+    <p>Vercel hosts this website. Resend delivers your form submission by email, with your address set for replies from Matt. We do not save form submissions in a website database, cookies, or browser storage.</p>
+    <p>Your submission stays in our campaign mailbox and may also be retained by our service providers. To limit spam, our server temporarily stores a hashed identifier derived from your network address. Hosting and email providers may keep request and delivery logs.</p>
     <h2>Analytics and cookies</h2>
-    <p>This site uses Vercel Web Analytics to count visits and page views in aggregate. It does not use cookies or identify individual visitors. There are no advertising pixels or tracking cookies. Fonts and images are served locally.</p>
+    <p>This site uses Vercel Web Analytics to count visits and page views as overall totals.{resourceEventsEnabled && ' It also counts calculator completions, resource downloads, and official-source clicks.'} Vercel Web Analytics does not use cookies or identify individual visitors. Fonts and images are served locally.</p>
+    <p>Our public website also uses a Google tag to measure Google Ads performance. Google may use cookies and process page visits, advertising identifiers, and browser or device information to measure advertising performance. We do not send campaign form fields or calculator inputs to this tag. Learn more about <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services<span class="sr-only"> (opens in a new tab)</span></a>.</p>
+    <h2>Calculators and exemption checklist</h2>
+    <p>These tools run in your browser. Square footage, optional current tax-bill amounts, checklist answers, and calculated results are not sent to the campaign or included in analytics. We do not save them in cookies, browser storage, or page URLs. The tools do not ask for your address, ZIP code, income amount, name, or email.</p>
     <h2>Email, phone, and external links</h2>
     <p>Email and phone links open your chosen app. Your provider processes those communications. External websites have their own privacy practices.</p>
     <h2>Contact and privacy requests</h2>
-    <p>To ask about your information, request its deletion, or stop campaign communications, contact {campaign.contact.name} at <a href={`mailto:${campaign.contact.email}`}>{campaign.contact.email}</a> or <a href={`tel:${campaign.contact.telephone}`}>{campaign.contact.phone}</a>.</p>
+    <p>To ask about your information, have it deleted, or stop hearing from us, contact {campaign.contact.name} at <a href={`mailto:${campaign.contact.email}`}>{campaign.contact.email}</a> or <a href={`tel:${campaign.contact.telephone}`}>{campaign.contact.phone}</a>.</p>
   </article>
 </Layout>

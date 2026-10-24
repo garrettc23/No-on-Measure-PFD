@@ -10,7 +10,7 @@ function assert(label, expression) {
 }
 run('viewport','390x844');
 run('goto',origin+'/join/');
-assert('Signup button uses the requested label', 'document.querySelector("#signup button[type=submit]").textContent.trim()==="Join the Campaign"');
+assert('Signup button uses the requested label', 'document.querySelector("#signup button[type=submit]").textContent.trim()==="Join the campaign"');
 assert('Form buttons have no static callouts beneath them', '[...document.querySelectorAll(".campaign-form button[type=submit]")].every(button=>!button.nextElementSibling)');
 assert('Footer includes the mayor commentary', '[...document.querySelectorAll(".footer-nav a")].some(a=>a.getAttribute("href")==="/bill-paparian/" && a.textContent.includes("Mayor"))');
 run('click','.menu-toggle');
@@ -66,18 +66,19 @@ assert('Skip link moves focus into main','document.activeElement.matches("#main"
 assert('Footer share button removed', '!document.querySelector(".site-footer .share-button")');
 run('click','.tax-amount a');
 assert('Tax estimate link reaches its visible footnote', 'location.hash==="#tax-estimate-note" && document.querySelector(location.hash).textContent.includes("median sales price")');
-assert('Mobile bar contains only the Vote NO action','!document.querySelector(".mobile-pledge > span") && document.querySelector(".mobile-pledge a").textContent.trim()==="Vote NO" && document.querySelector(".mobile-pledge a").getAttribute("href")==="/join/#signup"');
-assert('Header, hero, and closing prioritize Vote NO','["#main-navigation a:last-child", ".hero-actions .button", ".closing .button"].every(selector=>{const a=document.querySelector(selector);return a?.textContent.trim()==="Vote NO" && a.getAttribute("href")==="/join/#signup"})');
-run('click','.hero-actions a[href="/join/#signup"]');
-assert('Homepage Vote NO action reaches the signup form','location.pathname==="/join/" && location.hash==="#signup" && !!document.querySelector("#pledge form")');
+assert('Mobile bar contains only the Vote NO action','!document.querySelector(".mobile-pledge > span") && document.querySelector(".mobile-pledge a").textContent.trim()==="Vote NO" && document.querySelector(".mobile-pledge a").getAttribute("href")==="/join/"');
+assert('Header, hero, and closing prioritize Vote NO','["#main-navigation a.button[href=\\"/join/\\"]", ".hero-actions .button", ".closing .button"].every(selector=>{const a=document.querySelector(selector);return a?.textContent.trim()==="Vote NO" && a.getAttribute("href")==="/join/"})');
+run('click','.hero-actions a[href="/join/"]');
+assert('Homepage Vote NO action reaches the join page introduction','location.pathname==="/join/" && location.hash==="" && !!document.querySelector("#pledge form")');
 run('click','.footer-nav a[href="/vote/"]');
 assert('Footer voting link opens the guide','location.pathname==="/vote/" && document.querySelector("h1").textContent.includes("How to vote")');
 assert('Voting tools are available without a campaign form','!document.querySelector("form") && document.querySelectorAll(".voting-step").length===4');
-assert('Official voting links open new tabs','[...document.querySelectorAll(".voting-guide a[href^=https],.voting-sources a[href^=https]")].every(a=>a.target==="_blank" && a.rel.includes("noopener"))');
+assert('Official voting links open new tabs','[...document.querySelectorAll(".voting-guide a[href^=https],.election-resources a[href^=https]")].every(a=>a.target==="_blank" && a.rel.includes("noopener"))');
 run('goto',origin+'/facts/');
-run('click','#how-to-vote');
+run('click','.resource-hub a[href="/resources/"]');
+run('click','.resource-directory a[href="/vote/"]');
 assert('How-to-vote resource reaches the guide','location.pathname==="/vote/"');
 run('click','.mobile-pledge a');
-assert('Mobile Vote NO action reaches signup from the guide','location.pathname==="/join/" && location.hash==="#signup" && !!document.querySelector("#pledge form")');
+assert('Mobile Vote NO action reaches the join page introduction from the guide','location.pathname==="/join/" && location.hash==="" && !!document.querySelector("#pledge form")');
 writeFileSync('.context/interaction-audit.json',JSON.stringify(passed,null,2));
 console.log(`Passed ${passed.length} interaction checks.`);

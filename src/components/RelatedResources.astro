@@ -1,0 +1,10 @@
+---
+import { guides } from '../data/guides';
+import ResourceTiles from './ResourceTiles.astro';
+const current = Astro.url.pathname;
+const resources = [
+  ...guides.filter(guide => guide.path !== current).map(guide => ({ href: guide.path, title: guide.name, text: guide.summary, action: guide.action })),
+  { href: '/vote/', title: 'How do I vote on Measure PFD?', text: 'Check registration, find voting locations, and track your ballot.', action: 'Find voting options' },
+];
+---
+<ResourceTiles items={resources} label="Related Measure PFD resources" className="related-resources" />

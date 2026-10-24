@@ -174,8 +174,8 @@
 
 <style>
   /* Reserve a slot beside the native sound and menu buttons. */
-  .fullscreen-enter { position: absolute; bottom: 26px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 0; background: transparent; color: #fff; cursor: pointer; opacity: .95; transition: opacity 300ms ease; }
-  .fullscreen-enter::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: rgb(32 33 36 / 70%); opacity: 0; transition: opacity 150ms ease; }
+  .fullscreen-enter { position: absolute; bottom: 26px; right: 12px; display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: var(--radius-action); background: transparent; color: #fff; cursor: pointer; opacity: .95; transition: opacity 300ms ease; }
+  .fullscreen-enter::before { content: ''; position: absolute; inset: 4px; border-radius: var(--radius-action); background: rgb(32 33 36 / 70%); opacity: 0; transition: opacity 150ms ease; }
   .fullscreen-enter svg { position: relative; }
   .fullscreen-enter { pointer-events: none; }
   .fullscreen-enter.is-hovered, .fullscreen-enter:focus-visible { opacity: 1; }
@@ -189,11 +189,11 @@
   :global(video.has-fullscreen-controls::-webkit-media-controls-fullscreen-button) { display: none; }
   :global(video.has-fullscreen-controls::-webkit-media-controls-panel) { padding-right: 60px; }
   :global(video.has-fullscreen-controls::-webkit-media-controls-timeline) { margin-right: -60px; }
-  :global(.hero-video:fullscreen) { display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; aspect-ratio: auto; background: #000; overflow: hidden; box-shadow: none; }
+  :global(.hero-video:fullscreen) { display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; aspect-ratio: auto; border-radius: 0; background: #000; overflow: hidden; box-shadow: none; }
   :global(.hero-video:fullscreen > video) { grid-row: 1; width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center; }
   :global(.hero-video:fullscreen) .fullscreen-enter { display: none; }
   :global(.hero-video:fullscreen) .fullscreen-toolbar { grid-row: 2; display: flex; align-items: center; gap: 12px; padding: 8px max(24px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); background: linear-gradient(#16191e, #101216); color: #fff; border-top: 1px solid #ffffff12; font: 13px / 1.3 var(--sans); }
-  .fullscreen-toolbar button { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 50%; background: transparent; color: #eceef2; cursor: pointer; transition: background 160ms ease, color 160ms ease; }
+  .fullscreen-toolbar button { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: var(--radius-action); background: transparent; color: #eceef2; cursor: pointer; transition: background 160ms ease, color 160ms ease; }
   .fullscreen-toolbar button:hover { background: #ffffff14; color: #fff; }
   .fullscreen-toolbar .fullscreen-play { background: #fff; color: #101216; }
   .fullscreen-toolbar .fullscreen-play:hover { background: #dfe3e9; }

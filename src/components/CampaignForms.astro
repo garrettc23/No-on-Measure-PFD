@@ -42,8 +42,8 @@
           throw new Error('Unable to send.');
         }
         status.textContent = form.dataset.campaignForm === 'signup'
-          ? 'Thank you. Your signup has been sent to Matt at the campaign.'
-          : 'Your message has been sent to Matt at the campaign.';
+          ? 'Thanks for getting involved. Your signup has been sent to Matt Klink.'
+          : 'Your message has been sent to Matt Klink.';
         form.reset();
         submissionId = crypto.randomUUID();
         validatePhone();

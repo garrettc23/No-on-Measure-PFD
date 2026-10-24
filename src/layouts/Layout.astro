@@ -2,30 +2,45 @@
 import '@fontsource-variable/archivo';
 import '@fontsource-variable/public-sans';
 import '../styles/global.css';
+import '../styles/guides.css';
+import { guides } from '../data/guides';
+import { videos, type VideoId } from '../data/videos';
 import Logo from '../components/Logo.astro';
 import Favicon from '../components/Favicon.astro';
+import GoogleTag from '../components/GoogleTag.astro';
 import Analytics from '@vercel/analytics/astro';
-import Icon from '../components/Icon.astro';
 import { campaign } from '../data/campaign';
 import { titleCase } from '../utils/titleCase';
 import { absoluteUrl, allowIndexing, serializeSchema, publicPages } from '../utils/seo';
-interface Props { title?: string; description?: string; seoTitle?: string; noindex?: boolean; structuredData?: Record<string, unknown>; }
-const { title = campaign.name, description = campaign.description, seoTitle, noindex = false, structuredData = {} } = Astro.props;
+interface Props { title?: string; description?: string; seoTitle?: string; noindex?: boolean; structuredData?: Record<string, unknown>; article?: { modified: string; citations: string[] }; videoIds?: VideoId[]; }
+const { title = campaign.name, description = campaign.description, seoTitle, noindex = false, structuredData = {}, article, videoIds = [] } = Astro.props;
 const path = Astro.url.pathname;
-const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Facts & FAQ' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
+const nav = [{ href: '/', label: 'Home' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
+const resourceNav = [{ href: '/resources/', label: 'Tools & Guides' }, { href: '/facts/', label: 'FAQs' }];
 const canonical = absoluteUrl(path);
 const pageTitle = seoTitle || titleCase(title === campaign.name ? `${title} | Pasadena Parcel Tax, November 2026` : `${title} | ${campaign.name}`);
 const indexable = allowIndexing && !noindex;
+const resourceAnalyticsEnabled = indexable && import.meta.env.PUBLIC_RESOURCE_ANALYTICS_ENABLED === 'true';
 const organizationId = absoluteUrl('/#organization');
+const socialImage = absoluteUrl('/vote-no-pasadena-city-hall.png');
+const socialImageAlt = 'Vote No on Measure PFD logo with Pasadena City Hall behind it';
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Organization', '@id': organizationId, name: 'Committee for Responsible Property Taxation – Opposing Measure PFD, Sponsored by REALTORS®', alternateName: campaign.name, url: absoluteUrl('/'), logo: absoluteUrl('/campaign-logo.png'), description: 'The campaign opposing Pasadena’s proposed Measure PFD parcel tax.' },
+    { '@type': 'Organization', '@id': organizationId, name: 'Committee for Responsible Property Taxation - Opposing Measure PFD, Sponsored by REALTORS®', alternateName: campaign.name, url: absoluteUrl('/'), logo: absoluteUrl('/campaign-logo.png'), description: 'The campaign opposing Pasadena’s proposed Measure PFD parcel tax.' },
     { '@type': 'WebSite', '@id': absoluteUrl('/#website'), url: absoluteUrl('/'), name: campaign.name, publisher: { '@id': organizationId }, inLanguage: 'en-US' },
-    { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: pageTitle, description, isPartOf: { '@id': absoluteUrl('/#website') }, publisher: { '@id': organizationId }, inLanguage: 'en-US', ...structuredData },
+    ...videoIds.map(id => {
+      const video = videos[id];
+      return { '@type': 'VideoObject', '@id': absoluteUrl(`${video.content}#video`), name: video.name,
+        description: video.description, thumbnailUrl: absoluteUrl(video.thumbnail), contentUrl: absoluteUrl(video.content),
+        uploadDate: video.published, duration: video.duration,
+        publisher: { '@id': organizationId }, inLanguage: 'en-US', isPartOf: { '@id': `${canonical}#webpage` } };
+    }),
+    { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: pageTitle, description, isPartOf: { '@id': absoluteUrl('/#website') }, publisher: { '@id': organizationId }, inLanguage: 'en-US', ...(article ? { '@type': 'Article', headline: title, image: socialImage, dateModified: article.modified, author: { '@id': organizationId }, citation: article.citations, mainEntityOfPage: canonical } : {}), ...structuredData },
     ...(path !== '/' && !noindex ? [{ '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/') },
-      { '@type': 'ListItem', position: 2, name: publicPages.find(page => page.path === path)?.name || title, item: canonical },
+      ...(guides.some(guide => guide.path === path) ? [{ '@type': 'ListItem', position: 2, name: 'Tools & Guides', item: absoluteUrl('/resources/') }] : []),
+      { '@type': 'ListItem', position: guides.some(guide => guide.path === path) ? 3 : 2, name: publicPages.find(page => page.path === path)?.name || title, item: canonical },
     ] }] : []),
   ],
 };
@@ -33,6 +48,7 @@ const schema = {
 <!doctype html>
 <html lang="en">
   <head>
+    <GoogleTag />
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -40,14 +56,16 @@ const schema = {
     <meta name="robots" content={indexable ? "index, follow, max-image-preview:large" : "noindex, follow"} />
     {!noindex && <link rel="canonical" href={canonical} />}
     {!noindex && <script type="application/ld+json" set:html={serializeSchema(schema)} />}
-    <meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} /><meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:url" content={canonical} /><meta property="og:site_name" content={campaign.name} /><meta property="og:locale" content="en_US" />
-    <meta property="og:image" content={absoluteUrl('/vote-no-pasadena-city-hall.png')} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Vote No on Measure PFD logo with Pasadena City Hall behind it" />
-    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={absoluteUrl('/vote-no-pasadena-city-hall.png')} />
+    <meta property="og:image" content={socialImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+    {article && <meta property="article:modified_time" content={article.modified} />}
     <Favicon />
   </head>
-  <body class:list={{ 'home-page': path === '/' }}>
+  <body data-resource-analytics={resourceAnalyticsEnabled ? "enabled" : "disabled"} class:list={{ 'home-page': path === '/' }}>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="election-top"><span class="election-location">Pasadena, California</span><span>Vote No on November 3, 2026</span></div>
     <header class="site-header">
@@ -56,8 +74,9 @@ const schema = {
         <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation" type="button"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
         <nav id="main-navigation" aria-label="Main navigation">
           {nav.map(item => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>)}
-          {campaign.donationUrl && <a href={campaign.donationUrl} target="_blank" rel="noopener noreferrer" class="button button-small">Donate<span class="sr-only"> (opens in a new tab)</span> <Icon /></a>}
-          <a href="/join/#signup" class="button button-small">Vote NO <Icon size={17} /></a>
+          {campaign.donationUrl && <a href={campaign.donationUrl} target="_blank" rel="noopener noreferrer" class="button button-small">Donate<span class="sr-only"> (opens in a new tab)</span></a>}
+          {resourceNav.map(item => <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>)}
+          <a href="/join/" class="button button-small">Vote NO</a>
         </nav>
       </div>
     </header>
@@ -66,12 +85,12 @@ const schema = {
       <div class="container">
         <div class="footer-main">
           <Logo footer />
-          <div class="footer-nav"><a href="/facts/">Facts & FAQ</a><a href="/join/">Join the campaign</a><a href="/bill-paparian/">Mayor’s Take</a><a href="/vote/">How to vote</a><a href="/privacy/">Privacy</a></div>
+          <div class="footer-nav"><a href="/facts/">FAQs</a><a href="/resources/">Tools & Guides</a><a href="/join/">Join the campaign</a><a href="/bill-paparian/">Mayor’s Take</a><a href="/vote/">How to vote</a><a href="/privacy/">Privacy</a></div>
         </div>
         <div class="footer-bottom"><p data-legal-copy><span class="disclosure-heading">{campaign.disclosure}</span><span class="top-funder"><span class="disclosure-heading">{campaign.topFunderLabel}</span><br />{campaign.topFunder}</span></p></div>
       </div>
     </footer>
-    <div class="mobile-pledge"><a href="/join/#signup" class="button button-small">Vote NO <Icon size={17} /></a></div>
+    <div class="mobile-pledge"><a href="/join/" class="button button-small">Vote NO</a></div>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#main-navigation');
@@ -84,6 +103,33 @@ const schema = {
       document.addEventListener('keydown', event => { if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); } });
       document.addEventListener('click', event => { if (event.target instanceof Node && !nav?.contains(event.target) && !toggle?.contains(event.target)) closeMenu(); });
       matchMedia('(min-width: 801px)').addEventListener('change', closeMenu);
+    </script>
+    <script>
+      import { recordResourceEvent } from '../utils/resourceAnalytics';
+      import { referenceSources } from '../data/guides';
+      import { sources } from '../data/campaign';
+      import { votingLinks } from '../data/voting';
+      const official = [
+        ...Object.entries(referenceSources).map(([key, source]) => [source.url, key]),
+        ...Object.entries(sources).map(([key, source]) => [source.url, key]),
+        ...Object.entries(votingLinks).map(([key, url]) => [url, key]),
+      ];
+      document.addEventListener('click', event => {
+        if (!(event.target instanceof Element)) return;
+        const link = event.target.closest<HTMLAnchorElement>('a[href]');
+        if (!link) return;
+        const url = new URL(link.href);
+        const downloads: Record<string, string> = { '/downloads/measure-pfd-faq.pdf': 'faq', '/downloads/measure-pfd-fact-sheet.pdf': 'fact_sheet' };
+        if (url.origin === location.origin && downloads[url.pathname]) recordResourceEvent('resource_downloaded', downloads[url.pathname]);
+        const source = official.find(([href]) => href === url.origin + url.pathname);
+        if (source) recordResourceEvent('official_source_clicked', source[1]);
+      });
+    </script>
+    <script is:inline>
+      window.webAnalyticsBeforeSend = function (event) {
+        const url = new URL(event.url, window.location.origin);
+        return { ...event, url: url.origin + url.pathname };
+      };
     </script>
     <Analytics />
   </body>

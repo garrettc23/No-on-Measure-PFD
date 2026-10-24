@@ -20,7 +20,7 @@ export const paparian = {
     publication: 'Pasadena Now',
     published: 'October 15, 2026',
     publishedDate: '2026-10-15',
-    summary: 'In his latest Pasadena Now commentary, Paparian argues that Pasadena should prioritize fire-station replacements using existing Measure I revenue before asking residents for another tax.',
+    summary: 'Paparian says City Hall should use existing Measure I revenue to replace fire stations before asking you to pay another tax.',
   },
   portrait: {
     alt: 'Former Pasadena Mayor Bill Paparian',

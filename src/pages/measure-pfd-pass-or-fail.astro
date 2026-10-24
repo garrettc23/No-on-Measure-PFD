@@ -1,0 +1,27 @@
+---
+import GuideLayout from '../layouts/GuideLayout.astro';
+import { guides } from '../data/guides';
+const guide = guides.find(item => item.path === '/measure-pfd-pass-or-fail/')!;
+---
+<GuideLayout guide={guide} heading={guide.name}>
+  <div class="reference-answer"><p><strong>If PFD passes, it would authorize a new annual parcel tax of $0.19 per taxable square foot of building area.</strong> If it fails, this proposal would not authorize that tax. Passage requires at least two-thirds of votes cast on Measure PFD.</p></div>
+  <section aria-labelledby="outcomes-heading">
+    <h2 id="outcomes-heading">What each outcome means for you</h2>
+    <div class="outcome-grid">
+      <article class="outcome-card"><h3>If PFD passes</h3><p>Property owners would face the proposed charge, subject to exemptions. For 1,600 taxable square feet, that is $304 a year.</p><p>Revenue would go into a dedicated fund for authorized fire facilities, equipment, emergency-response enhancements, and related costs.</p><a class="button button-outline" href="/measure-pfd-calculator/">Calculate my added tax</a></article>
+      <article class="outcome-card"><h3>If PFD fails</h3><p>This proposal would not create the PFD charge. Existing property taxes and assessments would remain separate obligations.</p><p>The result would not adopt a replacement funding plan or determine future service changes. Those would require separate City decisions.</p><a class="button button-outline" href="/measure-pfd-fire-station-funding/">Explore fire funding</a></article>
+    </div>
+  </section>
+  <section id="vote-threshold"><h2>How many votes does PFD need to pass?</h2><p><strong>At least two-thirds of votes cast on the measure must be Yes.</strong> The threshold applies to votes on PFD, rather than all registered voters or everyone who casts a ballot in the election.</p><p>Election Day is November 3, 2026. Early vote totals can change as ballots are counted. Use certified results to confirm the outcome.</p></section>
+  <section id="first-bill"><h2>When would you start paying?</h2><p><strong>The proposed ordinance does not give a calendar date for the first tax bill.</strong> If PFD passes, check the City’s implementation notices for the first billing year and exemption application instructions.</p><p>The proposal calls for two equal installments under County collection procedures. For a $304 annual PFD charge, that would be $152 per installment. The calculator’s monthly amount is an equivalent for budgeting.</p></section>
+  <section id="duration"><h2>How long would the tax last?</h2><p><strong>The proposal sets a 14-year term from its effective date.</strong> It contains no annual cost-of-living increase. Your charge would still depend on taxable building area and any exemption that applies.</p><p>An extension would require a subsequent voter-approved ordinance. The proposal also protects authorized debt-service obligations if voters later repeal or amend it.</p></section>
+  <section id="projects"><h2>Would approval mean immediate construction?</h2><p><strong>Approval would authorize funding, not announce a construction start date.</strong> The proposal includes reconstruction of Stations 33 and 37 within the first ten years. Specific schedules and spending would depend on the City’s project and budget decisions.</p><p>Annual independent audits and public financial reports would provide ways to follow revenue, spending, and project progress.</p></section>
+  <section id="next-steps"><h2>What should you check after the election?</h2><ul><li><strong>Certified results:</strong> confirm whether PFD met the required vote threshold.</li><li><strong>If it passes:</strong> look for the first billing year, exemption procedures, budgets, and project schedules.</li><li><strong>If it fails:</strong> follow subsequent City budgets and any new funding proposals.</li></ul><p>Until an outcome and implementation details are confirmed, the calculator illustrates the proposal rather than an issued tax bill.</p></section>
+</GuideLayout>
+<style>
+  .outcome-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .outcome-card { padding: var(--space-panel); border: 1px solid var(--line); background: var(--paper-deep); display: flex; flex-direction: column; align-items: flex-start; }
+  .outcome-card h3 { margin: 0 0 20px; font-size: 26px; }
+  .outcome-card .button { margin-top: 24px; }
+  @media (max-width: 600px) { .outcome-grid { grid-template-columns: 1fr; } }
+</style>

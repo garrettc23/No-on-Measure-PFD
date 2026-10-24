@@ -1,0 +1,22 @@
+---
+import GuideLayout from '../layouts/GuideLayout.astro';
+import ResourceTiles from '../components/ResourceTiles.astro';
+import { guides, referenceSources } from '../data/guides';
+const guide = guides.find(item => item.path === '/pasadena-city-limits/')!;
+---
+<GuideLayout guide={guide} heading={guide.name}>
+  <div class="reference-answer"><p><strong>Check your property’s location in the City’s address lookup.</strong> A Pasadena mailing address or ZIP code alone does not confirm that your property is inside city limits. Measure PFD would apply to parcels within the City of Pasadena, subject to exemptions.</p></div>
+  <section id="check-address" aria-labelledby="address-heading">
+    <h2 id="address-heading">Start with your street address</h2>
+    <ResourceTiles columns={2} label="Property lookup options" items={[
+      { href: referenceSources.cityLookup.url, title: 'Find your address on the City map', text: 'Open Find My District and search your street address. Check the selected location and expand the property information in the results.', action: 'Open City address lookup' },
+      { href: referenceSources.assessor.url, title: 'Find your parcel number', text: 'Use the County Assessor’s property search to find your Assessor’s Identification Number (AIN). Match the record to your property before asking the City to confirm its location.', action: 'Find my property record' },
+    ]} />
+  </section>
+  <section id="map-results"><h2>What should I look for on the map?</h2><p><strong>Match the selected location to your property and review its Pasadena council-district information.</strong> The City’s lookup accepts an address or intersection and lets you explore property details. Use a full street address for your own property.</p><p>A search pin by itself is not a tax determination. If the location is wrong, no district appears, or your parcel sits near a boundary, ask the City to confirm using your address and AIN.</p></section>
+  <section id="mailing-address"><h2>Does a Pasadena mailing address mean I would pay PFD?</h2><p><strong>No. PFD would depend on whether your parcel is within City of Pasadena boundaries, along with its taxable building area and exemption status.</strong> A postal address, ZIP code, or nearby Pasadena landmark does not establish those facts.</p><p>If your parcel is outside city limits, this Pasadena proposal would not impose PFD on it. If it is inside, check exemptions before estimating your cost.</p></section>
+  <section id="confirm-location"><h2>What if I cannot confirm my property’s location?</h2><p><strong>Ask Pasadena’s City Service Center to direct your boundary question to the right department.</strong> Have your street address and parcel number ready. Use this option if the map will not load or its result is unclear.</p><a class="button button-outline" href="tel:+16267447311">Call 626-744-7311</a></section>
+</GuideLayout>
+<style>
+  #confirm-location > .button { margin-top: var(--space-copy); }
+</style>

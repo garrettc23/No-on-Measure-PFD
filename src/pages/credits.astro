@@ -5,15 +5,15 @@ import { photoCredits } from '../data/campaign';
 <Layout title="Photography credits" description="Photography sources, creator credits, and image usage information for the No on Measure PFD campaign website in Pasadena.">
   <article class="container prose-page">
     <h1>Photography credits.</h1>
-    <p class="lead">Image sources and usage information for this website.</p>
+    <p class="lead">Where our photos came from and how we use them.</p>
     {photoCredits.map(photo => <section>
       <h2>{photo.title}</h2>
       <p>{photo.description}{photo.author && <> Photograph by {photo.author}, taken {photo.date}.</>}</p>
-      {photo.url && <p><a href={photo.url} target="_blank" rel="noopener noreferrer">View the source photograph<span class="sr-only"> (opens in a new tab)</span></a>.{photo.license && photo.licenseUrl && <> Licensed under <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">{photo.license}<span class="sr-only"> (opens in a new tab)</span></a>.</>}</p>}
+      {photo.url && <p><a href={photo.url} target="_blank" rel="noopener noreferrer">View original photo<span class="sr-only"> (opens in a new tab)</span></a>.{photo.license && photo.licenseUrl && <> Licensed under <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">{photo.license}<span class="sr-only"> (opens in a new tab)</span></a>.</>}</p>}
       {photo.sourceNote && <p>{photo.sourceNote}</p>}
     </section>)}
-    <h2>How the photographs are used</h2>
-    <p>Website versions are resized, converted to WebP, and cropped to fit their layouts. Licensed photographs retain the license listed above.</p>
+    <h2>How we use these photos</h2>
+    <p>We resize, crop, and convert photos to WebP so they fit the page and load faster. Their original licenses still apply.</p>
     <p>The photographers and people whose properties appear in these images have not endorsed this campaign through their use.</p>
     <h2>Typefaces</h2>
     <p>Archivo and Public Sans are distributed under the SIL Open Font License. <a href="/licenses/archivo.txt">Archivo license</a> · <a href="/licenses/public-sans.txt">Public Sans license</a>.</p>

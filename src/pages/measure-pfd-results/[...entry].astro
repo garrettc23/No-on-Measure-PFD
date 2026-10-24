@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GuideLinks from '../../components/GuideLinks.astro';
+import { electionReports, latestElectionReport } from '../../data/electionResults';
+export function getStaticPaths() {
+  return latestElectionReport ? [{ params: { entry: undefined } }] : [];
+}
+const result = latestElectionReport!;
+const description = result.status === 'certified'
+  ? `Certified Pasadena Measure PFD results: the measure ${result.outcome === 'passed' ? 'passed' : 'did not pass'}. See official vote totals and source timestamps.`
+  : 'Preliminary Pasadena Measure PFD vote totals, with official sources and update timestamps. The count is not certified.';
+const formatDate = (date: string) => new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: 'America/Los_Angeles' }).format(new Date(date));
+---
+<Layout title="Pasadena Measure PFD results" seoTitle="Pasadena Measure PFD Results | Official Count & Status" description={description} article={{modified:result.reviewedAt,citations:[result.sourceUrl]}}>
+  <article class="reference-page container">
+
+    <header class="reference-header"><h1>Pasadena Measure PFD results</h1></header>
+    <div class="reference-answer"><h2>{result.status === 'certified' ? `Certified: Measure PFD ${result.outcome === 'passed' ? 'passed' : 'did not pass'}.` : 'Preliminary results: counting is not complete.'}</h2><p>{result.status === 'preliminary' ? 'These figures are an official preliminary count, not a certified outcome. Additional ballots may change the totals.' : 'The outcome below follows the official certified result.'}</p><p>Official source updated <time datetime={result.sourceUpdatedAt}>{formatDate(result.sourceUpdatedAt)} Pacific</time>.</p><p><a href={result.sourceUrl}>{result.sourceLabel}</a></p></div>
+    <table class="reference-table"><caption>Measure PFD votes in the latest official report</caption><thead><tr><th scope="col">Choice</th><th scope="col">Votes</th></tr></thead><tbody><tr><th scope="row">Yes</th><td>{result.yesVotes.toLocaleString('en-US')}</td></tr><tr><th scope="row">No</th><td>{result.noVotes.toLocaleString('en-US')}</td></tr></tbody></table>
+    <section><h2>Reporting history</h2><ul>{[...electionReports].reverse().map(report => <li><time datetime={report.sourceUpdatedAt}>{formatDate(report.sourceUpdatedAt)} Pacific</time>: {report.status}; {report.yesVotes.toLocaleString('en-US')} Yes and {report.noVotes.toLocaleString('en-US')} No. <a href={report.sourceUrl}>{report.sourceLabel}</a>.</li>)}</ul></section>
+    <section><h2>Understand the proposal</h2><p>See what PFD proposed and how it could affect your property taxes. If it passes, check adopted City rules for implementation details.</p><GuideLinks /></section>
+      </article>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import { campaign } from '../data/campaign';
+import { libraryResources } from '../data/resources';
+import ResourceTiles from './ResourceTiles.astro';
+const downloads = [
+  { href: campaign.factSheetUrl, title: 'Campaign fact sheet', text: 'Our case against Measure PFD, ready to print or share.', action: 'Download fact sheet (PDF)', download: 'No on Measure PFD Fact Sheet.pdf' },
+  { href: campaign.faqUrl, title: 'Campaign FAQs', text: 'Answers to common questions in a printable handout.', action: 'Download FAQs (PDF)', download: 'No on Measure PFD FAQ.pdf' },
+];
+---
+<ResourceTiles items={libraryResources} label="Calculators, guides, and more" className="resource-directory" />
+<section class="campaign-downloads" aria-labelledby="campaign-downloads-heading">
+  <h2 id="campaign-downloads-heading">Learn more about Measure PFD.</h2>
+  <div class="download-list">
+    {downloads.map(item => <article class="download-row">
+      <div><h3>{item.title}</h3><p>{item.text}</p></div>
+      <a class="button button-outline" href={item.href} download={item.download}>{item.action}</a>
+    </article>)}
+  </div>
+</section>
+<style>
+  .campaign-downloads { margin-top: var(--space-section); }
+  .campaign-downloads h2 { margin: 0 0 24px; font-size: 28px; line-height: 1.3; }
+  .download-list { display: grid; gap: 16px; }
+  .download-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px var(--space-panel); border: 1px solid var(--line); border-radius: var(--radius-surface); }
+  .download-row h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.35; }
+  .download-row p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--green-soft); }
+  .download-row .button { flex-shrink: 0; }
+  @media (max-width: 600px) {
+    .download-row { flex-direction: column; align-items: stretch; }
+    .download-row .button { align-self: flex-end; }
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+import Layout from './Layout.astro';
+import RelatedResources from '../components/RelatedResources.astro';
+import { type Guide } from '../data/guides';
+interface Props { guide: Guide; heading: string; }
+const { guide, heading } = Astro.props;
+---
+<Layout title={heading} seoTitle={guide.title} description={guide.description} article={{ modified: guide.reviewed, citations: [] }}>
+  <article class="reference-page container">
+
+    <header class="reference-header"><h1>{heading}</h1></header>
+    <slot />
+    <section aria-labelledby="related-heading">
+      <div class="related-heading"><h2 id="related-heading">Explore the measure</h2><a class="button button-outline" href="/resources/">Browse all resources</a></div>
+      <RelatedResources />
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .related-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-copy); margin-bottom: var(--space-content); }
+  .related-heading h2 { margin: 0; }
+  .related-heading > .button { margin-left: auto; }
+</style>
