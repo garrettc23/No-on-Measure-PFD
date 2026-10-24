@@ -1,0 +1,23 @@
+---
+import GuideLayout from '../layouts/GuideLayout.astro';
+import RentScenario from '../components/RentScenario.astro';
+import ResourceTiles from '../components/ResourceTiles.astro';
+import { guides } from '../data/guides';
+const guide = guides.find(item => item.path === '/measure-pfd-renters/')!;
+---
+<GuideLayout guide={guide} heading={guide.name}>
+  <RentScenario />
+  <div class="reference-answer"><p><strong>Measure PFD could add to a rental property owner’s costs, but it would not automatically raise your rent.</strong> PFD would be a property tax, not a separate tax bill sent to tenants. Whether your rent could increase depends on your rental agreement and the rules that cover your home.</p></div>
+  <section id="renter-tools" aria-labelledby="renter-tools-heading">
+    <h2 id="renter-tools-heading">Check what applies to your rental</h2>
+    <ResourceTiles columns={2} label="Rental information and help" items={[
+      { href: 'https://www.cityofpasadena.net/rentalregistry', title: 'Look up your rental property', text: 'Search Pasadena’s Rental Registry by address or parcel number to view property information. You can search without creating an account.', action: 'Search rental registry' },
+      { href: 'https://www.cityofpasadena.net/rent-stabilization/contact-housing-counselor/', title: 'Get help with a rent increase', text: 'Ask a City housing counselor which protections apply to your unit and how to review an increase or added charge.', action: 'Contact a housing counselor' },
+    ]} />
+  </section>
+  <section id="who-pays"><h2>Would tenants receive a PFD tax bill?</h2><p><strong>No. The proposed charge would apply to taxable property, with collection through property-tax procedures.</strong> It would charge $0.19 per taxable square foot of building area each year, before exemptions. The owner’s tax cost is separate from what a tenant legally owes in rent.</p></section>
+  <section id="rent-increase"><h2>Could my landlord raise my rent because of PFD?</h2><p><strong>A higher property-tax bill would not, by itself, authorize a matching rent increase.</strong> Any increase would still have to comply with applicable rent rules, notice requirements, and your rental agreement.</p><p>For covered rentals, Pasadena has a petition process through which landlords can request an upward rent adjustment for a fair rate of return. Property-tax changes can be part of that review. Filing a petition is not the same as receiving approval.</p><p>PFD does not set a per-tenant surcharge or a formula for increasing rents. If you receive a notice citing PFD, ask for a written explanation of the charge and have a housing counselor help you check it.</p></section>
+  <section id="rent-protections"><h2>Does Pasadena rent control cover my home?</h2><p><strong>Pasadena’s local rent limits generally cover multi-unit residential rental properties built before February 1, 1995, with exceptions.</strong> Coverage can depend on the property and unit, so confirm your situation before relying on a general rule.</p><p>Other protections may apply even if your home is outside local rent limits. Ask a housing counselor about state law, eviction protections, and the current rules for your tenancy.</p></section>
+  <section id="estimate"><h2>How does the rent estimate work?</h2><p><strong>Annual increase = taxable building square feet × $0.19.</strong> Divide by 12 for the monthly amount. For 1,200 square feet, that is $228 a year or $19 a month if the full tax is passed on, before exemptions.</p><p>The result covers the space you enter. If you enter an entire apartment building, it shows the building-wide cost, not one tenant’s share. Whether your landlord can increase your rent still depends on rental rules and your agreement.</p></section>
+  <section id="notice"><h2>What should I do if I receive a rent-increase notice?</h2><p><strong>Keep the notice and ask a housing counselor to help you review it.</strong> Have your lease, current rent, previous increase notices, and any explanation of a new fee ready. Ask which rules cover your unit, whether the amount and timing are allowed, and whether any claimed rent-adjustment approval actually covers your tenancy.</p></section>
+</GuideLayout>

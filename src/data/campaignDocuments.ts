@@ -37,8 +37,8 @@ export const factSheetSections: CampaignFactSection[] = [
     "title": "The Forgotten Middle Pays the Most",
     "paragraphs": [
       {
-        "text": "For wealthy homeowners, $304 a year is a rounding error. For a retiree on a fixed income, a young family stretching to cover a mortgage, or a longtime homeowner watching every bill climb, Measure PFD can mean the difference between staying in Pasadena and getting priced out. These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Only qualifying low-income seniors receive an exemption. Apartment properties, small housing providers, businesses, and other owners receive no comparable protection.",
-        "html": "For wealthy homeowners, $304 a year is a rounding error. <strong>For a retiree on a fixed income, a young family stretching to cover a mortgage</strong><strong>,</strong><strong> or a longtime homeowner watching every bill climb, Measure PFD can mean the difference between staying in Pasadena and getting priced out.</strong> These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Only qualifying low-income seniors receive an exemption. Apartment properties, small housing providers, businesses, and other owners receive no comparable protection."
+        "text": "For wealthy homeowners, $304 a year is a rounding error. For a retiree on a fixed income, a young family stretching to cover a mortgage, or a longtime homeowner watching every bill climb, Measure PFD can mean the difference between staying in Pasadena and getting priced out. These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Measure PFD includes exemptions for qualifying low-income owners, owners receiving specified Pasadena senior or disability utility-tax exemptions, government property, and qualifying religious or community-service property. Eligibility depends on the ordinance’s requirements.",
+        "html": "For wealthy homeowners, $304 a year is a rounding error. <strong>For a retiree on a fixed income, a young family stretching to cover a mortgage</strong><strong>,</strong><strong> or a longtime homeowner watching every bill climb, Measure PFD can mean the difference between staying in Pasadena and getting priced out.</strong> These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Measure PFD includes exemptions for qualifying low-income owners, owners receiving specified Pasadena senior or disability utility-tax exemptions, government property, and qualifying religious or community-service property. Eligibility depends on the ordinance’s requirements."
       }
     ]
   },
@@ -160,11 +160,11 @@ export const faqs: CampaignFaq[] = [
   },
   {
     "id": "who-is-exempt",
-    "question": "Who is the “forgotten middle”?",
+    "question": "Who is exempt from Measure PFD?",
     "paragraphs": [
       {
-        "text": "The forgotten middle includes retirees on fixed incomes, young families struggling to cover a mortgage, and longtime homeowners watching every bill climb. For wealthy homeowners, $304 a year is a rounding error. For the forgotten middle, Measure PFD can mean the difference between staying in Pasadena and being priced out. These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Only qualifying low-income seniors receive an exemption. Apartment properties, small housing providers, businesses, and other owners receive no comparable protection.",
-        "html": "<strong>The forgotten middle includes retirees on fixed incomes, young families struggling to cover a mortgage,</strong> <strong>and longtime homeowners watching every bill climb</strong>. For wealthy homeowners, $304 a year is a rounding error. For the forgotten middle, Measure PFD can mean the difference between staying in Pasadena and being priced out. These neighbors earn too much to qualify for assistance and too little to absorb another tax increase. Only qualifying low-income seniors receive an exemption. Apartment properties, small housing providers, businesses, and other owners receive no comparable protection."
+        "text": "Measure PFD includes exemptions for qualifying low-income owners, owners receiving specified Pasadena senior or disability utility-tax exemptions, government property, and qualifying religious or community-service property. Eligibility depends on the ordinance’s requirements.",
+        "html": "Measure PFD includes exemptions for qualifying low-income owners, owners receiving specified Pasadena senior or disability utility-tax exemptions, government property, and qualifying religious or community-service property. Eligibility depends on the ordinance’s requirements."
       }
     ]
   },

@@ -1,0 +1,13 @@
+---
+// Never send local development or preview visits to the advertising account.
+const enabled = import.meta.env.PROD && import.meta.env.VERCEL_ENV === 'production';
+---
+{enabled && <>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-18535242073"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18535242073');
+  </script>
+</>}

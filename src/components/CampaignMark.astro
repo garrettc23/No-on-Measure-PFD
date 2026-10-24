@@ -1,9 +1,9 @@
 ---
 interface Props { loading?: 'eager' | 'lazy'; }
 const { loading = 'eager' } = Astro.props;
-// Stable, lossless 600px asset stays available across preview rebuilds.
+// Lossless WebP matches the original PNG pixels and retains its explicit dimensions.
 ---
-<img class="campaign-mark" src="/campaign-logo.png" alt="Vote NO on Measure PFD" width="600" height="585" loading={loading} decoding="async" />
+<img class="campaign-mark" src="/campaign-logo.webp" alt="Vote NO on Measure PFD" width="600" height="585" loading={loading} decoding="async" />
 <style>
   .campaign-mark { display: block; width: 100%; height: auto; }
 </style>

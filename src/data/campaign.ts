@@ -5,7 +5,7 @@ export const campaign = {
   name: 'No on Measure PFD',
   title: 'Support Pasadena’s firefighters. Vote NO on Measure PFD.',
   tagline: 'Support public safety. Keep Pasadena affordable.',
-  description: 'We stand with our firefighters, police, and paramedics. We are asking for a fairer way to fund public safety. Read the measure, understand the cost, and get involved.',
+  description: 'Support Pasadena’s firefighters and a fairer tax plan. See what Measure PFD could cost you and join our campaign for a NO vote.',
   electionDate: 'Tuesday, November 3, 2026',
   contact: { name: 'Matt Klink', phone: '310-283-6267', telephone: '+13102836267', email: 'matt@klinkcampaigns.com' },
   // Website disclaimer per counsel's Sept. 25, 2026 requirements: top or bottom of every page, 11pt+ (15px+), contrasting color, never all caps.

@@ -1,0 +1,80 @@
+<section class="exemption-checklist" aria-labelledby="exemption-checklist-heading">
+  <form id="exemption-checklist" novalidate>
+    <h2 id="exemption-checklist-heading">Check your PFD exemptions</h2>
+    <p>Check whether your income, utility-tax exemption, or property ownership could exempt you from PFD.</p>
+    <div class="checklist-field">
+      <label for="property-kind">Who owns your property?</label>
+      <select id="property-kind" aria-describedby="checklist-error" required>
+        <option value="">Choose one</option><option value="owner">I do, or my household does</option><option value="government">A government agency</option><option value="organization">A religious or community group</option><option value="unsure">Something else or unsure</option>
+      </select>
+    </div>
+    <fieldset id="owner-questions" hidden disabled>
+      <legend class="sr-only">Owner exemptions</legend>
+      <div class="checklist-field"><label for="utility-exemption">Do you already receive Pasadena’s senior citizen or disability utility-tax exemption?</label><select id="utility-exemption"><option value="unsure">I’m not sure</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+      <div class="checklist-field"><label for="income-exemption">Is your household income within HUD’s Very Low (50%) Income Limit?</label><p id="income-check-help">Use the Los Angeles-Long Beach-Glendale limit for your household size and the year you would claim an exemption. Choose “I need to check” if you have not compared it.</p><select id="income-exemption" aria-describedby="income-check-help"><option value="unsure">I need to check</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+    </fieldset>
+    <fieldset id="organization-questions" hidden disabled><legend class="sr-only">Organization exemption</legend><div class="checklist-field"><label for="organization-exemption">Is your organization’s property exempt from value-based property taxes under California law?</label><select id="organization-exemption"><option value="unsure">I’m not sure</option><option value="yes">Yes</option><option value="no">No</option></select></div></fieldset>
+    <button class="button" type="submit" disabled>Check my PFD exemptions</button>
+    <p id="checklist-error" class="calculator-error" role="alert" hidden></p>
+    <p id="checklist-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="checklist-result" class="checklist-result" hidden>
+      <h3>Your PFD exemption check</h3>
+      <ul id="checklist-recommendations"></ul>
+      <p>These results identify PFD exemptions that may apply to your property. The City must confirm your eligibility and application requirements.</p>
+    </div>
+    <noscript><p>Read the exemption categories below to see what may apply to you.</p></noscript>
+  </form>
+</section>
+<script>
+  import { exemptionNextSteps } from '../utils/exemptionChecklist.mjs';
+  const form = document.querySelector<HTMLFormElement>('#exemption-checklist')!;
+  const property = form.querySelector<HTMLSelectElement>('#property-kind')!;
+  const result = form.querySelector<HTMLElement>('#checklist-result')!;
+  const error = form.querySelector<HTMLElement>('#checklist-error')!;
+  const list = form.querySelector<HTMLElement>('#checklist-recommendations')!;
+  const announcement = form.querySelector<HTMLElement>('#checklist-announcement')!;
+  form.querySelector<HTMLButtonElement>('button')!.disabled = false;
+  form.addEventListener('change', () => {
+    for (const [id, kind] of [['owner-questions', 'owner'], ['organization-questions', 'organization']]) {
+      const fields = form.querySelector<HTMLFieldSetElement>(`#${id}`)!;
+      fields.hidden = property.value !== kind; fields.disabled = fields.hidden;
+    }
+    result.hidden = true; list.replaceChildren(); announcement.textContent = ''; error.hidden = true; property.removeAttribute('aria-invalid');
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!property.value) {
+      error.textContent = 'Choose who owns your property to check your PFD exemptions.'; error.hidden = false;
+      property.setAttribute('aria-invalid', 'true'); property.focus(); return;
+    }
+    const value = (id: string) => form.querySelector<HTMLSelectElement>(`#${id}`)!.value;
+    const steps = exemptionNextSteps({ property: property.value, utility: value('utility-exemption'), income: value('income-exemption'), organization: value('organization-exemption') });
+    list.replaceChildren(...steps.map(step => {
+      const li = document.createElement('li');
+      const heading = document.createElement('h4'); heading.textContent = step.title;
+      const p = document.createElement('p'); p.textContent = step.text;
+      const link = document.createElement('a'); link.href = step.href; link.textContent = 'Check PFD exemption rules'; link.className = 'button button-outline';
+      link.setAttribute('aria-label', `Check PFD exemption rules: ${step.title}`);
+      li.append(heading, p, link); return li;
+    }));
+    result.hidden = false;
+    announcement.textContent = `Your PFD exemption check: ${steps.map(step => step.title).join('. ')}. The City determines eligibility and application requirements.`;
+  });
+</script>
+<style>
+  form { padding: var(--space-panel); background: var(--paper-deep); border-top: 4px solid var(--red); }
+  .checklist-field { margin-top: 24px; }
+  label { display: block; font-size: 18px; font-weight: 650; line-height: 1.5; margin-bottom: 10px; }
+  select { display: block; width: 100%; max-width: 100%; min-height: 52px; padding: 12px; border: 1px solid var(--green-soft); border-radius: 2px; color: var(--green); background: var(--paper); font-size: 16px; }
+  fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+  [hidden] { display: none; }
+  #income-check-help { margin: 0 0 12px; font-size: 16px; }
+  form > .button { margin-top: 24px; }
+  .checklist-result { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 24px; }
+  .checklist-result h3 { margin: 0 0 20px; font-size: 26px; }
+  .checklist-result :global(ul) { display: grid; gap: 20px; padding: 0; list-style: none; }
+  .checklist-result :global(li) { margin: 0; background: var(--paper); border: 1px solid var(--line); padding: 24px; }
+  .checklist-result :global(h4) { margin: 0 0 12px; font-size: 20px; color: var(--green); }
+  .checklist-result :global(.button) { margin-top: 20px; }
+  .checklist-result > p { margin-top: 20px; font-size: 16px; }
+</style>

@@ -177,14 +177,14 @@ const { id, src, poster, captions, label, title, width = 1920, height = 1080 } =
 </script>
 
 <style>
-  .hero-video { position: relative; width: 100%; margin-inline: auto; aspect-ratio: 16 / 9; background: #000; overflow: hidden; box-shadow: 0 12px 32px -12px #01275533; }
+  .hero-video { position: relative; width: 100%; margin-inline: auto; aspect-ratio: 16 / 9; background: #000; overflow: hidden; border-radius: var(--radius-surface); box-shadow: 0 12px 32px -12px #01275533; }
   /* Preserve the complete picture, including embedded text and disclosures. */
   video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
   .video-play { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-start; width: 100%; height: 100%; border: 0; padding: clamp(12px, 2vw, 20px); background: transparent; color: #fff; cursor: pointer; }
   .video-play[hidden], .video-error[hidden], .video-loading[hidden] { display: none; }
   .video-title { position: absolute; top: 0; left: 0; right: 0; padding: clamp(14px, 3cqi, 24px); color: #fff; font: 700 clamp(18px, 4.2cqi, 28px) / 1.2 var(--display); text-align: left; text-shadow: 0 1px 2px #000, 0 2px 4px #0009; }
   .video-title :global(.video-title-emphasis) { text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .14em; }
-  .play-icon { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 17px 0 14px; border: 1px solid #ffffff99; border-radius: 999px; background: color-mix(in srgb, var(--green) 85%, transparent); box-shadow: 0 2px 8px #0003; font: 600 14px / 1 var(--sans); white-space: nowrap; transition: background 150ms ease, border-color 150ms ease; }
+  .play-icon { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 17px 0 14px; border: 1px solid #ffffff99; border-radius: var(--radius-action); background: color-mix(in srgb, var(--green) 85%, transparent); box-shadow: 0 2px 8px #0003; font: 600 14px / 1 var(--sans); white-space: nowrap; transition: background 150ms ease, border-color 150ms ease; }
   .play-icon svg { width: 18px; height: 18px; fill: currentColor; }
   .video-play:hover .play-icon, .video-play:focus-visible .play-icon { background: color-mix(in srgb, var(--red) 90%, transparent); border-color: #fff; }
   .video-play:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }

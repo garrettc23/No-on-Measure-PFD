@@ -5,7 +5,7 @@ import { faqs, campaign } from '../../data/campaign';
 ---
 <PrintLayout title="Measure PFD questions and answers">
   <h1>Frequently Asked Questions</h1>
-  <p class="source">Published by the No on Measure PFD campaign. <a href={campaign.faqUrl} download>Download the campaign’s original FAQ PDF.</a></p>
+  <p class="source"><a href={campaign.faqUrl} download>Download the campaign’s original FAQ PDF.</a></p>
   {faqs.map(faq => <article class="faq-print"><h2>{faq.question}</h2><CampaignParagraphs paragraphs={faq.paragraphs} /></article>)}
   <p><strong>Get the Facts.</strong><br />PFDNo.com</p>
 </PrintLayout>

@@ -13,5 +13,6 @@ export const starNews = {
     'Why, then, does the Pasadena City Council not make it the No. 1 priority when it comes to the city budget? Pay for the best possible FD and PD, and then prioritize everything else in its turn?',
     'That is the question Pasadena voters ought to be asking City Hall. And that is the reason they ought to vote No on Measure PFD in November.',
   ],
-  conclusion: 'The measure has a high hurdle: two-thirds of voters need to approve it. Since it’s a blow few homeowners need just now —  the new annual tax on a 1,600-square-foot Pasadena home would be about $300 —  we think voters should vote No on PFD and tell City Hall to get its priorities straight.',
+  // Paraphrased recommendation; rendered as a summary, not a direct quotation.
+  conclusionSummary: 'Measure PFD needs approval from two-thirds of voters. The editorial board says few homeowners need another tax bill right now, with a 1,600-square-foot Pasadena home facing about $300 more per year. It urges voters to vote No on PFD and tell City Hall to get its priorities straight.',
 };

@@ -1,0 +1,102 @@
+---
+import GuideLayout from '../layouts/GuideLayout.astro';
+import { guides } from '../data/guides';
+import { estimateParcelTax, currency } from '../utils/parcelTax.mjs';
+import SquareFootageHelp from '../components/SquareFootageHelp.astro';
+const guide = guides[0];
+const examples = [1000, 1600, 2000, 20000];
+---
+<GuideLayout guide={guide} heading={guide.name}>
+  <section id="calculator" aria-labelledby="calculator-heading">
+    <form class="calculator" id="parcel-calculator" novalidate>
+      <h2 id="calculator-heading">Calculate your added PFD property tax</h2>
+      <label for="square-feet">Enter your home or building size below (square feet).</label>
+      <input id="square-feet" name="square-feet" type="text" inputmode="decimal" autocomplete="off" placeholder="1,600" aria-describedby="calculator-error" />
+      <details class="bill-comparison-options" id="bill-comparison-options">
+        <summary>See your tax bill with PFD added (optional)</summary>
+        <div class="bill-input">
+          <label for="current-tax-bill">Enter your current annual property-tax bill in dollars.</label>
+          <input id="current-tax-bill" type="text" inputmode="decimal" autocomplete="off" placeholder="8,000" aria-describedby="current-tax-help current-tax-error" />
+          <p id="current-tax-help" class="calculator-help">Use the full year’s property tax, including both installments. Leave out mortgage payments and insurance.</p>
+          <p id="current-tax-error" class="calculator-error" role="alert" hidden></p>
+        </div>
+      </details>
+      <button class="button" type="submit" disabled>Calculate my PFD tax increase</button>
+      <p id="calculator-error" class="calculator-error" role="alert" hidden></p>
+      <div id="calculator-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+      <dl id="calculator-results" class="calculator-results" hidden><div><dt>Your added PFD tax per year</dt><dd id="annual-cost"></dd></div><div><dt>Monthly equivalent</dt><dd id="monthly-cost"></dd></div><div><dt>Your added PFD tax over 14 years</dt><dd id="total-cost"></dd></div></dl>
+      <div id="bill-comparison" class="bill-comparison" hidden>
+        <h3>What your annual tax bill could become</h3>
+        <dl class="calculator-results"><div><dt>Current bill you entered</dt><dd id="current-bill-cost"></dd></div><div><dt>Estimated PFD charge</dt><dd id="added-bill-cost"></dd></div><div><dt>Combined annual amount</dt><dd id="combined-bill-cost"></dd></div></dl>
+        <p class="calculator-help">This adds PFD to your current bill before exemptions. Other taxes and assessments can change independently.</p>
+      </div>
+      <noscript><p class="calculator-help">The interactive calculator needs JavaScript. Use the formula and examples below to estimate your added tax.</p></noscript>
+    </form>
+    <SquareFootageHelp />
+  </section>
+  <div class="reference-answer"><p>If Measure PFD passes, it would add <strong>$0.19 per taxable square foot of building area each year</strong> for property in the City of Pasadena, before exemptions. For a 1,600-square-foot home, that is $304 more a year.</p></div>
+  <section id="formula"><h2>How is your PFD tax increase calculated?</h2><p><strong>Added tax per year = taxable building square feet × $0.19.</strong> Multiply the yearly amount by 14 to estimate the total over 14 years. Divide the yearly amount by 12 for the monthly equivalent. The proposed rate has no annual cost-of-living increase.</p>
+    <div class="reference-table-wrap"><table class="reference-table"><caption>Before exemptions; unchanged square footage and proposed rate.</caption><thead><tr><th scope="col">Square feet</th><th scope="col">Annual cost</th><th scope="col">14 years</th></tr></thead><tbody>{examples.map(area => { const cost = estimateParcelTax(String(area))!; return <tr><th scope="row">{area.toLocaleString('en-US')}</th><td>{currency(cost.annual)}</td><td>{currency(cost.total)}</td></tr>; })}</tbody></table></div>
+  </section>
+  <section id="property-records"><h2>Where do I find my square footage?</h2><p>Use the recorded building area in your property records, not the size of your land or lot. This calculator also works for apartment buildings and commercial properties. A Pasadena mailing address or ZIP code alone does not establish that a parcel is inside the City of Pasadena. Check that your property is inside city limits and that you have the right building area.</p><p>The proposed rate applies to homes, apartments, businesses, and other developed properties, subject to exemptions. The result is a property-tax estimate for the building; it does not estimate a renter’s rent increase.</p><p><a href="/measure-pfd-exemptions/">Check your PFD exemptions</a>.</p></section>
+</GuideLayout>
+<script>
+  import { estimateParcelTax, compareTaxBill, currency } from '../utils/parcelTax.mjs';
+  import { recordResourceEvent } from '../utils/resourceAnalytics';
+  const form = document.querySelector<HTMLFormElement>('#parcel-calculator')!;
+  const input = document.querySelector<HTMLInputElement>('#square-feet')!;
+  const error = document.querySelector<HTMLElement>('#calculator-error')!;
+  const results = document.querySelector<HTMLElement>('#calculator-results')!;
+  const announcement = document.querySelector<HTMLElement>('#calculator-announcement')!;
+  const billInput = document.querySelector<HTMLInputElement>('#current-tax-bill')!;
+  const billError = document.querySelector<HTMLElement>('#current-tax-error')!;
+  const billResults = document.querySelector<HTMLElement>('#bill-comparison')!;
+  form.querySelector<HTMLButtonElement>('button')!.disabled = false;
+  function clearResults() {
+    results.hidden = true; billResults.hidden = true; announcement.textContent = '';
+    error.hidden = true; billError.hidden = true;
+    input.removeAttribute('aria-invalid'); billInput.removeAttribute('aria-invalid');
+  }
+  input.addEventListener('input', clearResults);
+  billInput.addEventListener('input', clearResults);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    clearResults();
+    const estimate = estimateParcelTax(input.value);
+    if (!estimate) {
+      results.hidden = true; announcement.textContent = '';
+      error.textContent = 'Enter a number greater than zero, such as 1,600. Use no more than two decimal places.';
+      error.hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus(); return;
+    }
+    error.hidden = true; input.removeAttribute('aria-invalid');
+    document.querySelector('#annual-cost')!.textContent = currency(estimate.annual);
+    document.querySelector('#monthly-cost')!.textContent = currency(estimate.monthly);
+    document.querySelector('#total-cost')!.textContent = currency(estimate.total);
+    results.hidden = false;
+    announcement.textContent = `Estimated added tax per year ${currency(estimate.annual)}; monthly equivalent ${currency(estimate.monthly)}; added tax over 14 years ${currency(estimate.total)}. Before exemptions.`;
+    if (billInput.value.trim()) {
+      const comparison = compareTaxBill(billInput.value, estimate.annual);
+      if (comparison) {
+        document.querySelector('#current-bill-cost')!.textContent = currency(comparison.current);
+        document.querySelector('#added-bill-cost')!.textContent = currency(comparison.added);
+        document.querySelector('#combined-bill-cost')!.textContent = currency(comparison.combined);
+        billResults.hidden = false;
+        announcement.textContent += ` Current annual bill ${currency(comparison.current)}; combined annual amount ${currency(comparison.combined)}.`;
+      } else {
+        billError.textContent = 'Enter a valid annual amount, such as 8,000, or clear this optional field.';
+        billError.hidden = false; billInput.setAttribute('aria-invalid', 'true');
+        document.querySelector<HTMLDetailsElement>('#bill-comparison-options')!.open = true;
+        billInput.focus();
+      }
+    }
+    recordResourceEvent('calculator_completed');
+  });
+</script>
+<style>
+  .bill-comparison-options { margin-top: 16px; }
+  .bill-comparison-options summary { cursor: pointer; width: fit-content; font-weight: 600; font-size: 16px; line-height: 1.5; padding-block: 10px; }
+  .bill-input { padding-top: 16px; }
+  .bill-comparison { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .bill-comparison h3 { margin: 0; font-size: 24px; }
+  .bill-comparison .calculator-results { margin-top: 20px; }
+</style>

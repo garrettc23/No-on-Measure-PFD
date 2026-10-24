@@ -1,0 +1,27 @@
+---
+import { referenceSources } from '../data/guides';
+---
+<details class="square-footage-help">
+  <summary>Need help finding your square footage?</summary>
+  <ol class="lookup-steps">
+    <li><h3>Find your property</h3><p>Open the County Assessor search and enter your address or Assessor Identification Number (AIN). Choose the matching property and check its address and parcel status.</p><a class="button button-outline" href={referenceSources.assessor.url} target="_blank" rel="noopener noreferrer">Find my property<span class="sr-only"> (opens in a new tab)</span></a></li>
+    <li><h3>Look for Building SqFt</h3><p>Open “Building &amp; Land Overview.” Use “Building SqFt,” rather than “Land SqFt” or a dollar value.</p><dl class="record-example"><div><dt>Building SqFt</dt><dd>1,600</dd></div><div><dt>Land SqFt</dt><dd>6,000</dd></div></dl><p class="example-caption">Example record: enter 1,600 in the calculator.</p></li>
+    <li><h3>Check before calculating</h3><p>Use the building area for the property you are estimating. If the record is missing, shows zero, or lists several buildings, confirm the applicable area with the Assessor and City before relying on an estimate.</p><p>A Pasadena mailing address alone does not confirm that a property is inside city limits.</p></li>
+  </ol>
+</details>
+<style>
+  .square-footage-help { margin-top: 16px; }
+  summary { cursor: pointer; padding-block: 10px; font-weight: 600; font-size: 16px; line-height: 1.5; width: fit-content; }
+  .lookup-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 0; margin: 24px 0 0; list-style-position: inside; }
+  .lookup-steps li { margin: 0; padding: 24px; background: var(--paper); border: 1px solid var(--line); min-width: 0; }
+  .lookup-steps li::marker { font-weight: 700; color: var(--green); }
+  .lookup-steps h3 { display: inline; font-size: 20px; margin: 0; color: var(--green); }
+  .lookup-steps p { margin-top: 16px; font-size: 16px; line-height: 1.65; }
+  .lookup-steps .button { margin-top: 20px; }
+  .record-example { margin: 20px 0 0; font-size: 16px; }
+  .record-example div { display: flex; justify-content: space-between; gap: 12px; padding: 12px; }
+  .record-example div:first-child { background: var(--paper-deep); border: 2px solid var(--green); font-weight: 650; }
+  .record-example dd { margin: 0; }
+  .lookup-steps .example-caption { font-size: 14px; }
+  @media (max-width: 1000px) { .lookup-steps { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ResourceDirectory from '../components/ResourceDirectory.astro';
+import Closing from '../components/Closing.astro';
+import { libraryResources } from '../data/resources';
+import { absoluteUrl } from '../utils/seo';
+const resourceSchema = {
+  '@type': 'CollectionPage',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: libraryResources.length,
+    itemListElement: libraryResources.map((resource, index) => ({
+      '@type': 'ListItem', position: index + 1,
+      name: resource.title, url: absoluteUrl(resource.href),
+    })),
+  },
+};
+---
+<Layout structuredData={resourceSchema} title="Tools & guides" seoTitle="Measure PFD Calculators & Exemptions | Pasadena Tools" description="Calculate your potential Measure PFD property-tax or rent increase, check PFD exemptions for your property, and compare Pasadena’s tax measures.">
+  <section class="page-intro container">
+    <h1>Measure PFD tools &amp; guides.</h1>
+    <div class="intro-bottom"><p>How much more could you pay if Measure PFD passes? Calculate your property-tax or rent increase, or check whether you could qualify for a PFD exemption.</p></div>
+  </section>
+  <section id="resources" class="container library-resources" aria-label="Calculators, guides, FAQs, and campaign documents">
+    <ResourceDirectory />
+  </section>
+  <Closing />
+</Layout>
+<style>
+  .page-intro { padding-top: var(--space-section); padding-bottom: 16px; }
+  .page-intro h1 { font-size: clamp(38px, 4.2vw, 60px); }
+  .page-intro .intro-bottom { margin-top: 24px; border-bottom: 0; padding-bottom: 0; }
+  .library-resources { padding-block: var(--space-content) var(--space-section); }
+</style>

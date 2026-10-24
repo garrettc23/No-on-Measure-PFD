@@ -1,0 +1,50 @@
+<section aria-labelledby="rent-calculator-heading">
+  <form id="rent-calculator" class="calculator" novalidate>
+    <h2 id="rent-calculator-heading">Estimate your rent increase from PFD</h2>
+    <div class="rent-fields">
+      <div><label for="rental-area">Building size (sq. ft.)</label><input id="rental-area" type="text" inputmode="decimal" autocomplete="off" placeholder="1,200" aria-describedby="rent-error" /></div>
+    </div>
+    <button class="button" type="submit" disabled>Estimate the increase</button>
+    <p id="rent-error" class="calculator-error" role="alert" hidden></p>
+    <div class="sr-only" id="rent-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="rent-results" hidden>
+      <h3>If the full tax for this space is passed on</h3>
+      <dl class="calculator-results"><div><dt>Annual increase</dt><dd id="rent-annual"></dd></div><div><dt>Monthly increase</dt><dd id="rent-monthly"></dd></div></dl>
+    </div>
+    <noscript><p class="calculator-help">Use the formula below without JavaScript: building square feet × $0.19 ÷ 12.</p></noscript>
+  </form>
+</section>
+<script>
+  import { estimateRentScenario } from '../utils/rentScenario.mjs';
+  import { currency } from '../utils/parcelTax.mjs';
+  const form = document.querySelector<HTMLFormElement>('#rent-calculator')!;
+  const area = document.querySelector<HTMLInputElement>('#rental-area')!;
+  const error = document.querySelector<HTMLElement>('#rent-error')!;
+  const results = document.querySelector<HTMLElement>('#rent-results')!;
+  const announcement = document.querySelector<HTMLElement>('#rent-announcement')!;
+  form.querySelector<HTMLButtonElement>('button')!.disabled = false;
+  function clear() {
+    results.hidden = true; error.hidden = true; announcement.textContent = '';
+    area.removeAttribute('aria-invalid');
+  }
+  form.addEventListener('input', clear);
+  form.addEventListener('submit', event => {
+    event.preventDefault(); clear();
+    const estimate = estimateRentScenario(area.value);
+    if (!estimate) {
+      error.textContent = 'Enter a building size greater than zero, such as 1,200. Use no more than two decimal places.';
+      error.hidden = false; area.setAttribute('aria-invalid', 'true'); area.focus(); return;
+    }
+    document.querySelector('#rent-monthly')!.textContent = currency(estimate.monthly);
+    document.querySelector('#rent-annual')!.textContent = currency(estimate.annual);
+    results.hidden = false;
+    announcement.textContent = `If the full tax for this space is passed on, the increase would be ${currency(estimate.annual)} per year or ${currency(estimate.monthly)} per month. Actual increases depend on rental rules and the owner’s decision.`;
+  });
+</script>
+<style>
+  .rent-fields input { max-width: none; }
+  #rent-results { margin-top: var(--space-content); }
+  #rent-results h3 { font-size: 24px; margin-top: 0; }
+  #rent-results .calculator-results { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  @media(max-width:600px) { #rent-results .calculator-results { grid-template-columns: 1fr; } }
+</style>

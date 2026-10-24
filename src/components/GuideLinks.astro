@@ -1,0 +1,12 @@
+---
+import { guides } from '../data/guides';
+import ResourceTiles from './ResourceTiles.astro';
+import { latestElectionReport } from '../data/electionResults';
+interface Props { current?: string; }
+const { current = Astro.url.pathname } = Astro.props;
+const resources = [
+  ...guides.filter(guide => guide.path !== current).map(guide => ({ href: guide.path, title: guide.name, text: guide.summary, action: guide.action })),
+  ...(latestElectionReport && current !== '/measure-pfd-results/' ? [{ href: '/measure-pfd-results/', title: 'Election results', text: 'Check vote totals and whether results are preliminary or certified.', action: 'View results' }] : []),
+];
+---
+<ResourceTiles items={resources} label="Measure PFD reference guides" className="guide-links" />
