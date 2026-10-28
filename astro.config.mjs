@@ -10,6 +10,8 @@ if (site.protocol !== 'https:' || site.pathname !== '/' || site.search || site.h
 export default defineConfig({
   site: site.origin,
   output: 'static',
+  // Keep reusable styles cacheable instead of repeating CSS in every HTML document.
+  build: { inlineStylesheets: 'never' },
   devToolbar: { enabled: false },
   trailingSlash: 'always',
   integrations: [{

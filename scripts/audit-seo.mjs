@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 
 const origin = new URL(process.env.PUBLIC_SITE_URL || 'https://www.pfdno.com').origin;
 const indexable = !['preview', 'development'].includes(process.env.VERCEL_ENV);
-const paths = ['/', '/facts/', '/resources/', '/vote/', '/bill-paparian/', '/pasadena-star-news/', '/join/', '/privacy/', '/credits/', '/measure-pfd-calculator/', '/measure-pfd-exemptions/', '/measure-pfd-vs-measure-i/', '/measure-pfd-fire-station-funding/', '/pasadena-property-tax-guide/', '/measure-pfd-pass-or-fail/', '/pasadena-city-limits/', '/measure-pfd-renters/'];
+const paths = ['/', '/facts/', '/resources/', '/vote/', '/bill-paparian/', '/pasadena-star-news/', '/join/', '/privacy/', '/measure-pfd-calculator/', '/measure-pfd-exemptions/', '/measure-pfd-vs-measure-i/', '/measure-pfd-fire-station-funding/', '/pasadena-property-tax-guide/', '/measure-pfd-pass-or-fail/', '/pasadena-city-limits/', '/measure-pfd-renters/'];
+const results = JSON.parse(await readFile('src/data/election-results.json', 'utf8'));
+if (results.reports.length) paths.push('/measure-pfd-results/');
 const titles = new Set();
 const descriptions = new Set();
 const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -55,11 +57,12 @@ for (const path of paths) {
   if (path.startsWith('/measure-pfd-') || path === '/pasadena-property-tax-guide/' || path === '/pasadena-city-limits/') {
     assert.equal(page['@type'], 'Article');
     assert.ok(page.dateModified && Number.isFinite(Date.parse(page.dateModified)));
-    assert.deepEqual(page.citation, []);
+    assert.ok(Array.isArray(page.citation) && page.citation.length, 'Articles cite their sources');
+    for (const citation of page.citation) assert.ok(html.includes(`href="${citation}"`), 'Every schema citation is visibly linked');
     assert.equal(page.image, `${origin}/vote-no-pasadena-city-hall.png`);
     assert.ok(html.includes('property="article:modified_time"'));
     assert.ok(!html.includes('id="sources"'), 'Resource guides omit source sections');
-    assert.ok(!html.includes('class="reference-citation"'), 'Resource guides omit inline citations');
+
     assert.ok(!html.includes('href="#sources"'), 'No removed source-section links');
     assert.ok(!html.includes('aria-label="Breadcrumb"'), 'Guide pages should not display breadcrumbs');
     assert.ok(html.includes('/facts/'));
@@ -98,9 +101,12 @@ for (const path of paths) {
   }
 }
 
-for (const file of ['404.html', 'print/faq/index.html', 'print/social/index.html']) {
+for (const file of ['404.html', 'credits/index.html', 'print/faq/index.html', 'print/social/index.html']) {
   assert.ok(meta(await read(file), 'robots')?.includes('noindex'), `${file}: excluded from indexing`);
 }
+const credits = await read('credits/index.html');
+assert.ok(!/<link\b[^>]*rel="canonical"/.test(credits), 'Unindexed credits omit a canonical');
+assert.ok(!credits.includes('application/ld+json'), 'Unindexed credits omit search structured data');
 const robots = await read('robots.txt');
 assert.ok(robots.includes('User-agent: *'));
 assert.ok(robots.includes(indexable ? 'Allow: /' : 'Disallow: /'));

@@ -53,7 +53,7 @@ async function main() {
   const report = { collectedAt: new Date().toISOString(), siteUrl, searchType: 'web', dataState: 'final', reportingTimezone: 'America/Los_Angeles', periods: {}, sitemaps: null, inspections: [] };
   for (const [name, period] of Object.entries(periods)) {
     const tables = {};
-    for (const [label, dimensions] of Object.entries({ total: [], dates: ['date'], pages: ['page'], queries: ['query'], devices: ['device'] })) {
+    for (const [label, dimensions] of Object.entries({ total: [], dates: ['date'], pages: ['page'], queries: ['query'], devices: ['device'], queryPages: ['query', 'page'] })) {
       tables[label] = await queryRows(body => api(`${siteEndpoint}/searchAnalytics/query`, body), { ...period, dimensions, type: 'web', dataState: 'final' });
     }
     const queries = tables.queries.rows.map(row => ({ ...row, group: queryGroup(row.keys[0]) }));
@@ -62,7 +62,7 @@ async function main() {
   }
   report.sitemaps = await api(`${siteEndpoint}/sitemaps`);
   // Inspect existing public pages; inspection reports Google's indexed copy, not a live test.
-  for (const path of ['/', '/facts/']) {
+  for (const path of ['/', '/facts/', '/measure-pfd-pass-or-fail/', '/measure-pfd-fire-station-funding/']) {
     const inspectionUrl = `https://www.pfdno.com${path}`;
     report.inspections.push({ inspectionUrl, ...await api('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect', { inspectionUrl, siteUrl, languageCode: 'en-US' }) });
   }

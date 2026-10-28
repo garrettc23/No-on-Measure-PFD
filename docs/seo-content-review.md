@@ -33,3 +33,17 @@ User approved the following exact answer on October 24, 2026:
 > Measure PFD includes exemptions for qualifying low-income owners, owners receiving specified Pasadena senior or disability utility-tax exemptions, government property, and qualifying religious or community-service property. Eligibility depends on the ordinance’s requirements.
 
 Applied to `who-is-exempt` (question now “Who is exempt from Measure PFD?”) and the identical outdated claim in the HTML fact sheet. Shared data propagates the correction to visible HTML, FAQPage, printable FAQ HTML, and llms.txt. Original PDFs remain unchanged. No other proposed claim replacement is approved by this correction.
+
+## October 27 follow-up: verified funding evidence
+
+The adopted FY 2027 to 2031 capital plan supports a more precise replacement for the “paid for station upgrades already” passages. [Municipal facilities, page 1.2](https://www.cityofpasadena.net/public-works/wp-content/uploads/sites/29/Tab-03-Municipal-Building-and-Facilites.pdf#page=4), records $7.675 million appropriated through FY 2026 for renovation project 71911, including completed Station 33 tenant improvements in FY 2021 and Station 38 retrofit/tenant improvements in FY 2024. [Future projects, pages 1.19 and 1.20](https://www.cityofpasadena.net/public-works/wp-content/uploads/sites/29/Tab-17-Future-Projects-1.pdf#page=6), lists full Station 37 and 33 replacements as unfunded. Neither table proves that Measure I paid for either complete reconstruction. Appropriations are not actual expenditure totals.
+
+Proposed replacement for both the FAQ answer and matching HTML fact-sheet section (not yet applied):
+
+> Measure I’s ballot question included fire services and keeping stations open among several general City services. The City’s adopted capital plan records funded renovations and completed improvements at some stations. It separately lists full replacements of Stations 33 and 37 as unfunded. Our campaign believes existing revenues should have been prioritized for those replacements before asking property owners to pay another tax. Read the funding timeline for the project history and official records.
+
+Use the heading “How does existing fire funding relate to Measure PFD?” and link “funding timeline” to `/measure-pfd-vs-measure-i/#funding-timeline`. This replaces the unsupported inference without changing attributed third-party quotations or original PDFs.
+
+For the homepage's unsupported $1,700 total, the ready replacement is a $304 annual PFD example for 1,600 taxable square feet, before exemptions; $4,256 over 14 years at unchanged taxable area. Keep the existing panel design and `tax-estimate-note` anchor. Do not present median sale price as assessed value or publish the $1,700 calculation without its component records.
+
+These proposed edits remain separate because the user expressly requested separate review of disputed campaign-copy corrections. Publication of the technical and guide improvements does not approve these wording changes.

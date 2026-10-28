@@ -61,10 +61,9 @@ const queue = ['/'];
 while (queue.length) for (const target of pages.get(queue.shift())?.links || []) if (!reached.has(target)) { reached.add(target); queue.push(target); }
 const sitemap = await readFile(resolve(build, 'sitemap.xml'), 'utf8');
 const publicPaths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => new URL(match[1]).pathname);
-// Credits remain accessible by URL, but the user explicitly removed their navigation link.
-const intentionalOrphans = ['/credits/'];
-for (const path of publicPaths) if (!reached.has(path) && !intentionalOrphans.includes(path)) errors.push(`${path}: unreachable from the homepage`);
+// Every sitemap entry must be reachable; unlinked utility pages stay out of search.
+for (const path of publicPaths) if (!reached.has(path)) errors.push(`${path}: unreachable from the homepage`);
 await mkdir('.context', { recursive: true });
-await writeFile('.context/link-audit.json', JSON.stringify({ pages: pages.size, links, assets, reachablePages: [...reached], intentionalOrphans, errors }, null, 2));
+await writeFile('.context/link-audit.json', JSON.stringify({ pages: pages.size, links, assets, reachablePages: [...reached], errors }, null, 2));
 assert.deepEqual(errors, [], 'Broken destinations, missing assets, or orphaned resources');
-console.log(`Link audit passed: ${pages.size} HTML pages, ${links} links, ${assets} asset references; all public resources reachable. Credits intentionally outside navigation.`);
+console.log(`Link audit passed: ${pages.size} HTML pages, ${links} links, ${assets} asset references; all sitemap pages reachable.`);
