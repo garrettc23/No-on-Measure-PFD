@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { photoCredits } from '../data/campaign';
 ---
-<Layout title="Photography credits" description="Photography sources, creator credits, and image usage information for the No on Measure PFD campaign website in Pasadena.">
+<Layout noindex title="Photography credits" description="Photography sources, creator credits, and image usage information for the No on Measure PFD campaign website in Pasadena.">
   <article class="container prose-page">
     <h1>Photography credits.</h1>
     <p class="lead">Where our photos came from and how we use them.</p>
@@ -16,6 +16,6 @@ import { photoCredits } from '../data/campaign';
     <p>We resize, crop, and convert photos to WebP so they fit the page and load faster. Their original licenses still apply.</p>
     <p>The photographers and people whose properties appear in these images have not endorsed this campaign through their use.</p>
     <h2>Typefaces</h2>
-    <p>Archivo and Public Sans are distributed under the SIL Open Font License. <a href="/licenses/archivo.txt">Archivo license</a> · <a href="/licenses/public-sans.txt">Public Sans license</a>.</p>
+    <p>Archivo and Public Sans are distributed under the SIL Open Font License. <a href="/licenses/archivo.txt" type="text/plain" download>Archivo license (TXT)</a> · <a href="/licenses/public-sans.txt" type="text/plain" download>Public Sans license (TXT)</a>.</p>
   </article>
 </Layout>

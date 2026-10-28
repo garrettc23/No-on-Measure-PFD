@@ -9,7 +9,7 @@ import PaparianVideo from '../components/PaparianVideo.astro';
 import { paparian } from '../data/paparian';
 import ResourceTiles from '../components/ResourceTiles.astro';
 import { guides } from '../data/guides';
-const featuredResources = [guides[0], guides[4]].map(guide => ({ href: guide.path, title: guide.name, text: guide.summary, action: guide.action }));
+const featuredResources = ['/measure-pfd-calculator/', '/measure-pfd-pass-or-fail/'].map(path => guides.find(guide => guide.path === path)!).map(guide => ({ href: guide.path, title: guide.name, text: guide.summary, action: guide.action }));
 ---
 <Layout videoIds={['kitchen-table', 'bill-paparian']} seoTitle="No on Measure PFD | Pasadena Parcel Tax, November 2026" description="Vote No on Pasadena Measure PFD on November 3, 2026. Estimate your added property tax, check exemptions, and learn why our campaign opposes this parcel tax.">
   <section class="hero container">
@@ -20,7 +20,7 @@ const featuredResources = [guides[0], guides[4]].map(guide => ({ href: guide.pat
     <figure class="hero-figure">
       <CampaignVideo id="kitchen-table-video" src="/videos/kitchen-table.mp4" poster="/videos/kitchen-table-poster.webp" captions="/videos/kitchen-table.en.vtt" label="Kitchen Table" width={1280} height={720} />
     </figure>
-    <div class="hero-actions"><a href="/join/" class="button">Vote NO</a><a href="/facts/" class="button button-outline secondary-action">Get the facts</a></div>
+    <div class="hero-actions"><a href="/join/" class="button">Vote NO</a><a href="/facts/" class="button button-outline secondary-action">Get the Measure PFD facts</a></div>
   </section>
 
   <TaxCallout />
@@ -55,9 +55,9 @@ const featuredResources = [guides[0], guides[4]].map(guide => ({ href: guide.pat
   <section class="container home-guides" aria-labelledby="reference-title">
     <div class="home-guides-heading">
       <h2 id="reference-title">Understand the proposal.</h2>
-      <a class="button button-outline" href="/resources/">Learn more</a>
+      <a class="button button-outline" href="/resources/">Tools &amp; guides</a>
     </div>
-    <p>See how much more you could pay and where PFD would fit on your property-tax bill.</p>
+    <p>Estimate your added property tax and understand what voting Yes or No on Measure PFD would mean.</p>
     <ResourceTiles items={featuredResources} label="Featured resources" className="guide-links" columns={2} />
   </section>
 

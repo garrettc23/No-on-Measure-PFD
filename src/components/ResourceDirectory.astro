@@ -13,7 +13,7 @@ const downloads = [
   <div class="download-list">
     {downloads.map(item => <article class="download-row">
       <div><h3>{item.title}</h3><p>{item.text}</p></div>
-      <a class="button button-outline" href={item.href} download={item.download}>{item.action}</a>
+      <a class="button button-outline" href={item.href} type="application/pdf" download={item.download}>{item.action}</a>
     </article>)}
   </div>
 </section>

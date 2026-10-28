@@ -4,6 +4,9 @@ export function validateElectionReports(reports, now = Date.now()) {
   let previous = 0;
   for (const report of reports) {
     if (now < pollsClose) throw new Error('Do not publish results before polls close.');
+    if (!report || typeof report !== 'object') throw new Error('Each report must be an object.');
+    const timestamp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+    if (![report.reviewedAt, report.sourceUpdatedAt].every(value => typeof value === 'string' && timestamp.test(value))) throw new Error('Use complete timestamps with explicit timezones.');
     const reviewed = Date.parse(report.reviewedAt);
     const updated = Date.parse(report.sourceUpdatedAt);
     if (!Number.isFinite(reviewed) || !Number.isFinite(updated) || updated < pollsClose || updated > reviewed || reviewed > now || reviewed <= previous) throw new Error('Results need chronological, genuine source and review timestamps.');
@@ -14,6 +17,11 @@ export function validateElectionReports(reports, now = Date.now()) {
     if (![report.yesVotes, report.noVotes].every(n => Number.isSafeInteger(n) && n >= 0) || !Number.isSafeInteger(report.yesVotes + report.noVotes)) throw new Error('Vote totals must be safe non-negative integers.');
     if (report.status === 'preliminary' && report.outcome != null) throw new Error('Do not declare an outcome from preliminary results.');
     if (report.status === 'certified' && !['passed', 'failed'].includes(report.outcome)) throw new Error('Copy the certified outcome from the official source.');
+    if (report.status === 'certified') {
+      const total = report.yesVotes + report.noVotes;
+      const passes = BigInt(report.yesVotes) * 3n >= BigInt(total) * 2n;
+      if (!total || report.outcome !== (passes ? 'passed' : 'failed')) throw new Error('Certified outcome must match the two-thirds threshold and nonzero official totals.');
+    }
     if (typeof report.sourceLabel !== 'string' || !report.sourceLabel.trim()) throw new Error('Name the official results source.');
   }
 }

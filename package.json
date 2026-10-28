@@ -19,7 +19,10 @@
     "test:results": "node --test scripts/election-results.test.mjs",
     "seo:baseline": "node scripts/search-baseline.mjs",
     "seo:vercel-baseline": "node scripts/vercel-baseline.mjs",
-    "audit:release": "node scripts/release-audit.mjs"
+    "audit:release": "node scripts/release-audit.mjs",
+    "seo:indexnow": "node scripts/indexnow.mjs",
+    "test:indexnow": "node --test scripts/indexnow.test.mjs",
+    "results:import": "node scripts/election-results-import.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.3.0",

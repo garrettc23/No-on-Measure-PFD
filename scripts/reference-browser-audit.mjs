@@ -104,9 +104,9 @@ assert('Facts page omits jump navigation and source blocks', '!document.querySel
 run('goto', `${origin}/bill-paparian/`);
 assert('Video captions remain without an underneath transcript block', '!document.querySelector(".video-transcript") && !!document.querySelector("video track[kind=captions]")');
 run('goto', `${origin}/`);
-assert('Homepage features only the calculator and property tax guide, in order', 'JSON.stringify([...document.querySelectorAll(".home-guides nav a")].map(a=>a.getAttribute("href")))===JSON.stringify(["/measure-pfd-calculator/","/pasadena-property-tax-guide/"]) && !document.querySelector(".video-transcript")');
+assert('Homepage features the calculator and voting guide, in order', 'JSON.stringify([...document.querySelectorAll(".home-guides nav a")].map(a=>a.getAttribute("href")))===JSON.stringify(["/measure-pfd-calculator/","/measure-pfd-pass-or-fail/"]) && !document.querySelector(".video-transcript")');
 run('click', '.home-guides-heading > .button');
-assert('Learn more reaches the resource library', 'location.pathname==="/resources/" && document.querySelectorAll("#resources .resource-card").length===9');
+assert('Tools and guides link reaches the resource library', 'location.pathname==="/resources/" && document.querySelectorAll("#resources .resource-card").length===9');
 assert('Campaign PDFs follow the primary resource tiles', '[...document.querySelectorAll(".resource-directory a")].some(a=>a.getAttribute("href")==="/vote/") && ![...document.querySelectorAll(".resource-directory a")].some(a=>["/facts/","/bill-paparian/","/pasadena-star-news/"].includes(a.getAttribute("href"))) && document.querySelectorAll(".resource-directory a[download]").length===0 && document.querySelectorAll(".campaign-downloads a[download]").length===2 && !!(document.querySelector(".resource-directory").compareDocumentPosition(document.querySelector(".campaign-downloads")) & Node.DOCUMENT_POSITION_FOLLOWING)');
 assert('Resource library is linked in the footer', '[...document.querySelectorAll(".footer-nav a")].some(a=>a.getAttribute("href")==="/resources/")');
 // Verify the initial HTML independently of hydration. The browse CDP allowlist

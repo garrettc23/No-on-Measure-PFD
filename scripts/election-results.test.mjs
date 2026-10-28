@@ -9,7 +9,13 @@ test('empty data is safe; no results can be published before polls close', () =>
   assert.doesNotThrow(() => validateElectionReports([fixture], now));
 });
 test('results require official sources, timestamps, valid counts, and certification before an outcome', () => {
-  for (const invalid of [{sourceUrl:'https://example.com/'},{yesVotes:-1},{noVotes:1.5},{outcome:'passed'},{status:'certified'},{reviewedAt:'2026-11-06T00:00:00Z'},{sourceUpdatedAt:'2026-11-04T08:00:00Z'}]) assert.throws(() => validateElectionReports([{...fixture,...invalid}], now));
+  for (const invalid of [{reviewedAt:'2026-11-04T07:00:00'},{sourceUrl:'https://example.com/'},{yesVotes:-1},{noVotes:1.5},{outcome:'passed'},{status:'certified'},{reviewedAt:'2026-11-06T00:00:00Z'},{sourceUpdatedAt:'2026-11-04T08:00:00Z'}]) assert.throws(() => validateElectionReports([{...fixture,...invalid}], now));
   assert.doesNotThrow(() => validateElectionReports([{...fixture,status:'certified',outcome:'failed'}], now));
   assert.throws(() => validateElectionReports([fixture, fixture], now));
+});
+
+test('certified outcomes require two-thirds of votes cast, without rounding', () => {
+  const certified = {...fixture,status:'certified',yesVotes:2,noVotes:1,outcome:'passed'};
+  assert.doesNotThrow(() => validateElectionReports([certified], now));
+  for (const invalid of [{yesVotes:6666,noVotes:3334},{outcome:'failed'},{yesVotes:0,noVotes:0}]) assert.throws(() => validateElectionReports([{...certified,...invalid}],now));
 });
