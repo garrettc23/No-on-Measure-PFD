@@ -3,13 +3,14 @@ import { campaign } from '../data/campaign';
 import { libraryResources } from '../data/resources';
 import ResourceTiles from './ResourceTiles.astro';
 const downloads = [
-  { href: campaign.factSheetUrl, title: 'Campaign fact sheet', text: 'Our case against Measure PFD, ready to print or share.', action: 'Download fact sheet (PDF)', download: 'No on Measure PFD Fact Sheet.pdf' },
-  { href: campaign.faqUrl, title: 'Campaign FAQs', text: 'Answers to common questions in a printable handout.', action: 'Download FAQs (PDF)', download: 'No on Measure PFD FAQ.pdf' },
+  { href: campaign.factSheetUrl, title: 'Original campaign fact sheet', text: 'Original campaign handout, preserved as supplied.', action: 'Download fact sheet (PDF)', download: 'No on Measure PFD Fact Sheet.pdf' },
+  { href: campaign.faqUrl, title: 'Original campaign FAQs', text: 'Original FAQ handout, preserved as supplied.', action: 'Download FAQs (PDF)', download: 'No on Measure PFD FAQ.pdf' },
 ];
 ---
 <ResourceTiles items={libraryResources} label="Calculators, guides, and more" className="resource-directory" />
 <section class="campaign-downloads" aria-labelledby="campaign-downloads-heading">
   <h2 id="campaign-downloads-heading">Learn more about Measure PFD.</h2>
+  <p>These PDFs retain their original wording. Read the <a href="/facts/">updated website FAQ and fact sheet</a> for the reviewed tax, exemption, funding, and service information.</p>
   <div class="download-list">
     {downloads.map(item => <article class="download-row">
       <div><h3>{item.title}</h3><p>{item.text}</p></div>

@@ -37,8 +37,6 @@ export const sources = {
   },
 };
 
-export const taxEstimateNote = 'Estimate based on the median sales price for a Pasadena home.';
-
 export const photoCredits = [
   {
     title: 'Former Pasadena Mayor Bill Paparian',

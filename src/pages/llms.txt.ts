@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 import { campaign, faqs, factSheetSections, paragraphText } from '../data/campaign';
+import { campaignCopyReviewedDate } from '../data/campaignDocuments';
+import { referenceSources } from '../data/guides';
 import { absoluteUrl, publicPages } from '../utils/seo';
 
 // An optional reading guide for tools; this is not a search-engine ranking requirement.
@@ -10,8 +12,15 @@ export const GET: APIRoute = () => new Response([
   '',
   '## Website pages',
   ...publicPages.map(page => `- [${page.name}](${absoluteUrl(page.path)}): ${page.description}`),
-  `- [Printable FAQ](${absoluteUrl(campaign.faqUrl)}): Original campaign FAQ PDF. The website FAQ includes an approved exemption correction.`,
-  `- [Campaign fact sheet](${absoluteUrl(campaign.factSheetUrl)}): Download the original fact sheet PDF.`,
+  `- [Printable FAQ](${absoluteUrl(campaign.faqUrl)}): Original campaign FAQ PDF; does not incorporate subsequent website factual corrections.`,
+  `- [Campaign fact sheet](${absoluteUrl(campaign.factSheetUrl)}): Original campaign fact sheet PDF; does not incorporate subsequent website factual corrections.`,
+  '',
+  '## Sources for website factual corrections',
+  `Website FAQ and fact sheet reviewed ${campaignCopyReviewedDate}. Original PDFs retain their supplied wording.`,
+  ...['ordinance', 'capitalFacilities', 'capitalFuture', 'measureI'].map(key => {
+    const source = referenceSources[key as keyof typeof referenceSources];
+    return `- [${source.title}](${source.url})`;
+  }),
   '',
   '## Campaign fact sheet',
   ...factSheetSections.flatMap(section => ['', `### ${section.title}`, ...section.paragraphs.map(p => p.text)]),
@@ -19,7 +28,7 @@ export const GET: APIRoute = () => new Response([
   '## Questions and answers',
   ...faqs.flatMap(faq => [
     '', `### ${faq.question}`, paragraphText(faq.paragraphs),
-    faq.id === 'who-is-exempt' ? 'Source: Website exemption correction approved October 24, 2026.' : 'Source: No on Measure PFD campaign FAQ supplied October 8, 2026.',
+    'Source: No on Measure PFD website FAQ. See the source documents for reviewed factual corrections above.',
   ]),
   '', '## Publisher disclosure', campaign.disclosure, campaign.topFunderLabel, campaign.topFunder,
   '',

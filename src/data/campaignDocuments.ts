@@ -1,5 +1,7 @@
-// Client-supplied October 8, 2026 documents. Wording and emphasis are preserved.
-// HTML is escaped document text with only strong, em, and u formatting tags.
+// Website copy based on client-supplied October 8, 2026 documents and factual review.
+// Original PDFs and attributed quotations remain separate. HTML includes reviewed formatting and guide links.
+export const campaignCopyReviewedDate = '2026-10-28';
+
 export interface CampaignParagraph { text: string; html: string; cite?: string; }
 export interface CampaignFactSection { title: string; paragraphs: CampaignParagraph[]; }
 export interface CampaignFaq { id: string; question: string; paragraphs: CampaignParagraph[]; }
@@ -25,11 +27,11 @@ export const factSheetSections: CampaignFactSection[] = [
     ]
   },
   {
-    "title": "A City That Keeps Getting More Expensive",
+    "title": "What Measure PFD Would Add",
     "paragraphs": [
       {
-        "text": "Pasadena families already face some of the country's highest housing costs. Insurance, utilities, groceries, and property taxes are rising faster than paychecks. Voters have stepped up before. Pasadena approved parcel taxes for the Central Library and the school district. City and school measures since 2020 already add more than $1,700 in new taxes for many. On October 1, a half-cent county sales tax hike, passed by L.A. County voters in June, reaches every checkout counter. Politicians talk about affordability but pass policies and taxes that make Pasadena less affordable. Measure PFD piles on. Enough is enough.",
-        "html": "Pasadena families already face some of the country&#x27;s highest housing costs. Insurance, utilities, groceries, and property taxes are rising faster than paychecks. Voters have stepped up before. Pasadena approved parcel taxes for the Central Library and the school district. <strong>City and school measures since 2020 already add more than $1,700 in new taxes</strong><strong> for many</strong><strong>.</strong> On October 1, a half-cent county sales tax hike, passed by L.A. County voters in June, reaches every checkout counter. Politicians talk about affordability but pass policies and taxes that make Pasadena less affordable. Measure PFD piles on. Enough is enough."
+        "text": "Measure PFD would add a parcel tax of $0.19 per taxable square foot annually, subject to exemptions. For 1,600 taxable square feet, that is $304 a year or $4,256 over 14 years if the taxable area stays the same. Existing property-tax charges vary by property and applicable exemptions; this example does not calculate a household’s combined city, school, or county taxes.",
+        "html": "Measure PFD would add a parcel tax of $0.19 per taxable square foot annually, subject to exemptions. For 1,600 taxable square feet, that is $304 a year or $4,256 over 14 years if the taxable area stays the same. Existing property-tax charges vary by property and applicable exemptions; this example does not calculate a household’s combined city, school, or county taxes."
       }
     ]
   },
@@ -43,42 +45,38 @@ export const factSheetSections: CampaignFactSection[] = [
     ]
   },
   {
-    "title": "Renters Pay, Too",
+    "title": "How Measure PFD Could Affect Renters",
     "paragraphs": [
       {
-        "text": "Most Pasadena households rent. Renters will never see a Measure PFD bill, yet they live in the buildings that must pay it. Measure PFD taxes apartment buildings on every improved square foot. Family-owned small housing providers keep Pasadena’s older, more affordable apartments running on thin margins. Rent control limits what they collect. Taxes, insurance, and repairs keep rising anyway. The pressure lands somewhere: deferred repairs, fewer upgrades, higher rents on new leases or buildings sold to bigger investors. Pasadena should fight fires without fueling the housing crisis.",
-        "html": "Most Pasadena households rent. Renters will never see a Measure PFD bill, yet they live in the buildings that must pay it. Measure PFD taxes apartment buildings on every improved square foot. Family-owned small housing providers keep Pasadena’s older, more affordable apartments running on thin margins. Rent control limits what they collect. Taxes, insurance, and repairs keep rising anyway. The pressure lands somewhere: deferred repairs, fewer upgrades, higher rents on new leases or buildings sold to bigger investors. <strong>Pasadena should fight fires without fueling the housing crisis.</strong>"
+        "text": "The proposed tax would apply to taxable improved rental property, subject to exemptions. Its effect on rents, maintenance, or ownership decisions would depend on individual circumstances and applicable rental rules.",
+        "html": "The proposed tax would apply to taxable improved rental property, subject to exemptions. Its effect on rents, maintenance, or ownership decisions would depend on individual circumstances and applicable rental rules."
       }
     ]
   },
   {
-    "title": "The Eaton Fire Deserves Better Than a Sales Pitch",
+    "title": "Wildfire Readiness and the Eaton Fire",
     "paragraphs": [
       {
-        "text": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it.",
-        "html": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it."
-      },
-      {
-        "text": "Proponents cite the Eaton Fire to push an inequitable tax. County and state fire investigators determined that electrical arcing from utility equipment caused the disaster. Honoring our firefighters does not require a 14-year tax on only one slice of the community.",
-        "html": "Proponents cite the Eaton Fire to push an inequitable tax. <strong>County and state fire investigators determined that electrical arcing from utility equipment caused the disaster. Honoring our firefighters does not require a 14-year tax on only one slice of the community.</strong>"
+        "text": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. This guide does not make a finding about the fire’s cause. Our campaign believes the City should prioritize wildfire readiness within its existing resources.",
+        "html": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. This guide does not make a finding about the fire’s cause. Our campaign believes the City should prioritize wildfire readiness within its existing resources."
       }
     ]
   },
   {
-    "title": "A 14-Year Check With No Strings Attached",
+    "title": "What the Ordinance Requires",
     "paragraphs": [
       {
-        "text": "Measure PFD guarantees tax collections. The measure does lock in seismic retrofits at two fire stations. Beyond those two, nothing in Measure PFD guarantees completed repairs at the other stations, faster response times, successful recruitment, or fewer overlapping emergencies. Annual audits merely track spending after the money leaves taxpayers’ pockets. Voters deserve a project schedule, performance standards, protection for existing fire funding, a housing-impact study and a midterm public review. Measure PFD offers none of them.",
-        "html": "Measure PFD guarantees tax collections. The measure does lock in seismic retrofits at two fire stations. <strong>Beyond those two, nothing in Measure PFD guarantees completed repairs at the other stations, faster response times, successful recruitment</strong><strong>,</strong><strong> or fewer overlapping emergencies.</strong> Annual audits merely track spending after the money leaves taxpayers’ pockets. Voters deserve a project schedule, performance standards, protection for existing fire funding, a housing-impact study and a midterm public review. Measure PFD offers none of them."
+        "text": "The proposed ordinance includes reconstruction of Stations 33 and 37 within the first ten years. It restricts spending to specified purposes and requires annual independent audits and public reports. The ordinance defines a service baseline and describes enhancements above it, but capital-improvement prioritization does not require the City to maintain a specific General Fund appropriation. It does not set a guaranteed emergency-response time. Our campaign seeks stronger performance commitments.",
+        "html": "The proposed ordinance includes reconstruction of Stations 33 and 37 within the first ten years. It restricts spending to specified purposes and requires annual independent audits and public reports. The ordinance defines a service baseline and describes enhancements above it, but capital-improvement prioritization does not require the City to maintain a specific General Fund appropriation. It does not set a guaranteed emergency-response time. Our campaign seeks stronger performance commitments."
       }
     ]
   },
   {
-    "title": "You Already Paid for Fire Stations. Now They Want You to Pay Again.",
+    "title": "How Does Existing Fire Funding Relate to Measure PFD?",
     "paragraphs": [
       {
-        "text": "Pasadena voters paid once already. In 2018, they approved Measure I, a permanent three-quarter-cent sales tax, sold in part to “keep fire stations open.” Today, Measure I brings in about $32 million. About $10.7 million goes to PUSD under Measure J. The city’s share goes to the general fund, with no lock on fire stations. In June 2019, the capital budget recommended $1.5 million to design a replacement for Station 37, at 3430 East Foothill, then estimated at $21.3 million. On June 12, Mayor Tornek said those dollars would be better used for short-term repairs. On June 17, the Council voted to make that transfer. Stations 33 and 37, the two facilities named in Measure PFD, remain unfunded. Voters paid for the upgrades once. City Hall moved the design money and left both stations waiting. Now City Hall wants voters to pay again.",
-        "html": "<strong>Pasadena voters paid once already. In 2018, they approved Measure I, a permanent three-quarter-cent sales tax, sold in part to “keep fire stations open.”</strong> Today, Measure I brings in about $32 million. About $10.7 million goes to PUSD under Measure J. The city’s share goes to the general fund, with no lock on fire stations. In June 2019, the capital budget recommended $1.5 million to design a replacement for Station 37, at 3430 East Foothill, then estimated at $21.3 million. On June 12, Mayor Tornek said those dollars would be better used for short-term repairs. On June 17, the Council voted to make that transfer. <strong>Stations 33 and 37, the two </strong><strong>facilities</strong><strong> named in Measure PFD, remain unfunded. Voters paid for the upgrades once. City Hall moved the design money and left both stations waiting. Now City Hall wants voters to pay again.</strong>"
+        "text": "Measure I’s ballot question included fire services and keeping stations open among several general City services. The City’s adopted capital plan records funded renovations and completed improvements at some stations. It separately lists full replacements of Stations 33 and 37 as unfunded. Our campaign believes existing revenues should have been prioritized for those replacements before asking property owners to pay another tax. Read the funding timeline for the project history and official records.",
+        "html": "Measure I’s ballot question included fire services and keeping stations open among several general City services. The City’s adopted capital plan records funded renovations and completed improvements at some stations. It separately lists full replacements of Stations 33 and 37 as unfunded. Our campaign believes existing revenues should have been prioritized for those replacements before asking property owners to pay another tax. Read the <a href=\"/measure-pfd-vs-measure-i/#funding-timeline\">funding timeline</a> for the project history and official records."
       }
     ]
   },
@@ -100,8 +98,12 @@ export const factSheetSections: CampaignFactSection[] = [
     "title": "A Better Plan Is Within Reach",
     "paragraphs": [
       {
-        "text": "A NO vote does not leave Pasadena unprotected. Firefighters continue to respond. City Hall needs to return with a fairer plan that shares costs among everyone who benefits, sets measurable performance standards, and protects existing fire funding. A better plan starts with a housing-impact study, a project schedule, and response-time benchmarks. It pairs response funding with fire prevention, including encampment-related fire risk. Then City Hall can ask voters again.",
-        "html": "<strong>A NO vote does not leave Pasadena unprotected. Firefighters continue to respond</strong>. City Hall needs to return with a fairer plan that shares costs among everyone who benefits, sets measurable performance standards, and protects existing fire funding. A better plan starts with a housing-impact study, a project schedule, and response-time benchmarks. It pairs response funding with fire prevention, including encampment-related fire risk. Then City Hall can ask voters again."
+        "text": "Rejecting Measure PFD would mean the proposed parcel tax is not adopted. Future service and capital-funding decisions would remain subject to the City’s budgets and other applicable requirements.",
+        "html": "Rejecting Measure PFD would mean the proposed parcel tax is not adopted. Future service and capital-funding decisions would remain subject to the City’s budgets and other applicable requirements."
+      },
+      {
+        "text": "Our campaign asks City Hall to return with a fairer funding plan, measurable performance standards, and protection for existing fire funding. We support a housing-impact study, a project schedule, and response-time benchmarks. A No vote would not itself enact those proposals.",
+        "html": "Our campaign asks City Hall to return with a fairer funding plan, measurable performance standards, and protection for existing fire funding. We support a housing-impact study, a project schedule, and response-time benchmarks. A No vote would not itself enact those proposals."
       }
     ]
   }
@@ -150,11 +152,11 @@ export const faqs: CampaignFaq[] = [
   },
   {
     "id": "what-is-the-1700-estimate",
-    "question": "Haven’t Pasadena voters already approved new taxes?",
+    "question": "How does Measure PFD relate to existing property taxes?",
     "paragraphs": [
       {
-        "text": "Yes. Pasadena voters have stepped up again and again. Voters approved parcel taxes for the Central Library and the school district. Since 2020, city and school measures have already added more than $1,700 in new taxes for many. The hits keep coming. L.A. County voters raised the sales tax by half a cent in June, and the increase takes effect at every checkout counter on October 1, 2026. Meanwhile, insurance, utilities, groceries, and property taxes are rising faster than paychecks. Politicians talk about affordability but pass policies and taxes that make Pasadena less affordable. Measure PFD piles on.",
-        "html": "Yes. Pasadena voters have stepped up again and again. Voters approved parcel taxes for the Central Library and the school district. Since 2020, city and school measures have already added more than $1,700 in new taxes for many. The hits keep coming. L.A. County voters raised the sales tax by half a cent in June, and the increase takes effect at every checkout counter on October 1, 2026. Meanwhile, insurance, utilities, groceries, and property taxes are rising faster than paychecks. Politicians talk about affordability but pass policies and taxes that make Pasadena less affordable. Measure PFD piles on."
+        "text": "Measure PFD would add a parcel tax of $0.19 per taxable square foot annually, subject to exemptions. For 1,600 taxable square feet, that is $304 a year or $4,256 over 14 years if the taxable area stays the same. Existing property-tax charges vary by property and applicable exemptions; this example does not calculate a household’s combined city, school, or county taxes.",
+        "html": "Measure PFD would add a parcel tax of $0.19 per taxable square foot annually, subject to exemptions. For 1,600 taxable square feet, that is $304 a year or $4,256 over 14 years if the taxable area stays the same. Existing property-tax charges vary by property and applicable exemptions; this example does not calculate a household’s combined city, school, or county taxes."
       }
     ]
   },
@@ -170,11 +172,11 @@ export const faqs: CampaignFaq[] = [
   },
   {
     "id": "does-it-affect-renters",
-    "question": "I rent. Why should I care?",
+    "question": "How could Measure PFD affect renters?",
     "paragraphs": [
       {
-        "text": "Most Pasadena households rent. Renters will never see a Measure PFD bill, yet they live in the buildings that must pay it. Measure PFD taxes apartment buildings on every improved square foot. Family-owned small housing providers keep Pasadena’s older, more affordable apartments running on thin margins. Rent control limits what they can collect. Taxes, insurance, and repairs keep rising anyway. The pressure will hit somewhere: deferred repairs, fewer upgrades, higher rents on new leases, or buildings sold to bigger investors. Pasadena can and should fight fires without fueling the housing crisis.",
-        "html": "Most Pasadena households rent. Renters will never see a Measure PFD bill, yet they live in the buildings that must pay it. Measure PFD taxes apartment buildings on every improved square foot. Family-owned small housing providers keep Pasadena’s older, more affordable apartments running on thin margins. Rent control limits what they can collect. Taxes, insurance, and repairs keep rising anyway. <strong>The pressure </strong><strong>will hit</strong><strong> somewhere: deferred repairs, fewer upgrades, higher rents on new leases</strong><strong>,</strong><strong> or buildings sold to bigger investors. Pasadena </strong><strong>can and </strong><strong>should fight fires without fueling the housing crisis.</strong>"
+        "text": "The proposed tax would apply to taxable improved rental property, subject to exemptions. Its effect on rents, maintenance, or ownership decisions would depend on individual circumstances and applicable rental rules.",
+        "html": "The proposed tax would apply to taxable improved rental property, subject to exemptions. Its effect on rents, maintenance, or ownership decisions would depend on individual circumstances and applicable rental rules."
       }
     ]
   },
@@ -183,28 +185,28 @@ export const faqs: CampaignFaq[] = [
     "question": "Didn’t the Eaton Fire prove we need this tax?",
     "paragraphs": [
       {
-        "text": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. Proponents cite the Eaton Fire to push an inequitable tax. County and state fire investigators determined that electrical arcing from utility equipment caused the disaster. Honoring our firefighters does not require a 14-year tax on a single slice of the community. Pasadena deserves a real plan for wildfire readiness, not a sales pitch built on tragedy.",
-        "html": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. <strong>Proponents cite the Eaton Fire to push an inequitable tax. County and state fire investigators determined that electrical arcing from utility equipment caused the disaster.</strong> Honoring our firefighters does not require a 14-year tax on a single slice of the community. Pasadena deserves a real plan for wildfire readiness, not a sales pitch built on tragedy."
+        "text": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. This guide does not make a finding about the fire’s cause. Our campaign believes the City should prioritize wildfire readiness within its existing resources.",
+        "html": "The Eaton Fire devastated our neighbors. We honor every firefighter who fought it. This guide does not make a finding about the fire’s cause. Our campaign believes the City should prioritize wildfire readiness within its existing resources."
       }
     ]
   },
   {
     "id": "what-oversight-is-required",
-    "question": "Won’t annual audits keep the money honest?",
+    "question": "What oversight and funding requirements does Measure PFD include?",
     "paragraphs": [
       {
-        "text": "Audits count the money. They do not deliver results. Measure PFD guarantees tax collections. The measure does lock in seismic retrofits at two fire stations. Beyond those two, Measure PFD guarantees nothing about completed repairs at the other stations, faster response times, successful recruitment, or fewer overlapping emergencies. Annual audits merely track spending after the money leaves taxpayers’ pockets. Voters deserve a project schedule, performance standards, protection for existing fire funding, a housing-impact study, and a midterm public review. Measure PFD offers none of them.",
-        "html": "Audits count the money. They do not deliver results. <strong>Measure PFD guarantees tax collections.</strong> The measure does lock in seismic retrofits at two fire stations. <strong>Beyond those two, Measure PFD guarantees </strong><strong>nothing about </strong><strong>completed repairs at the other stations, faster response times, successful recruitment</strong><strong>,</strong><strong> or fewer overlapping emergencies.</strong> Annual audits merely track spending after the money leaves taxpayers’ pockets. Voters deserve a project schedule, performance standards, protection for existing fire funding, a housing-impact study, and a midterm public review. Measure PFD offers none of them."
+        "text": "The proposed ordinance includes reconstruction of Stations 33 and 37 within the first ten years. It restricts spending to specified purposes and requires annual independent audits and public reports. The ordinance defines a service baseline and describes enhancements above it, but capital-improvement prioritization does not require the City to maintain a specific General Fund appropriation. It does not set a guaranteed emergency-response time. Our campaign seeks stronger performance commitments.",
+        "html": "The proposed ordinance includes reconstruction of Stations 33 and 37 within the first ten years. It restricts spending to specified purposes and requires annual independent audits and public reports. The ordinance defines a service baseline and describes enhancements above it, but capital-improvement prioritization does not require the City to maintain a specific General Fund appropriation. It does not set a guaranteed emergency-response time. Our campaign seeks stronger performance commitments."
       }
     ]
   },
   {
     "id": "fire-station-upgrades",
-    "question": "Haven’t voters already paid for fire station upgrades?",
+    "question": "How does existing fire funding relate to Measure PFD?",
     "paragraphs": [
       {
-        "text": "Pasadena voters paid once already. In 2018, they approved Measure I, a permanent three-quarter-cent sales tax, sold in part to “keep fire stations open.” Today, Measure I brings in about $32 million. About $10.7 million goes to PUSD under Measure J. The city’s share goes to the general fund, with no lock on fire stations. In June 2019, the capital budget recommended $1.5 million to design a replacement for Station 37, at 3430 East Foothill, then estimated at $21.3 million. On June 12, Mayor Tornek said those dollars would be better used for short-term repairs. On June 17, the Council voted to make that transfer. Stations 33 and 37, the two houses named in Measure PFD, remain unfunded. Voters paid for the upgrades once. City Hall moved the design money and left both stations waiting. Now City Hall wants voters to pay again.",
-        "html": "<strong>Pasadena voters paid once already. In 2018, they approved Measure I, a permanent three-quarter-cent sales tax, sold in part to “keep fire stations open.”</strong> Today, Measure I brings in about $32 million. About $10.7 million goes to PUSD under Measure J. The city’s share goes to the general fund, with no lock on fire stations. In June 2019, the capital budget recommended $1.5 million to design a replacement for Station 37, at 3430 East Foothill, then estimated at $21.3 million. On June 12, Mayor Tornek said those dollars would be better used for short-term repairs. On June 17, the Council voted to make that transfer. <strong>Stations 33 and 37, the two houses named in Measure PFD, remain unfunded. Voters paid for the upgrades once. City Hall moved the design money and left both stations waiting. Now City Hall wants voters to pay again.</strong>"
+        "text": "Measure I’s ballot question included fire services and keeping stations open among several general City services. The City’s adopted capital plan records funded renovations and completed improvements at some stations. It separately lists full replacements of Stations 33 and 37 as unfunded. Our campaign believes existing revenues should have been prioritized for those replacements before asking property owners to pay another tax. Read the funding timeline for the project history and official records.",
+        "html": "Measure I’s ballot question included fire services and keeping stations open among several general City services. The City’s adopted capital plan records funded renovations and completed improvements at some stations. It separately lists full replacements of Stations 33 and 37 as unfunded. Our campaign believes existing revenues should have been prioritized for those replacements before asking property owners to pay another tax. Read the <a href=\"/measure-pfd-vs-measure-i/#funding-timeline\">funding timeline</a> for the project history and official records."
       }
     ]
   },
@@ -228,12 +230,12 @@ export const faqs: CampaignFaq[] = [
     "question": "What happens if Measure PFD fails?",
     "paragraphs": [
       {
-        "text": "Firefighters keep responding. Every station stays open, and every 911 call still gets answered.",
-        "html": "Firefighters keep responding. Every station stays open, and every 911 call still gets answered."
+        "text": "Rejecting Measure PFD would mean the proposed parcel tax is not adopted. Future service and capital-funding decisions would remain subject to the City’s budgets and other applicable requirements.",
+        "html": "Rejecting Measure PFD would mean the proposed parcel tax is not adopted. Future service and capital-funding decisions would remain subject to the City’s budgets and other applicable requirements."
       },
       {
-        "text": "A NO vote simply sends City Hall back to the drawing board for a better plan, one that shares costs among everyone who benefits, sets measurable performance standards, and protects existing fire funding.",
-        "html": "A NO vote simply sends City Hall back to the drawing board for a better plan, one that shares costs among everyone who benefits, sets measurable performance standards, and protects existing fire funding."
+        "text": "Our campaign asks City Hall to develop a fairer funding plan with measurable performance standards and protection for existing fire funding. A No vote would not itself enact that alternative.",
+        "html": "Our campaign asks City Hall to develop a fairer funding plan with measurable performance standards and protection for existing fire funding. A No vote would not itself enact that alternative."
       }
     ]
   },
