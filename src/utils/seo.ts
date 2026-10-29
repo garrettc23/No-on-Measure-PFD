@@ -14,7 +14,7 @@ export const publicPages = [
   { path: '/vote/', name: 'How to vote on Measure PFD', description: 'Official registration, ballot-return, vote-center, and ballot-tracking tools.' },
   { path: '/bill-paparian/', name: 'Bill Paparian commentary', description: 'The former Pasadena mayor’s Pasadena Now and Pasadena Star-News commentaries on Measure PFD.' },
   { path: '/pasadena-star-news/', name: 'Pasadena Star-News editorial', description: 'Excerpts from the editorial board’s recommendation to vote No on Measure PFD.' },
-  { path: '/join/', name: 'Join the campaign', description: 'Campaign contacts and ways to get involved.' },
+  { modified: '2026-10-28', path: '/join/', name: 'Join the campaign', description: 'Campaign contacts and ways to get involved.' },
   { path: '/privacy/', name: 'Privacy notice', description: 'How the website handles visitor information.' },
   ...guides.map(guide => ({ path: guide.path, name: guide.name, description: guide.description, modified: guide.reviewed })),
   ...(latestElectionReport ? [{path:'/measure-pfd-results/',name:'Measure PFD election results',description:'Sourced election results, official status, and reporting history.',modified:latestElectionReport.reviewedAt}] : []),
