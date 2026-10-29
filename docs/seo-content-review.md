@@ -1,6 +1,6 @@
 # Source-backed corrections for review
 
-Prepared October 24, 2026. The exemption correction below was approved by the user on October 24, 2026 and applied to the website FAQ and matching HTML fact-sheet claim. Other rows remain proposals. Caption files and supplied PDFs are unchanged. New reference guides describe the official provisions separately.
+Prepared October 24, 2026. The exemption correction below was approved by the user on October 24, 2026 and applied to the website FAQ and matching HTML fact-sheet claim. The remaining website corrections were approved by Garrett on October 28, 2026 and applied in this change. Caption files and supplied PDFs are unchanged. New reference guides describe the official provisions separately.
 
 Primary source: [proposed ordinance](https://www.cityofpasadena.net/fire/wp-content/uploads/sites/25/MEASURE-PFD-RESOLUTION-PARCEL-TAX-MEASURE.pdf). Page references below are PDF page numbers.
 
@@ -16,7 +16,7 @@ Primary source: [proposed ordinance](https://www.cityofpasadena.net/fire/wp-cont
 | County and state investigators determined electrical arcing caused the Eaton Fire. | Awaiting a dated primary investigative report; not independently verified in this implementation. | “The Eaton Fire caused devastating losses in the region. This guide does not make a finding about its cause.” Retain a specific cause statement only after reviewing the responsible agency’s dated findings. |
 | Voters have already paid for these station projects through Measure I. | Campaign interpretation. The 2018 ballot question included fire and numerous general services; that does not establish a completed allocation for each station project. | “Measure I’s ballot question included fire services and keeping stations open among several general City services. The campaign argues that existing revenues should have been prioritized for station projects.” |
 
-## Applying approved changes
+## Applying approved changes (process)
 
 1. Record the approved wording and the approver/date in this document.
 2. Update shared campaign document data and any matching homepage passages. Do not change quoted third-party opinions as if the speakers said something else.
@@ -47,3 +47,11 @@ Use the heading “How does existing fire funding relate to Measure PFD?” and 
 For the homepage's unsupported $1,700 total, the ready replacement is a $304 annual PFD example for 1,600 taxable square feet, before exemptions; $4,256 over 14 years at unchanged taxable area. Keep the existing panel design and `tax-estimate-note` anchor. Do not present median sale price as assessed value or publish the $1,700 calculation without its component records.
 
 These proposed edits remain separate because the user expressly requested separate review of disputed campaign-copy corrections. Publication of the technical and guide improvements does not approve these wording changes.
+
+## October 28 approval and implementation
+
+Garrett approved the factual corrections and explicitly requested that the website be updated and pushed. Applied the prepared corrections to the shared FAQ and fact sheet and replaced the homepage $1,700 estimate with the $304 annual example for 1,600 taxable square feet. The homepage housing-impact statement now identifies the campaign concern and qualifies possible effects. The printable FAQ, FAQPage JSON-LD, and llms.txt use the same revised answers; crawler text identifies the original PDFs as unchanged source materials rather than the revised website copy.
+
+Re-downloaded the ordinance, adopted municipal-facilities plan, and future-projects plan on October 28 using gstack browse. Each file's SHA-256 matches the previously reviewed copy. Relevant provisions are ordinance sections 4.110.120(E), 4.110.130, 4.110.150, 4.110.160(B), and 4.110.190; facilities page 1.2; future-projects pages 1.19 and 1.20. The funding text describes appropriations and renovations separately from full replacements. No definitive Eaton Fire cause is asserted.
+
+Existing FAQ anchors, homepage hero, attributed editorials, video/captions, and original PDFs are preserved. No replacement PDFs were authorized. Historical proposal wording above records the review process; this approval supersedes its pending status for the website corrections. Type checking, production build, SEO/schema parity, copy audit, and internal link/asset audit passed locally. Desktop and 390px mobile callout and FAQ layouts were reviewed. Original video audio and matching captions still retain their supplied wording, including the $1,700 reference; replacement media is a separate deliverable. Release status is recorded separately after push/deployment.

@@ -117,6 +117,19 @@ assert.deepEqual(locations, indexable ? paths.map(path => origin + path) : []);
 const guide = await read('llms.txt');
 assert.ok(guide.includes(`${origin}/facts/`) && guide.includes('not an official election authority'));
 assert.ok(!sitemap.includes('localhost') && !guide.includes('localhost'));
+// Approved corrections must stay consistent across visible and machine-readable copy.
+for (const file of ['index.html', 'facts/index.html', 'print/faq/index.html', 'llms.txt']) {
+  const content = await read(file);
+  for (const phrase of ['$1,700', 'Every station stays open', 'every 911 call still gets answered', 'investigators determined that electrical arcing', 'no strings attached', 'Voters paid for the upgrades once']) {
+    assert.ok(!content.toLowerCase().includes(phrase.toLowerCase()), `${file}: superseded campaign claim remains: ${phrase}`);
+  }
+}
+const reviewedFacts = await read('facts/index.html');
+assert.ok(reviewedFacts.includes('reconstruction of Stations 33 and 37 within the first ten years'));
+assert.ok(reviewedFacts.includes('annual independent audits and public reports'));
+assert.ok(reviewedFacts.includes('A No vote would not itself enact that alternative.'));
+assert.ok(reviewedFacts.includes('href="/measure-pfd-vs-measure-i/#funding-timeline"'));
+assert.ok((await read('index.html')).includes('1,600 taxable square feet × $0.19 = $304 annually.'));
 const print = await read('print/faq/index.html');
 checkFaviconHead(print, '/print/faq/');
 assert.ok(print.includes('Committee for Responsible Property Taxation'));
