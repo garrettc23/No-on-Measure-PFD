@@ -1,13 +1,60 @@
 ---
 import GuideLayout from '../layouts/GuideLayout.astro';
-import { guides } from '../data/guides';
+import FireFundingComparison from '../components/FireFundingComparison.astro';
+import { guides, referenceSources } from '../data/guides';
+import { firefighterFaqs } from '../data/firefighterFunding';
+const guide = guides.find(item => item.path === '/measure-pfd-fire-station-funding/')!;
+const ordinance = referenceSources.ordinance.url;
+const facilities = `${referenceSources.capitalFacilities.url}#page=4`;
+const future = referenceSources.capitalFuture.url;
 ---
-<GuideLayout guide={guides[3]} heading={guides[3].name}>
-  <div class="reference-answer"><p>Measure PFD would help pay for rebuilding Fire Stations 33 and 37, other fire facilities, equipment, and emergency-response improvements. It would also cover costs of administering the tax. The sections below explain the proposed projects, spending rules, and annual audits.</p></div>
-  <section id="firefighters"><h2>How would Measure PFD support Pasadena firefighters?</h2><p>The proposal would fund facilities and equipment used by Pasadena firefighters and paramedics. Eligible uses also include recruiting and retaining qualified firefighters, professional training, staffing improvements, and upgrades to emergency communications.</p><p>The ordinance prioritizes capital improvements and allows service enhancements above an established baseline. It does not promise a specific number of new firefighters or a guaranteed response time. <a href="/measure-pfd-pass-or-fail/">See what voting Yes or No on Measure PFD would mean for this funding</a>.</p></section>
-  <section id="stations"><h2>Which fire stations would it fund?</h2><p>It would fund rebuilding Stations 33 and 37 within the first ten years. Other listed uses include another fire station, training centers, Fire headquarters, safety infrastructure, ambulances, and firefighting equipment.</p><p>The proposal tells the City to prioritize building and infrastructure projects until they are complete. Naming a project in this proposal does not mean construction has started or a contract has been awarded.</p></section>
-  <section id="uses"><h2>What else could the money pay for?</h2><p>Your tax dollars could pay for new or upgraded facilities, emergency equipment, and debt payments for capital projects. They could also support fire and paramedic services, wildfire readiness, brush and debris removal, and costs of collecting and administering PFD.</p><p>The ordinance lists staffing, training, communications, prevention, recruitment, and other enhancements above an established baseline. Those operating funds would add to existing services. Amounts could change each year with City Council approval.</p></section>
-  <section id="baseline"><h2>Would the City have to keep its existing fire funding?</h2><p>The proposal does not guarantee a specific future General Fund budget for fire services. It sets a starting point, called a baseline, using the average annual Fire Department budget for the three fiscal years before its effective date and front-line services at that date. It describes eligible service enhancements above that baseline.</p><p>It also says prioritizing capital projects does not require the City to maintain a specific General Fund contribution. That limits what you can infer about future City funding.</p></section>
-  <section id="oversight"><h2>How would spending be checked?</h2><p>An independent financial audit would review PFD spending every year. The finance director must also provide a public annual report covering receipts, expenditures, capital-project status, verification of service enhancements above the baseline, and carried-forward balances. The report must be presented to the City Council and posted on the City’s website.</p><p>These reports would show where money went and how projects progressed. They would not guarantee a particular emergency-response time or completed project.</p></section>
-  <section id="campaign-view"><h2>Why we want a different plan</h2><p>We want clear performance standards and a fairer way to pay for public safety. <a href="/facts/#measure">Read our case against PFD</a>.</p></section>
+<GuideLayout guide={guide} heading={guide.name}>
+  <div class="reference-answer"><p><strong>Measure PFD would add a dedicated parcel tax for Pasadena firefighters’ facilities, equipment, and emergency-response enhancements.</strong> It names reconstruction of Stations 33 and 37 within its first ten years. Staffing and training are eligible uses, but the ordinance does not promise a specific number of hires or response time.</p></div>
+
+  <section id="firefighters"><h2>How would Measure PFD support Pasadena firefighters?</h2><p>The proposal would fund facilities and equipment used by Pasadena firefighters and paramedics. Eligible uses also include recruiting and retaining qualified firefighters, professional training, staffing improvements, and upgrades to emergency communications.</p><p>The ordinance prioritizes capital improvements and allows service enhancements above an established baseline. Operating funding could vary each year with City Council approval. <a href={`${ordinance}#page=11`} type="application/pdf">See section 4.110.160 (PDF)</a>, or <a href="/measure-pfd-pass-or-fail/">compare what voting Yes or No means</a>.</p></section>
+
+  <section id="comparison" aria-labelledby="comparison-heading">
+    <h2 id="comparison-heading">What changes with Measure PFD?</h2>
+    <p>Compare the existing funding situation with the proposed tax. Choose a topic to focus the comparison, or read all four below. These are funding provisions and documented project statuses, not forecasts of future service levels.</p>
+    <FireFundingComparison />
+    <p>For your own property, <a href="/measure-pfd-calculator/">estimate the proposed tax</a> and <a href="/measure-pfd-exemptions/">check potential exemptions</a>.</p>
+  </section>
+
+  <section id="stations"><h2>Would Measure PFD rebuild Pasadena Fire Stations 33 and 37?</h2><p><strong>Yes. The proposal names reconstruction of Stations 33 and 37 within the first ten years.</strong> Other listed uses include another fire station, training centers, Fire headquarters, safety infrastructure, ambulances, and firefighting equipment. Naming a project does not establish that construction has started or a contract has been awarded. <a href={`${ordinance}#page=10`} type="application/pdf">See the ordinance’s purpose, section 4.110.150 (PDF)</a>.</p></section>
+
+  <section id="station-timeline" aria-labelledby="timeline-heading">
+    <h2 id="timeline-heading">Pasadena fire station funding: Stations 33 and 37 timeline</h2>
+    <p>These milestones come from the adopted FY 2027 to 2031 capital plan and the proposed PFD ordinance, reviewed October 29, 2026. “Appropriated” means funding authorized; it is not a total of paid invoices. Renovations and full replacements are separate scopes of work.</p>
+    <ol class="station-timeline">
+      <li><h3>FY 2013: Replacement projects created</h3><p>The City’s project histories date the proposed new facilities for Stations 33 and 37 to FY 2013. The FY 2027 to 2031 plan still lists both as unfunded. Station 33 is at 515 N. Lake Avenue; Station 37 is at 3430 E. Foothill Boulevard. <a href={`${future}#page=6`} type="application/pdf">Project histories, pages 1.19 to 1.20 (PDF)</a>.</p></li>
+      <li><h3>FY 2020 to 2022: Renovation program and Station 33 improvements</h3><p>The separate renovation program, project 71911, began in FY 2020. The City reports tenant improvements at Station 33 completed in FY 2021 and design of a new Station 33 storage building completed in FY 2022. Neither milestone establishes completion of a full station replacement. <a href={facilities} type="application/pdf">Renovation history, page 1.2 (PDF)</a>.</p></li>
+      <li><h3>Through FY 2026: $7.675 million appropriated for the renovation program</h3><p>Project 71911 lists $4.4 million from the American Rescue Plan Act, $3.15 million from the General Fund, and $125,000 from the Building Preventive Maintenance Fund. It lists another $1.95 million as unfunded. These are program-wide figures across station improvements, not a dedicated replacement budget for Stations 33 and 37. <a href={facilities} type="application/pdf">Funding table, page 1.2 (PDF)</a>.</p></li>
+      <li><h3>FY 2027 to 2031 plan: Both full replacements listed as unfunded</h3><div class="station-estimates"><div><h4>Station 33</h4><p><strong>$60 million</strong> estimated replacement cost. The City says an updated cost must be calculated when the project is scheduled for action. <a href={`${future}#page=7`} type="application/pdf">Page 1.20 (PDF)</a>.</p></div><div><h4>Station 37</h4><p><strong>$30 million</strong> estimated replacement cost. The City says the total will be determined after conceptual design and clearer scope definition; the estimate excludes land acquisition. <a href={`${future}#page=6`} type="application/pdf">Page 1.19 (PDF)</a>.</p></div></div><p>Both schedules depend on identifying funding. These are planning estimates, not construction awards or PFD spending commitments.</p></li>
+      <li><h3>November 3, 2026: Voters consider Measure PFD</h3><p>PFD would create a restricted funding source and names reconstruction of both stations within the first ten years. Passage requires at least two-thirds of votes cast on the measure. Approval would not itself announce a construction start date. <a href={`${ordinance}#page=10`} type="application/pdf">Proposed projects (PDF)</a> · <a href="/measure-pfd-pass-or-fail/">What each election outcome means</a>.</p></li>
+    </ol>
+    <p>For the broader sales-tax context, read the <a href="/measure-pfd-vs-measure-i/#funding-timeline">Measure I and PFD funding timeline</a>. The records above do not establish that Measure I has paid for either full replacement.</p>
+  </section>
+
+  <section id="firefighter-faq" aria-labelledby="faq-heading"><h2 id="faq-heading">Pasadena firefighter funding FAQ</h2>
+    {firefighterFaqs.map((faq, index) => <div class="funding-faq" id={`funding-answer-${index + 1}`}><h3>{faq.question}</h3><p>{faq.answer}</p><p class="reference-citation"><a href={faq.source} type="application/pdf">{faq.label} (PDF)</a></p></div>)}
+  </section>
+
+  <section id="uses"><h2>What else could the money pay for?</h2><p>Authorized uses include capital-related debt payments, wildfire readiness, brush and debris removal, and costs of collecting and administering PFD. The money would go into a restricted fund for the ordinance’s specified purposes. <a href={`${ordinance}#page=10`} type="application/pdf">Read sections 4.110.150 to 4.110.160 (PDF)</a>.</p></section>
+  <section id="baseline"><h2>How does the funding baseline work?</h2><p>The baseline uses the average annual Fire Department budget for the three fiscal years before the ordinance’s effective date and front-line services at that date. Eligible service enhancements are described as above that baseline. The ordinance also says capital prioritization does not require a specific General Fund appropriation, so the baseline is not a promise of an unchanged future City budget. <a href={`${ordinance}#page=9`} type="application/pdf">Read the definition and allocation rules, pages 9 to 12 (PDF)</a>.</p></section>
+  <section id="oversight"><h2>How would spending be checked?</h2><p>An independent financial audit would review PFD spending every year. The finance director must also provide a public annual report covering receipts, expenditures, capital-project status, verification of service enhancements above the baseline, and carried-forward balances. The report must be presented to the City Council and posted on the City’s website.</p><p>Those reports would help residents follow spending and project progress. They would not guarantee a particular emergency-response time. <a href={`${ordinance}#page=13`} type="application/pdf">Read section 4.110.190 (PDF)</a>.</p></section>
+  <section id="campaign-view"><h2>Why our campaign wants a different funding plan</h2><p>We support Pasadena’s firefighters and paramedics. Our campaign believes the City should prioritize existing resources for fire facilities before adding another property tax, and wants clearer commitments on project delivery and service improvements. That is our policy position; it does not mean the full replacements are already funded.</p><p><a href="/facts/#measure">Read our case against PFD</a> and <a href="/measure-pfd-pass-or-fail/#arguments">compare the City’s funding rationale with our objections</a>.</p></section>
+  <p class="guide-attribution">Published by the No on Measure PFD campaign. For careers, station locations, and department services, visit the <a href="https://www.cityofpasadena.net/fire/">Pasadena Fire Department</a>.</p>
 </GuideLayout>
+<style>
+  .station-timeline { list-style: none; padding: 0 0 0 24px; border-left: 2px solid var(--line); }
+  .station-timeline > li { position: relative; padding: 0 0 24px 8px; margin: 0; }
+  .station-timeline > li::before { content: ''; position: absolute; width: 12px; height: 12px; background: var(--red); border-radius: 50%; left: -31px; top: 9px; }
+  .station-timeline h3 { font-size: 24px; margin: 0 0 16px; }
+  .station-estimates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 20px; }
+  .station-estimates > div { background: var(--paper-deep); padding: 20px; }
+  .station-estimates h4 { font-size: 20px; margin: 0 0 12px; }
+  .station-estimates p { margin: 0; }
+  .funding-faq { border-top: 1px solid var(--line); padding-bottom: 20px; }
+  .funding-faq h3 { font-size: 24px; }
+  @media (max-width: 650px) { .station-estimates { grid-template-columns: 1fr; } }
+</style>

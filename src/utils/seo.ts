@@ -9,8 +9,8 @@ export const allowIndexing = import.meta.env.PROD
 
 export const publicPages = [
   { modified: campaignCopyReviewedDate, path: '/', name: 'No on Measure PFD', description: 'The campaign opposing Pasadena’s proposed Measure PFD parcel tax.' },
-  { modified: campaignCopyReviewedDate, path: '/facts/', name: 'Pasadena Measure PFD: What It Is, Costs & FAQ', description: 'What Measure PFD is, what Yes and No votes mean, proposed costs, exemptions, fire funding, and campaign FAQs.' },
-  { modified: campaignCopyReviewedDate, path: '/resources/', name: 'Measure PFD tools & guides', description: 'Property-tax and rent calculators, PFD exemption checklist, Pasadena tax guides, voting resources, and downloadable documents.' },
+  { modified: '2026-10-29', path: '/facts/', name: 'Pasadena Measure PFD: 2026 Fire Parcel Tax & FAQ', description: 'What Measure PFD is, what Yes and No votes mean, proposed costs, exemptions, fire funding, and campaign FAQs.' },
+  { modified: '2026-10-29', path: '/resources/', name: 'Measure PFD tools & guides', description: 'PFD tax calculator, exemption checklist, renter scenarios, fire-funding guides, voting resources, and downloadable documents.' },
   { path: '/vote/', name: 'How to vote on Measure PFD', description: 'Official registration, ballot-return, vote-center, and ballot-tracking tools.' },
   { path: '/bill-paparian/', name: 'Bill Paparian commentary', description: 'The former Pasadena mayor’s Pasadena Now and Pasadena Star-News commentaries on Measure PFD.' },
   { path: '/pasadena-star-news/', name: 'Pasadena Star-News editorial', description: 'Excerpts from the editorial board’s recommendation to vote No on Measure PFD.' },

@@ -7,9 +7,10 @@ const guide = guides[0];
 const examples = [1000, 1600, 2000, 20000];
 ---
 <GuideLayout guide={guide} heading={guide.name}>
+  <div class="reference-answer"><p><strong>Measure PFD would cost 19 cents per taxable square foot of building area each year, before exemptions.</strong> For 1,600 taxable square feet, that is $304 a year. Enter your building size to calculate your proposed Pasadena parcel tax.</p></div>
   <section id="calculator" aria-labelledby="calculator-heading">
     <form class="calculator" id="parcel-calculator" novalidate>
-      <h2 id="calculator-heading">Calculate your added PFD property tax</h2>
+      <h2 id="calculator-heading">Measure PFD tax calculator</h2>
       <label for="square-feet">Enter your home or building size below (square feet).</label>
       <input id="square-feet" name="square-feet" type="text" inputmode="decimal" autocomplete="off" placeholder="1,600" aria-describedby="calculator-error" />
       <details class="bill-comparison-options" id="bill-comparison-options">
@@ -34,8 +35,7 @@ const examples = [1000, 1600, 2000, 20000];
     </form>
     <SquareFootageHelp />
   </section>
-  <div class="reference-answer"><p>If Measure PFD passes, it would add <strong>$0.19 per taxable square foot of building area each year</strong> for property in the City of Pasadena, before exemptions. For a 1,600-square-foot home, that is $304 more a year.</p></div>
-  <section id="formula"><h2>How is your PFD tax increase calculated?</h2><p><strong>Added tax per year = taxable building square feet × $0.19.</strong> Multiply the yearly amount by 14 to estimate the total over 14 years. Divide the yearly amount by 12 for the monthly equivalent. The proposed rate has no annual cost-of-living increase.</p>
+  <section id="formula"><h2>How is the 19-cent-per-square-foot tax calculated?</h2><p><strong>Added tax per year = taxable building square feet × $0.19.</strong> Multiply the yearly amount by 14 to estimate the total over 14 years. Divide the yearly amount by 12 for the monthly equivalent. The proposed rate has no annual cost-of-living increase.</p>
     <div class="reference-table-wrap"><table class="reference-table"><caption>Before exemptions; unchanged square footage and proposed rate.</caption><thead><tr><th scope="col">Square feet</th><th scope="col">Annual cost</th><th scope="col">14 years</th></tr></thead><tbody>{examples.map(area => { const cost = estimateParcelTax(String(area))!; return <tr><th scope="row">{area.toLocaleString('en-US')}</th><td>{currency(cost.annual)}</td><td>{currency(cost.total)}</td></tr>; })}</tbody></table></div>
   </section>
   <section id="property-records"><h2>Where do I find my square footage?</h2><p>Use the recorded building area in your property records, not the size of your land or lot. This calculator also works for apartment buildings and commercial properties. A Pasadena mailing address or ZIP code alone does not establish that a parcel is inside the City of Pasadena. Check that your property is inside city limits and that you have the right building area.</p><p>The proposed rate applies to homes, apartments, businesses, and other developed properties, subject to exemptions. The result is a property-tax estimate for the building; it does not estimate a renter’s rent increase.</p><p><a href="/measure-pfd-exemptions/">Check your PFD exemptions</a>.</p></section>
