@@ -1,15 +1,16 @@
 <section aria-labelledby="rent-calculator-heading">
   <form id="rent-calculator" class="calculator" novalidate>
-    <h2 id="rent-calculator-heading">Estimate your rent increase from PFD</h2>
+    <h2 id="rent-calculator-heading">Explore a full-tax pass-through scenario</h2>
     <div class="rent-fields">
-      <div><label for="rental-area">Building size (sq. ft.)</label><input id="rental-area" type="text" inputmode="decimal" autocomplete="off" placeholder="1,200" aria-describedby="rent-error" /></div>
+      <div><label for="rental-area">Building size (sq. ft.)</label><input id="rental-area" type="text" inputmode="decimal" autocomplete="off" placeholder="1,200" aria-describedby="rent-scope rent-error" /></div>
     </div>
-    <button class="button" type="submit" disabled>Estimate the increase</button>
+    <p id="rent-scope" class="calculator-help">This estimates the property tax for the space you enter, before exemptions. An entire building’s cost is not one tenant’s share or an automatic rent increase.</p>
+    <button class="button" type="submit" disabled>Calculate the tax scenario</button>
     <p id="rent-error" class="calculator-error" role="alert" hidden></p>
     <div class="sr-only" id="rent-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
     <div id="rent-results" hidden>
       <h3>If the full tax for this space is passed on</h3>
-      <dl class="calculator-results"><div><dt>Annual increase</dt><dd id="rent-annual"></dd></div><div><dt>Monthly increase</dt><dd id="rent-monthly"></dd></div></dl>
+      <dl class="calculator-results"><div><dt>Annual tax for this space</dt><dd id="rent-annual"></dd></div><div><dt>Monthly equivalent</dt><dd id="rent-monthly"></dd></div></dl>
     </div>
     <noscript><p class="calculator-help">Use the formula below without JavaScript: building square feet × $0.19 ÷ 12.</p></noscript>
   </form>

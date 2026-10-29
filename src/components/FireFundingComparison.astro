@@ -1,0 +1,60 @@
+---
+import { fundingComparisons } from '../data/firefighterFunding';
+---
+<fire-funding-comparison>
+  <div class="comparison-filters" role="group" aria-label="Choose a funding topic" hidden>
+    <button type="button" aria-pressed="true" data-topic="all">All topics</button>
+    {fundingComparisons.map(item => <button type="button" aria-pressed="false" data-topic={item.id}>{item.label}</button>)}
+  </div>
+  <p class="sr-only" aria-live="polite" data-comparison-status></p>
+  <div class="comparison-results">
+    {fundingComparisons.map(item => <article class="funding-card" data-funding-topic={item.id} aria-labelledby={`comparison-${item.id}`}>
+      <h3 id={`comparison-${item.id}`}>{item.heading}</h3>
+      <div class="funding-columns">
+        <div><h4>Existing funding / without PFD</h4><p>{item.existing}</p></div>
+        <div><h4>What PFD would add</h4><p>{item.proposed}</p></div>
+      </div>
+      <p class="funding-limit"><strong>What this does not establish:</strong> {item.limit}</p>
+      <p class="reference-citation">Sources (PDF): {item.sources.map((source, index) => <><a href={source.url} type="application/pdf">{source.label}</a>{index < item.sources.length - 1 ? '; ' : '.'}</>)}</p>
+    </article>)}
+  </div>
+</fire-funding-comparison>
+
+<script>
+  class FireFundingComparison extends HTMLElement {
+    connectedCallback() {
+      const filters = this.querySelector<HTMLElement>('.comparison-filters');
+      const buttons = this.querySelectorAll<HTMLButtonElement>('[data-topic]');
+      const cards = this.querySelectorAll<HTMLElement>('[data-funding-topic]');
+      const status = this.querySelector<HTMLElement>('[data-comparison-status]');
+      if (!filters || !status) return;
+      buttons.forEach(button => {
+        button.onclick = () => {
+          const topic = button.dataset.topic;
+          buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+          cards.forEach(card => { card.hidden = topic !== 'all' && card.dataset.fundingTopic !== topic; });
+          status.textContent = topic === 'all' ? 'Showing all four funding topics.' : `Showing ${button.textContent} comparison.`;
+        };
+      });
+      filters.hidden = false;
+    }
+  }
+  if (!customElements.get('fire-funding-comparison')) customElements.define('fire-funding-comparison', FireFundingComparison);
+</script>
+
+<style>
+  fire-funding-comparison { display: block; }
+  .comparison-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+  .comparison-filters[hidden], .funding-card[hidden] { display: none; }
+  .comparison-filters button { border: 1px solid var(--green); background: var(--paper); color: var(--green); padding: 12px 18px; font: inherit; font-weight: 650; cursor: pointer; min-height: 48px; }
+  .comparison-filters button[aria-pressed="true"] { background: var(--green); color: var(--paper); }
+  .comparison-filters button:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+  .funding-card { border: 1px solid var(--line); padding: clamp(20px, 3vw, 32px); margin-top: 24px; }
+  .funding-card h3 { margin: 0 0 24px; font-size: 26px; }
+  .funding-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .funding-columns h4 { margin: 0 0 12px; font-size: 18px; }
+  .funding-columns p { margin: 0; }
+  .funding-limit { border-left: 3px solid var(--red); background: var(--paper-deep); padding: 16px 20px; margin-top: 24px; }
+  @media (max-width: 650px) { .funding-columns { grid-template-columns: 1fr; gap: 24px; } }
+  @media print { .comparison-filters { display: none; } .funding-card[hidden] { display: block; } }
+</style>

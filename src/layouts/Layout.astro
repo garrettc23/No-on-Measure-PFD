@@ -15,8 +15,8 @@ import { absoluteUrl, allowIndexing, serializeSchema, publicPages } from '../uti
 interface Props { title?: string; description?: string; seoTitle?: string; noindex?: boolean; structuredData?: Record<string, unknown>; article?: { modified: string; citations: string[] }; videoIds?: VideoId[]; }
 const { title = campaign.name, description = campaign.description, seoTitle, noindex = false, structuredData = {}, article, videoIds = [] } = Astro.props;
 const path = Astro.url.pathname;
-const nav = [{ href: '/', label: 'Home' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
-const resourceNav = [{ href: '/resources/', label: 'Tools & Guides' }, { href: '/facts/', label: 'Measure PFD' }];
+const nav = [{ href: '/', label: 'Home' }, { href: '/facts/', label: 'Measure PFD' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
+const resourceNav = [{ href: '/resources/', label: 'Tools & Guides' }];
 const canonical = absoluteUrl(path);
 const pageTitle = seoTitle || titleCase(title === campaign.name ? `${title} | Pasadena Parcel Tax, November 2026` : `${title} | ${campaign.name}`);
 const indexable = allowIndexing && !noindex;

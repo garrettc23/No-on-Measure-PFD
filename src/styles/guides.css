@@ -4,3 +4,5 @@
 .facts-overview h3{margin-block:24px 10px}.table-scroll-hint{display:none}@media(max-width:600px){.table-scroll-hint{display:block;font-size:15px!important}}
 
 .reference-answer, .reference-note, .calculator, .reference-table-wrap { border-radius: var(--radius-surface); }
+
+.reference-page .guide-attribution { font-size: 14px; line-height: 1.7; margin-top: 32px; }
