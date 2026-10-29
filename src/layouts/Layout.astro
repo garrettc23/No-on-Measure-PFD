@@ -16,7 +16,7 @@ interface Props { title?: string; description?: string; seoTitle?: string; noind
 const { title = campaign.name, description = campaign.description, seoTitle, noindex = false, structuredData = {}, article, videoIds = [] } = Astro.props;
 const path = Astro.url.pathname;
 const nav = [{ href: '/', label: 'Home' }, { href: '/pasadena-star-news/', label: 'Pasadena Star-News Says Vote No' }, { href: '/bill-paparian/', label: 'Former Pasadena Mayor’s Take' }];
-const resourceNav = [{ href: '/resources/', label: 'Tools & Guides' }, { href: '/facts/', label: 'FAQs' }];
+const resourceNav = [{ href: '/resources/', label: 'Tools & Guides' }, { href: '/facts/', label: 'Measure PFD' }];
 const canonical = absoluteUrl(path);
 const pageTitle = seoTitle || titleCase(title === campaign.name ? `${title} | Pasadena Parcel Tax, November 2026` : `${title} | ${campaign.name}`);
 const indexable = allowIndexing && !noindex;
@@ -85,7 +85,7 @@ const schema = {
       <div class="container">
         <div class="footer-main">
           <Logo footer />
-          <div class="footer-nav"><a href="/facts/">FAQs</a><a href="/resources/">Tools & Guides</a><a href="/join/">Join the campaign</a><a href="/bill-paparian/">Mayor’s Take</a><a href="/vote/">How to vote</a><a href="/privacy/">Privacy</a></div>
+          <div class="footer-nav"><a href="/facts/">Measure PFD facts</a><a href="/resources/">Tools & Guides</a><a href="/join/">Join the campaign</a><a href="/bill-paparian/">Mayor’s Take</a><a href="/vote/">How to vote</a><a href="/privacy/">Privacy</a></div>
         </div>
         <div class="footer-bottom"><p data-legal-copy><span class="disclosure-heading">{campaign.disclosure}</span><span class="top-funder"><span class="disclosure-heading">{campaign.topFunderLabel}</span><br />{campaign.topFunder}</span></p></div>
       </div>

@@ -1,16 +1,30 @@
 ---
 import GuideLayout from '../layouts/GuideLayout.astro';
-import { guides } from '../data/guides';
+import { guides, referenceSources } from '../data/guides';
 const guide = guides.find(item => item.path === '/measure-pfd-pass-or-fail/')!;
 ---
 <GuideLayout guide={guide} heading={guide.name}>
   <div class="reference-answer"><p><strong>Voting Yes on Measure PFD supports adopting Pasadena’s proposed parcel tax. Voting No opposes adopting it.</strong> If PFD passes, it would authorize a new annual tax of $0.19 per taxable square foot of building area, subject to exemptions. If it fails, this proposal would not authorize that tax. Passage requires at least two-thirds of votes cast on Measure PFD.</p></div>
+  <p>This guide comes from the No on Measure PFD campaign. It explains both ballot choices and identifies our position separately from the City’s analysis. For the overall proposal, see <a href="/facts/">Pasadena Measure PFD facts and FAQs</a>.</p>
+  <nav class="guide-jump-links" aria-label="Voting guide sections"><a href="#outcomes-heading">Yes and No votes</a><a href="#arguments">Arguments for and against</a><a href="#vote-threshold">Votes needed to pass</a><a href="#first-bill">Tax billing</a></nav>
   <section aria-labelledby="outcomes-heading">
     <h2 id="outcomes-heading">What each outcome means for you</h2>
     <div class="outcome-grid">
       <article class="outcome-card"><h3>What does voting Yes on Measure PFD mean?</h3><p>A Yes vote supports the proposed tax and its specified fire and emergency-response uses. If PFD passes, property owners would face the proposed charge, subject to exemptions. For 1,600 taxable square feet, that is $304 a year.</p><p>Revenue would go into a dedicated fund for authorized fire facilities, equipment, emergency-response enhancements, and related costs.</p><a class="button button-outline" href="/measure-pfd-calculator/">Calculate my added tax</a></article>
       <article class="outcome-card"><h3>What does voting No on Measure PFD mean?</h3><p>A No vote opposes the proposed tax. If PFD fails, this proposal would not create the PFD charge. Existing property taxes and assessments would remain separate obligations.</p><p>The result would not adopt a replacement funding plan or determine future service changes. Those would require separate City decisions.</p><a class="button button-outline" href="/measure-pfd-fire-station-funding/">Explore fire funding</a></article>
     </div>
+  </section>
+  <section id="arguments" aria-labelledby="arguments-heading">
+    <h2 id="arguments-heading">Arguments for and against Measure PFD</h2>
+    <p>The question is whether to create this dedicated parcel tax for fire and emergency services. The funding objectives and the choice of how to pay for them are separate issues.</p>
+    <h3>What is the funding case for voting Yes on Measure PFD?</h3>
+    <p>The <a href={referenceSources.impartialAnalysis.url} type="application/pdf">City Attorney’s impartial analysis</a> describes additional, restricted revenue for firefighter and paramedic staffing, wildfire readiness, fire facilities, and equipment. It says the revenue is intended to enhance services and infrastructure beyond existing levels. The proposal requires independent financial audits, public spending disclosure, and a 14-year sunset.</p>
+    <p>The analysis also says that without this funding source, the City may face limits on expanding wildfire mitigation and capital improvements. These are the City’s stated funding objectives and assessment, not a guarantee of a particular response time or project completion date.</p>
+    <h3>Why does our campaign recommend voting No on Measure PFD?</h3>
+    <p>Our campaign believes Pasadena should prioritize existing revenues for fire facilities before adding another property tax. We question the added cost to taxable property owners and want clearer commitments about how projects and service improvements will be delivered.</p>
+    <p>The City’s capital plan records funded renovations and completed station improvements, while listing full replacements of Stations 33 and 37 as unfunded. That distinction does not establish that the replacements are already paid for. Review the <a href="/measure-pfd-vs-measure-i/#funding-timeline">fire-station funding timeline and original budget records</a> to assess our position.</p>
+    <h3>What would neither vote guarantee?</h3>
+    <p>A Yes vote would not guarantee a particular emergency-response time. A No vote would not enact an alternative funding plan or guarantee future service levels. Those questions depend on subsequent budgets, project decisions, and the applicable ordinance provisions.</p>
   </section>
   <section id="vote-threshold"><h2>How many votes does PFD need to pass?</h2><p><strong>At least two-thirds of votes cast on the measure must be Yes.</strong> The threshold applies to votes on PFD, rather than all registered voters or everyone who casts a ballot in the election.</p><p>Election Day is November 3, 2026. Early vote totals can change as ballots are counted. Use certified results to confirm the outcome.</p></section>
   <section id="first-bill"><h2>When would you start paying?</h2><p><strong>The proposed ordinance does not give a calendar date for the first tax bill.</strong> If PFD passes, check the City’s implementation notices for the first billing year and exemption application instructions.</p><p>The proposal calls for two equal installments under County collection procedures. For a $304 annual PFD charge, that would be $152 per installment. The calculator’s monthly amount is an equivalent for budgeting.</p></section>
@@ -19,6 +33,8 @@ const guide = guides.find(item => item.path === '/measure-pfd-pass-or-fail/')!;
   <section id="next-steps"><h2>What should you check after the election?</h2><ul><li><strong>Certified results:</strong> confirm whether PFD met the required vote threshold.</li><li><strong>If it passes:</strong> look for the first billing year, exemption procedures, budgets, and project schedules.</li><li><strong>If it fails:</strong> follow subsequent City budgets and any new funding proposals.</li></ul><p>Until an outcome and implementation details are confirmed, the calculator illustrates the proposal rather than an issued tax bill.</p><p>Our campaign recommends voting No because we believe Pasadena needs a fairer way to fund public safety. <a href="/facts/#measure">Read the campaign’s case against Measure PFD</a>, or <a href="/vote/">find official voting resources</a>.</p></section>
 </GuideLayout>
 <style>
+  .guide-jump-links { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-block: 20px; margin-block: 24px; border-block: 1px solid var(--line); }
+  #arguments h3 { margin-top: 28px; margin-bottom: 16px; font-size: 24px; }
   .outcome-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .outcome-card { padding: var(--space-panel); border: 1px solid var(--line); background: var(--paper-deep); display: flex; flex-direction: column; align-items: flex-start; }
   .outcome-card h3 { margin: 0 0 20px; font-size: 26px; }

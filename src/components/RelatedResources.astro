@@ -3,6 +3,7 @@ import { guides } from '../data/guides';
 import ResourceTiles from './ResourceTiles.astro';
 const current = Astro.url.pathname;
 const resources = [
+  { href: '/facts/', title: 'What is Pasadena Measure PFD?', text: 'Start with the proposed tax, exemptions, fire funding, and answers to common questions.', action: 'Read Measure PFD facts' },
   ...guides.filter(guide => guide.path !== current).map(guide => ({ href: guide.path, title: guide.name, text: guide.summary, action: guide.action })),
   { href: '/vote/', title: 'How do I vote on Measure PFD?', text: 'Check registration, find voting locations, and track your ballot.', action: 'Find voting options' },
 ];
